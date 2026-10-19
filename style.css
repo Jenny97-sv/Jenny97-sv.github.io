@@ -13,6 +13,12 @@ body {
     padding:0 20px 20px 20px;
     text-shadow: 1px 1px 1px black;
     border:5px solid black;
+    border-radius: 50px;
+    outline-style: auto;
+    outline-color: blue;
+    outline-width: thin;
+    outline-style:dashed;
+    text-transform: uppercase;
 }
 
 h1 {
@@ -64,9 +70,21 @@ li.done
     color:darkseagreen;
     text-decoration:line-through solid black;
 }
-button{
+button
+{
     color:#c744d8;
     background-color: rgb(80, 0, 90);
     font-size: 10px;
     font-family:"Bitcount Ink", system-ui;
+}
+video
+{
+    width:600px;
+    display:block;
+    margin: 40px auto;
+}
+audio
+{
+    display:block;
+    margin:40px auto;
 }
