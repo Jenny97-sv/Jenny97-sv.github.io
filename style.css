@@ -3,9 +3,9 @@ html {
 }
 
 body {
-    width: 90%;
+    width: 100%;
     max-width: 60rem;
-    margin: 1rem 10%;
+    margin: 1rem;
 
     font-size: 1rem;
     font-family: "Roboto", sans-serif;
@@ -21,6 +21,9 @@ body {
     .instructions {
         margin-left: 15%;
         margin-right: 15%;
+    }
+    body {
+        margin: 1rem 10%;
     }
 }
 
