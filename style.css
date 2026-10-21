@@ -1,90 +1,105 @@
-html
-{
-    background-color: rgb(80, 0, 90);
+html {
+    background-color: rgb(204, 154, 165);
 }
 
 body {
-    width: 600px;
-    font-size: 10px;
-    font-family:"Bitcount Ink", system-ui;
-    max-width: fit-content;
-    margin: 0 auto;
-    background-color: #d87b44;
-    padding:0 20px 20px 20px;
-    text-shadow: 1px 1px 1px black;
-    border:5px solid black;
+    width: 90%;
+    max-width: 60rem;
+    margin: 1rem 10%;
+
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    /* font-weight: lighter; */
+
+    background-color: #f5f2f1;
+
+    padding: 1rem;
+
+    /* text-shadow: 1px 1px 1px black; */
+
+    /* border: 5px solid black; 
     border-radius: 50px;
+
     outline-style: auto;
     outline-color: blue;
     outline-width: thin;
-    outline-style:dashed;
-    text-transform: uppercase;
+    outline-style: dashed; */
+}
+
+/* Only on screens at least 700px wide (tablet and up) */
+@media (min-width: 700px) {
+    .ingrediences,
+    .instructions {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
 }
 
 h1 {
-    color:rgb(0, 0, 0);
-    text-align: center;
-    font-size: 60px;
+    color:rgb(241, 0, 0);
+    text-align: left;
+    margin: 1rem 10%;
+    font-size: 2rem;
 }
+
 h2 {
     color:rgb(43, 0, 56);
-    text-align: center;
-    font-size: 50px;
-}
-h3 {
-    color:rgb(82, 0, 107);
-    text-align: center;
-    font-size: 40px;
+    text-align: left;
+    margin: 1rem 10%;
+    font-size: 20px;
 }
 
-h4 {
-    color:rgb(103, 0, 134);
-    text-align: center;
-    font-size: 30px;
-}
 li {
-    color:rgb(120, 0, 156);
-    border: 1px solid black;
+    margin: 0 10%;
     margin-bottom: 5px;
-    background-color: rgb(80, 0, 90);
     line-height: 2;
-    letter-spacing: 4px;
+    padding-left: 0;
 }
 
-p,
-.my-class,
-#my-id 
-{
+.note {
+    background-color: rgb(205, 201, 206);
+    background-size: cover;
+    font-size: 1rem;
+    margin: 0px 10%;
+    padding: 1rem 1.5rem;
+}
+
+.text {
     color:rgb(20, 0, 26);
-    font-size:20px;
+    font-size: 1rem;
+    margin: 0px 10%;
+    margin-bottom: 1rem;
 }
 
-img{
-    display:block;
-    margin:50px auto;
+img {
+    justify-content: space-evenly;
+    display: block;
+    margin: auto;
     max-width: 100%;
+    width: 20rem;          
 }
 
-li.done
-{
+.PancakeImage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.PancakeImage img {
+    max-width: 100%;
+    height: auto;
+    width: 20rem;
+}
+
+li.done {
     color:darkseagreen;
     text-decoration:line-through solid black;
 }
-button
-{
+
+button {
     color:#c744d8;
     background-color: rgb(80, 0, 90);
     font-size: 10px;
     font-family:"Bitcount Ink", system-ui;
-}
-video
-{
-    width:600px;
-    display:block;
-    margin: 40px auto;
-}
-audio
-{
-    display:block;
-    margin:40px auto;
 }

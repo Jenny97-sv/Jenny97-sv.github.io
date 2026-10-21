@@ -32,12 +32,12 @@ function setUserName()
 // ----- Event listeners -----
 myHeading.addEventListener("click", () => myHeading.textContent = "You clicked me!");
 myImage.addEventListener("click", toggleImage);
-myButton.addEventListener("click", setUserName);
+// myButton.addEventListener("click", setUserName);
 myListItems.forEach((item) => item.addEventListener("click", toggleDone));
 
 // ----- Init -----
-const storedName = localStorage.getItem("name");
-if (storedName)
-    setHeading(storedName);
-else
-    setUserName();
+// const storedName = localStorage.getItem("name");
+// if (storedName)
+//     setHeading(storedName);
+// else
+//     setUserName();
