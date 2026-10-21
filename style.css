@@ -26,6 +26,13 @@ body {
     outline-style: dashed; */
 }
 
+main {
+    /*max-width: 40rem;            /* about 640px, like the screenshot */
+    margin: 0 auto;              /* centers the card */
+    background-color: #fcfcfc;
+    padding-bottom: 2rem;
+}
+
 /* Only on screens at least 700px wide (tablet and up) */
 @media (min-width: 700px) {
     .ingrediences,
@@ -38,7 +45,7 @@ body {
 h1 {
     color:rgb(241, 0, 0);
     text-align: left;
-    margin: 1rem 10%;
+    /* margin: 1rem 10%; */
     font-size: 2rem;
 }
 
@@ -60,7 +67,7 @@ li {
     background-color: rgb(205, 201, 206);
     background-size: cover;
     font-size: 1rem;
-    margin: 0px 10%;
+    /* margin: 0px 10%; */
     padding: 1rem 1.5rem;
 }
 
@@ -72,17 +79,19 @@ li {
 }
 
 img {
-    justify-content: space-evenly;
     display: block;
     margin: auto;
     max-width: 100%;
-    width: 20rem;          
 }
 
+.HeroImage {
+    width: 100%;
+    object-fit: cover;
+}
 .PancakeImage {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 2rem;
 }
 
