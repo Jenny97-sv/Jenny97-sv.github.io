@@ -1,0 +1,30 @@
+{
+    "pageTitle": "Pannkaksrecept",
+    "heroTitle": "Enkelt recept på pannkakor",
+    "heroDescription": "Gör traditionella tunna pannkakor med detta enkla och goda recept.",
+    "heroImageAlt": "En bild av pannkakor",
+
+    "ingredientsHeading": "Ingredienser",
+    "servings": "För 4 portioner",
+    "flour": "2 2/1 dl vetemjöl",
+    "salt": "1/2 tsk salt",
+    "milk": "6 dl mjölk",
+    "eggs": "3 ägg",
+    "butter": "Smör till stekning",
+    "toppings": "Sylt, bär eller frukt till servering",
+
+    "instructionsHeading": "Så här gör du",
+    "step1": "Blanda mjöl och salt i en bunke.",
+    "step2": "Vispa i hälften av mjölken till en slät smet.",
+    "step3": "Vispa i resten av mjölken och äggen.",
+    "step4": "Låt smeten vila i ca 10 minuter.",
+    "step5": "Stek tunna pannkakor i lite smör, en i taget, i en stekpanna.",
+    "step6": "Servera med sylt, bär eller frukt.",
+
+    "servingHeading": "Serveringsförslag",
+    "image2Alt": "Pannkakor serverade med tillbehör",
+    "image3Alt": "Nystekta pannkakor",
+    "image5Alt": "En tallrik med pannkakor",
+
+    "languageLabel": "Välj språk"
+}

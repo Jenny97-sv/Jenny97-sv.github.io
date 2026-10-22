@@ -1,0 +1,31 @@
+
+{
+  "pageTitle": "Pancake Recipe",
+  "heroTitle": "Easy Pancake Recipe",
+  "heroDescription": "Make traditional thin pancakes with this simple and delicious recipe",
+  "heroImageAlt": "A picture of pancakes",
+
+  "ingredientsHeading": "Ingredients",
+  "servings": "Serves 4",
+  "flour": "2 1/2 dl all-purpose flour",
+  "salt": "1/2 tsp salt",
+  "milk": "600 ml milk",
+  "eggs": "3 eggs",
+  "butter": "Butter (for frying)",
+  "toppings": "Jam, berries or fruit for serving",
+
+  "instructionsHeading": "Instructions",
+  "step1": "Mix the flour and salt in a bowl",
+  "step2": "Whisk in half the milk until the batter is smooth",
+  "step3": "Whisk in the remaining milk and the eggs",
+  "step4": "Let the batter rest for about 10 minutes",
+  "step5": "Fry thin pancakes in a little butter, one at a time, in a frying pan",
+  "step6": "Serve with jam, berries or fruit",
+
+  "servingHeading": "Serving Suggestions",
+  "image2Alt": "Pancakes served with toppings",
+  "image3Alt": "Freshly cooked pancakes",
+  "image5Alt": "A plate of pancakes",
+
+  "languageLabel": "Choose language"
+}

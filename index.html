@@ -3,8 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Pannkaksrecept</title>
-        <script async src="script.js"></script>
+        <title data-i18n="pageTitle">Pannkaksrecept</title>
+
+        <script defer src="script.js"></script>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,34 +13,38 @@
     </head>
     <body>
         <header>
-            <img class="HeroImage" src="Pannkakor4.jpg" alt="En pannkaksbild" />
-            <h1>Enkelt recept på pannkakor</h1>
-            <p class="note">Gör traditionella tunna pannkakor med denna enkla och goda pannkaksrecept</p>
+            <nav class="language-switcher">
+                <button type="button" data-language="sv">Svenska</button>
+                <button type="button" data-language="en">English</button>
+            </nav>
+            <img class="HeroImage" src="Pannkakor4.jpg" alt="" data-i18n="heroImageAlt" />
+            <h1 data-i18n="heroTitle">Enkelt recept på pannkakor</h1>
+            <p class="note" data-i18n="heroDescription"></p>
         </header>
         <main>
-            <h2>Ingredienser</h2>
-            <p class="text">För 4 personer</p>
+            <h2 data-i18n="ingredientsHeading">Ingredienser</h2>
+            <p class="text" data-i18n="servings"></p>
             <ul>
-                <li>2 1/2 dl vetemjöl</li>
-                <li>1/2 tsk salt</li>
-                <li>6 dl mjölk</li>
-                <li>3 ägg</li>
-                <li>smör (till stekning)</li>
-                <li>sylt, bär eller frukt till servering</li>
+                <li data-i18n="flour"></li>
+                <li data-i18n="salt"></li>
+                <li data-i18n="milk"></li>
+                <li data-i18n="eggs"></li>
+                <li data-i18n="butter"></li>
+                <li data-i18n="toppings"></li>
             </ul>
-            <h2>Så här gör du</h2>
+            <h2 data-i18n="instructionsHeading">Så här gör du</h2>
             <ol>
-                <li>Blanda mjöl och salt i en bunke</li>
-                <li>Vispa i hälften av mjölken och vispa till en slät smet</li>
-                <li>Vispa i resten av mjölken och äggen</li>
-                <li>Låt smeten vila i ca 10 minuter</li>
-                <li>Stek tunna pannkakor i lite smör, för varje pannkaka, i en stek- eller pannkakspanna</li>
-                <li>Servera med sylt, bär eller frukt</li>
+                <li data-i18n="step1"></li>
+                <li data-i18n="step2"></li>
+                <li data-i18n="step3"></li>
+                <li data-i18n="step4"></li>
+                <li data-i18n="step5"></li>
+                <li data-i18n="step6"></li>
             </ol>
-            <h2>Serveringsförslag</h2>
+            <h2 data-i18n="servingHeading">Serveringsförslag</h2>
             <div class="PancakeImage">
-                <img src="Pannkakor2.jpg" alt="En annan pannkaksbild" />
-                <img src="Pannkakor3.jpg" alt="En tredje pannkaksbild"/>
+                <img src="Pannkakor2.jpg" alt="" data-i18n-alt="image2Alt" />
+                <img src="Pannkakor3.jpg" alt="" data-i18n-alt="image3Alt" />
                 <!-- <img src="Pannkakor5.jpg" alt="En femte pannkaksbild"/> -->
                 <!-- <img src="Pannkakor1.jpg" alt="En första pannkaksbild"/> -->
             </div>
