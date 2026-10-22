@@ -1,11 +1,12 @@
 html {
-    background-color: rgb(204, 154, 165);
+       background-color: rgb(204, 154, 165);
 }
 
 body {
     width: 100%;
     max-width: 60rem;
     margin: auto;
+    margin-bottom: 1rem;
 
     padding: 0;
 
@@ -21,10 +22,8 @@ body {
 /* Only on screens at least 700px wide (tablet and up) */
 @media (min-width: 700px) {
     body {
-
         padding: 1rem;
         margin: 1rem auto;
-
     }
 }
 
@@ -84,15 +83,16 @@ img {
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 1rem;
+    margin: 1rem;
 }
 
 .PancakeImage img {
     max-width: 100%;
     height: auto;
-    width: 20rem;
-    gap: 0rem;
+    width: 40rem;
     aspect-ratio: 1/1;
     object-fit: cover;
+    margin-bottom: 1rem;
 }
 
 li.done {
