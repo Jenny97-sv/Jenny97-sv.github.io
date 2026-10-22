@@ -11,9 +11,18 @@ function setHeading(name)
     myHeading.textContent = `Welcome to class ${name}`;
 }
 
-function toggleDone(e)
+function toggleDone(e) 
 {
-    e.target.classList.toggle("done");
+    const checkbox = e.currentTarget.querySelector(
+        "input[type='checkbox']"
+    );
+
+    if (e.target.type !== "checkbox")
+{
+        checkbox.checked = !checkbox.checked;
+    }
+
+    e.currentTarget.classList.toggle("done", checkbox.checked);
 }
 
 function toggleImage()
@@ -25,14 +34,16 @@ function toggleImage()
 function setUserName()
 {
     const name = prompt("Please enter your name.");
-    if (!name) return;
+    if (!name) 
+        return;
     localStorage.setItem("name", name);
     setHeading(name);
 }
 
 async function changeLanguage(language) 
 {
-    try {
+    try 
+    {
         // Load the selected JSON file
         const response = await fetch(`${language}.json`);
 
@@ -72,7 +83,9 @@ async function changeLanguage(language)
             button.setAttribute("aria-pressed", isActive);
         });
 
-    } catch (error) {
+    } 
+    catch (error) 
+    {
         console.error("Translation error:", error);
     }
 }
