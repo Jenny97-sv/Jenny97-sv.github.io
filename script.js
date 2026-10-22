@@ -18,7 +18,7 @@ function toggleDone(e)
 function toggleImage()
 {
     const src = myImage.getAttribute("src");
-    myImage.setAttribute("src", src === "TempBat2.png" ? "CoffeMug.png" : "TempBat2.png");
+    myImage.setAttribute("src", src === "Pannkakor4.jpg" ? "Pannkakor1.jpg" : "Pannkakor4.jpg");
 }
 
 function setUserName()
