@@ -16,10 +16,6 @@ body {
     background-color: #f5f2f1;
 
     box-sizing: border-box;
-
-    border-radius: 14px;
-    border-color: aqua;
-    border-width: 5px;
 }
 
 /* Only on screens at least 700px wide (tablet and up) */
@@ -57,7 +53,6 @@ ul {
     padding-left:1rem;
 }
 ul li {
-    /* list-style-position: outside; */
     list-style:none;
     margin-left:0;
 }
@@ -125,27 +120,4 @@ img {
     aspect-ratio: 1/1;
     object-fit: cover;
     margin-bottom: 1rem;
-}
-
-li.done {
-    color:darkseagreen;
-    text-decoration:line-through solid black;
-}
-
-button {
-    color:rgb(20, 0, 26);
-    background-color: rgb(205, 201, 206);
-    border-radius: 10%;
-    border: solid;
-    border-color: rgb(204, 154, 165);
-    /* border-radius: 50%; */
-    padding: 0.2rem;
-    overflow: hidden;
-    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-.language-switcher button.active {
-    font-weight: bold;
-    background-color: #d9a9ab;
-    border-style:dashed();
 }
