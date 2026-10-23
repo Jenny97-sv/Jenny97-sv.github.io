@@ -121,3 +121,15 @@ img {
     object-fit: cover;
     margin-bottom: 1rem;
 }
+
+button {
+    color:rgb(20, 0, 26);
+    background-color: rgb(205, 201, 206);
+    border-radius: 10%;
+    border: solid;
+    border-color: rgb(204, 154, 165);
+    padding: 0.2rem;
+    overflow: hidden;
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+    cursor:pointer;
+}
