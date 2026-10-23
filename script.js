@@ -2,8 +2,11 @@
 const myHeading = document.querySelector("h1");
 const myImage = document.querySelector("img");
 const myButton = document.querySelector("button");
-const myListItems = document.querySelectorAll("li");
+//const myListItems = document.querySelectorAll("li");
 const languageButtons = document.querySelectorAll("[data-language]");
+const checkboxes = document.querySelectorAll("li input[type='checkbox']");
+let myHeadingClicked = false;
+let myOriginalHeading = "";
 
 // ----- Functions -----
 function setHeading(name)
@@ -82,6 +85,7 @@ async function changeLanguage(language)
             button.classList.toggle("active", isActive);
             button.setAttribute("aria-pressed", isActive);
         });
+        myHeadingClicked = false;
 
     } 
     catch (error) 
@@ -91,13 +95,30 @@ async function changeLanguage(language)
 }
 
 // ----- Event listeners -----
-myHeading.addEventListener("click", () => myHeading.textContent = "You clicked me!");
+// myHeading.addEventListener("click", () => myHeading.textContent = "You clicked me!");
 myImage.addEventListener("click", toggleImage);
-myListItems.forEach((item) => item.addEventListener("click", toggleDone));
+//myListItems.forEach((item) => item.addEventListener("click", toggleDone));
 languageButtons.forEach(button => {
     button.addEventListener("click", () => {
         changeLanguage(button.dataset.language);
     });
+});
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", () => {
+        checkbox.closest("li").classList.toggle("done", checkbox.checked);
+    });
+});
+myHeading.addEventListener("click", () => {
+    if (!myHeadingClicked) 
+    {
+        myOriginalHeading = myHeading.textContent;
+        myHeading.textContent = "You clicked me!";
+    } 
+    else 
+    {
+        myHeading.textContent = myOriginalHeading;
+    }
+    myHeadingClicked = !myHeadingClicked;
 });
 
 // ----- Init -----

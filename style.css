@@ -49,6 +49,17 @@ li {
     line-height: 2;
     padding-left: 0;
 }
+ul {
+    padding-left:1rem;
+}
+ul li {
+    /* list-style-position: outside; */
+    list-style:none;
+    margin-left:0;
+}
+ol {
+    list-style: decimal outside; /*Numbers in order*/
+}
 
 label {
     display: flex;
@@ -119,9 +130,11 @@ li.done {
 button {
     color:rgb(20, 0, 26);
     background-color: rgb(205, 201, 206);
+    border-radius: 10%;
 }
 
 .language-switcher button.active {
     font-weight: bold;
     background-color: #d9a9ab;
+    border-style:dashed();
 }
