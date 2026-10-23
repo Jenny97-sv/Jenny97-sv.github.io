@@ -25,7 +25,7 @@ function toggleDone(e)
 function toggleImage()
 {
     const src = myImage.getAttribute("src");
-    myImage.setAttribute("src", src === "../Assets/Pannkakor4.jpg" ? "../Assets/Pannkakor1.jpg" : "../Assets/Pannkakor4.jpg");
+    myImage.setAttribute("src", src === "../Assets/Pannkakor4.jpg" ? "../Assets/Pannkakor3.jpg" : "../Assets/Pannkakor4.jpg");
 }
 
 function setUserName()
