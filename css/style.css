@@ -1,5 +1,5 @@
 html {
-       background-color: rgb(204, 154, 165);
+       background-color: rgb(204, 154, 202);
 }
 
 body {
@@ -13,7 +13,7 @@ body {
     font-size: 1rem;
     font-family: "Roboto", sans-serif;
 
-    background-color: #f5f2f1;
+    background-color: #f8d4fd;
 
     box-sizing: border-box;
 
@@ -50,52 +50,19 @@ img {
     max-width: 100%;
 }
 
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0;
+}
+
 button {
     color:rgb(20, 0, 26);
-    background-color: rgb(205, 201, 206);
+    background-color: rgb(204, 154, 202);
     border-radius: 10%;
     border: solid;
     border-color: rgb(204, 154, 165);
     padding: 0.2rem;
     overflow: hidden;
     font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-    align-items: center;
-    align-content: center;
-}
-
-.banner {
-  /* Set your banner background image */
-  background-image: url('your-banner-image.jpg');
-  
-  /* Center the image and make it cover the entire container */
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  
-  /* Define the banner height */
-  height: 400px; 
-  width: 100%;
-  
-  /* Flexbox settings to perfectly center text inside the banner */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Style the content over the banner */
-.banner-content {
-  color: #ffffff; /* White text for contrast */
-  font-family: sans-serif;
-  padding: 20px;
-}
-
-.banner-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #ff5722;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
 }
