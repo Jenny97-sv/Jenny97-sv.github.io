@@ -5,6 +5,7 @@ html {
 body {
     width: 100%;
     max-width: 60rem;
+    
     margin: auto;
     margin-bottom: 1rem;
 
@@ -22,7 +23,6 @@ body {
     border-width: 5px;
 }
 
-/* Only on screens at least 700px wide (tablet and up) */
 @media (min-width: 700px) {
     body {
         padding: 1rem;
@@ -31,15 +31,15 @@ body {
 }
 
 h1 {
-    color:rgb(241, 0, 0);
+    color: rgb(241, 0, 0);
     text-align: left;
     font-size: 2rem;
     margin-left: 1rem;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 h2 {
-    color:rgb(43, 0, 56);
+    color: rgb(43, 0, 56);
     text-align: left;
     margin-left: 1rem;
     font-size: 2rem;
@@ -55,15 +55,14 @@ li {
     padding-left: 0;
 }
 ul {
-    padding-left:1rem;
+    padding-left: 1rem;
 }
 ul li {
-    /* list-style-position: outside; */
-    list-style:none;
-    margin-left:0;
+    list-style: none;
+    margin-left: 0;
 }
 ol {
-    list-style: decimal outside; /*Numbers in order*/
+    list-style: decimal outside;
 }
 
 label {
@@ -88,11 +87,11 @@ input[type="checkbox"]:checked + span {
     background-size: cover;
     font-size: 1rem;
     padding: 1rem 1.5rem;
-    margin-right:1rem;
+    margin-right: 1rem;
 }
 
 .text {
-    color:rgb(20, 0, 26);
+    color: rgb(20, 0, 26);
     font-size: 1rem;
     margin-bottom: 1rem;
 }
@@ -108,7 +107,7 @@ img {
     height: 60vh;
     object-fit: cover;
     object-position: center;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .PancakeImage {
@@ -130,24 +129,24 @@ img {
 }
 
 li.done {
-    color:darkseagreen;
-    text-decoration:line-through solid black;
+    color: darkseagreen;
+    text-decoration: line-through solid black;
 }
 
 button {
-    color:rgb(20, 0, 26);
+    color: rgb(20, 0, 26);
     background-color: rgb(205, 201, 206);
     border-radius: 10%;
     border: solid;
     border-color: rgb(204, 154, 165);
     padding: 0.2rem;
     overflow: hidden;
-    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-    cursor:pointer;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    cursor: pointer;
 }
 
 .language-switcher button.active {
     font-weight: bold;
     background-color: #d9a9ab;
-    border-style:dashed();
+    border-style: dashed();
 }

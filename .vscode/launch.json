@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open Halloween.html",
-            "file": "c:\\Users\\eriks\\OneDrive\\Skrivbord\\Jenny97-sv.github.io\\Pages\\Halloween.html"
+            "file": "${file}"
         }
     ]
 }

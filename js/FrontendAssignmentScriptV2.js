@@ -41,7 +41,6 @@ async function changeLanguage(language)
 {
     try 
     {
-        // Load the selected JSON file
         const response = await fetch(`../Languages/${language}.json`);
 
         if (!response.ok) {
@@ -50,25 +49,22 @@ async function changeLanguage(language)
 
         const translations = await response.json();
 
-        // Translate all text elements
-        document.querySelectorAll("[data-i18n]").forEach(element => {
-            const key = element.dataset.i18n;
+        const translatable = [
+            { attribute: "data-i18n",     apply: (el, text) => el.textContent = text },
+            { attribute: "data-i18n-alt", apply: (el, text) => el.alt = text }
+        ];
 
-            if (translations[key] !== undefined) {
-                element.textContent = translations[key];
-            }
+        translatable.forEach(({ attribute, apply }) => {
+            document.querySelectorAll(`[${attribute}]`).forEach(element => {
+                const text = translations[element.getAttribute(attribute)];
+            
+                if (text !== undefined) {
+                    apply(element, text);
+                }
+            });
         });
 
-        // Translate image alt attributes
-        document.querySelectorAll("[data-i18n-alt]").forEach(element => {
-            const key = element.dataset.i18nAlt;
-
-            if (translations[key] !== undefined) {
-                element.alt = translations[key];
-            }
-        });
-
-        // Update document language and page title
+        // Set document language and page title
         document.documentElement.lang = language;
         document.title = translations.pageTitle;
 

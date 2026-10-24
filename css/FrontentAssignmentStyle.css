@@ -18,7 +18,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Only on screens at least 700px wide (tablet and up) */
 @media (min-width: 700px) {
     body {
         padding: 1rem;
@@ -27,14 +26,14 @@ body {
 }
 
 h1 {
-    color:rgb(241, 0, 0);
+    color: rgb(241, 0, 0);
     text-align: left;
     font-size: 2rem;
     margin-left: 1rem;
 }
 
 h2 {
-    color:rgb(43, 0, 56);
+    color: rgb(43, 0, 56);
     text-align: left;
     margin-left: 1rem;
     font-size: 2rem;
@@ -47,34 +46,15 @@ p {
 li {
     margin-bottom: 5px;
     line-height: 2;
-    padding-left: 0;
 }
+
 ul {
-    padding-left:1rem;
+    padding-left: 1rem;
+    list-style: none;
 }
-ul li {
-    list-style:none;
-    margin-left:0;
-}
+
 ol {
-    list-style: decimal outside; /*Numbers in order*/
-}
-
-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-input[type="checkbox"] {
-  width: 1rem;
-  height: 1rem;
-  cursor: pointer;
-}
-input[type="checkbox"]:checked + span {
-  text-decoration: line-through;
-  opacity: 0.5;
+    list-style: decimal outside;
 }
 
 .note {
@@ -122,8 +102,9 @@ img {
     margin-bottom: 1rem;
 }
 
+/*Only for back button*/
 button {
-    color:rgb(20, 0, 26);
+    color: rgb(20, 0, 26);
     background-color: rgb(205, 201, 206);
     border-radius: 10%;
     border: solid;
@@ -131,5 +112,5 @@ button {
     padding: 0.2rem;
     overflow: hidden;
     font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-    cursor:pointer;
+    cursor: pointer;
 }
