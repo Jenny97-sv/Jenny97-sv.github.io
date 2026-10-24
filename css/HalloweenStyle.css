@@ -1,3 +1,14 @@
+:root
+{
+    --main-color: rgb(80, 0, 90);
+    --secondary-color: rgb(204, 154, 202);
+    --text-color: rgb(20, 0, 26);
+    --border-color: rgb(204, 154, 165);
+    --background-color: #d87b44;
+    --dark-color: black;
+
+}
+
 html
 {
     background-color: rgb(80, 0, 90);
@@ -6,13 +17,13 @@ html
 body {
     width: 600px;
     font-size: 10px;
-    font-family:"Bitcount Ink", system-ui;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     max-width: fit-content;
     margin: 0 auto;
-    background-color: #d87b44;
+    background-color: var(--background-color);
     padding:0 20px 20px 20px;
-    text-shadow: 1px 1px 1px black;
-    border:5px solid black;
+    text-shadow: 1px 1px 1px var(--dark-color);
+    border:5px solid var(--dark-color);;
 }
 
 h1 {
@@ -37,7 +48,7 @@ h4 {
     font-size: 30px;
 }
 li {
-    color:rgb(120, 0, 156);
+    color:rgb(244, 234, 247);
     border: 1px solid black;
     margin-bottom: 5px;
     background-color: rgb(80, 0, 90);
@@ -59,6 +70,9 @@ img{
     max-width: 100%;
 }
 
+li {
+    cursor:pointer;
+}
 li.done
 {
     color:darkseagreen;
@@ -69,4 +83,23 @@ button{
     background-color: rgb(80, 0, 90);
     font-size: 10px;
     font-family:"Bitcount Ink", system-ui;
+}
+button:hover {
+    color:rgb(20, 0, 26);
+    background-color: rgb(204, 154, 202);
+    border: 2px solid rgb(204, 154, 165);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem;
+    font-family:"Bitcount Ink", system-ui;
+
+    cursor:pointer
+}
+button:active {
+    color:rgb(20, 0, 26);
+    background-color: rgb(75, 55, 75);
+    border: 2px solid rgb(204, 154, 165);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem;
+    font-family:"Bitcount Ink", system-ui;
+    cursor:pointer
 }
