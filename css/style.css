@@ -31,7 +31,7 @@ body {
 
 .skip-link{
     position: absolute;
-    top: -40px;
+    top: -1000px;
     left: 0;
     background-color: var(--color-primary);
     color: white;
