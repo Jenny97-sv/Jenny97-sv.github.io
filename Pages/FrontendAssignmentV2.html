@@ -1,112 +1,152 @@
 <!doctype html>
 <html lang="sv">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title data-i18n="pageTitle">Pannkaksrecept</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n="pageTitle">Pannkaksrecept</title>
 
-        <script defer src="../js/FrontendAssignmentScriptV2.js"></script>
-        <link rel="stylesheet" href="../css/FrontendAssignmentStyleV2.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <nav class="language-switcher">
-                <button type="button" data-language="sv">Svenska</button>
-                <button type="button" data-language="en">English</button>
-            </nav>
-            <img class="HeroImage" src="../Assets/Pannkakor4.jpg" alt="En bild av pannkakor" data-i18n="heroImageAlt" />
-            <h1 data-i18n="heroTitle">Enkelt recept på pannkakor</h1>
-            <p class="note" data-i18n="heroDescription">Gör traditionella tunna pannkakor med detta enkla och goda recept.</p>
-        </header>
-        <main>
-            <h2 data-i18n="ingredientsHeading">Ingredienser</h2>
-            <p class="text" data-i18n="servings">För 4 portioner</p>
-            <ul>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="flour">2 1/2 dl vetemjöl</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="salt">1/2 tsk salt</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="milk">6 dl mjölk</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="eggs">3 ägg</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="butter">Smör till stekning</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="toppings">Sylt, bär eller frukt till servering</span>
-                    </label>
-                </li>
-            </ul>
-            <h2 data-i18n="instructionsHeading">Så här gör du</h2>
-            <ol>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step1">Blanda mjöl och salt i en bunke.</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step2">Vispa i hälften av mjölken till en slät smet.</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step3">Vispa i resten av mjölken och äggen.</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step4">Låt smeten vila i ca 10 minuter.</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step5">Stek tunna pannkakor i lite smör, en i taget, i en stekpanna.</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <span data-i18n="step6">Servera med sylt, bär eller frukt.</span>
-                    </label>
-                </li>
-            </ol>
+    <script defer src="../js/FrontendAssignmentScriptV2.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Menu -->
+    <header>
+        <div class="banner">
+            <div class="banner-content">
+                <img src="../Assets/CoffeMug.png" alt="En bild av kaffe">
+                <nav class="Pages">
+                    <a class="button" href="../index.html">Startsida</a>
+                    <a class="button" href="Pages/ShareRecipe.html">Dela recept</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <!-- Row 1: image left, text right -->
+        <section class="hero">
+            <img class="HeroImage" src="../Assets/Pannkakor4.jpg" alt="En bild av pannkakor" data-i18n-alt="heroImageAlt">
+            <div class="hero-text">
+                <h1 data-i18n="heroTitle">Enkelt recept på pannkakor</h1>
+                <p class="note" data-i18n="heroDescription">Gör traditionella tunna pannkakor med detta enkla och goda recept.</p>
+                <ul class="facts">
+                    <li>4 port</li>
+                    <li>30 min</li>
+                    <li>Lätt</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Row 2: ingredients left, instructions right -->
+        <section class="recipe">
+            <div class="ingredients">
+                <h2 data-i18n="ingredientsHeading">Ingredienser</h2>
+                <p class="text" data-i18n="servings">För 4 portioner</p>
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="flour">2 1/2 dl vetemjöl</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="salt">1/2 tsk salt</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="milk">6 dl mjölk</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="eggs">3 ägg</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="butter">Smör till stekning</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="toppings">Sylt, bär eller frukt till servering</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="instructions">
+                <h2 data-i18n="instructionsHeading">Så här gör du</h2>
+                <ol>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step1">Blanda mjöl och salt i en bunke.</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step2">Vispa i hälften av mjölken till en slät smet.</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step3">Vispa i resten av mjölken och äggen.</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step4">Låt smeten vila i ca 10 minuter.</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step5">Stek tunna pannkakor i lite smör, en i taget, i en stekpanna.</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span data-i18n="step6">Servera med sylt, bär eller frukt.</span>
+                        </label>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Row 3: serving suggestions -->
+        <section class="serving">
             <h2 data-i18n="servingHeading">Serveringsförslag</h2>
             <div class="PancakeImage">
-                <img src="../Assets/Pannkakor2.jpg" alt="Pannkakor serverade med tillbehör" data-i18n-alt="image2Alt" />
-                <img src="../Assets/Pannkakor1.jpg" alt="En första pannkaksbild"/>
+                <figure>
+                    <img src="../Assets/Pannkakor2.jpg" alt="Pannkakor serverade med tillbehör" data-i18n-alt="image2Alt">
+                    <figcaption>Med grädde och blåbär</figcaption>
+                </figure>
+                <figure>
+                    <img src="../Assets/Pannkakor1.jpg" alt="Pannkakor med sylt och frukt">
+                    <figcaption>Med grädde och hallon</figcaption>
+                </figure>
             </div>
-            <button><a href="../index.html">Back</a></button>
-        </main>
-    </body>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Jennys recept</p>
+    </footer>
+</body>
 </html>
