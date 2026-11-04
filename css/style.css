@@ -229,6 +229,143 @@ footer p {
     margin: 0;
 }
 
+[hidden] {
+    display: none;
+}
+
+/* ---------- Landing page ---------- */
+.site-header,
+.site-footer {
+    padding: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 2rem;
+    margin: 0;
+}
+
+.site-header nav a:not(.button),
+.site-footer a {
+    color: var(--color-text);
+}
+
+.landing-hero {
+    position: relative;
+    margin: 0 1rem;
+}
+
+.landing-hero img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    margin: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(20, 0, 26, 0.55);
+    color: white;
+    text-align: center;
+}
+
+.hero-overlay h1 {
+    color: white;
+    margin: 0 0 0.5rem;
+}
+
+.hero-overlay p {
+    margin: 0;
+}
+
+.recipes {
+    padding: 1rem;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+button[aria-pressed="true"] {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid var(--color-border);
+}
+
+.card a {
+    display: block;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    margin: 0;
+}
+
+.card h3 {
+    margin: 0.5rem 1rem 0;
+}
+
+.card p {
+    margin: 0 1rem 1rem;
+}
+
+.card a:hover h3,
+.card a:focus-visible h3 {
+    text-decoration: underline;
+}
+
+.site-footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.site-footer h2 {
+    text-align: left;
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.site-footer ul {
+    padding: 0;
+}
+
+.credits {
+    margin: 0;
+}
+
 /* ---------- Wider screens (keep this last) ---------- */
 @media (min-width: 700px) {
     body {
@@ -245,5 +382,18 @@ footer p {
     .hero,
     .recipe {
         grid-template-columns: 1fr 1fr;
+    }
+        .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-footer {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .credits {
+        grid-column: 1 / -1;
     }
 }

@@ -13,20 +13,85 @@
     </head>
     <body>
         <a href="#main-content" class="skip-link">Skip to main content</a>
-        <header>
-            <div class="banner">
-                <div class="banner-content">
-                    <img src="Assets/CoffeMug.png" alt="En bild av kaffe">
-                    <h1>Jennys olika recept!</h1>
-                    <h2>Här kan du se olika recept:</h2>
-                    <nav class="Pages">
-                        <a class="button" href="Pages/FrontendAssignmentV2.html">Receptsida</a>
-                        <a class="button" href="Pages/ShareRecipe.html">Dela recept</a>
-                    </nav>
-                </div>
-            </div>
+            
+        <header class="site-header">
+            <a href="index.html" class="logo">
+                <img src="Assets/CoffeMug.png" alt="">
+                <span>Jennys recept</span>
+            </a>
+            <nav aria-label="Huvudmeny">
+                <a class="button" href="#recept">Recept</a>
+                <a class="button" href="Pages/About.html">Om sajten</a>
+                <a class="button" href="Pages/ShareRecipe.html">Dela recept</a>
+            </nav>
         </header>
+
         <main id="main-content" tabindex="-1">
+            <section class="landing-hero">
+                <img src="Assets/FoodImage.jpg" alt="Food">
+                <div class="hero-overlay">
+                    <h1>Jennys olika recept!</h1>
+                    <p>Enkla vardagsrecept som alla kan laga.</p>
+                </div>
+            </section>
+
+            <section id="recept" class="recipes">
+                <h2>Recept</h2>
+                <div class="filters" role="group" aria-label="Filtrera recept">
+                    <button type="button" data-filter="alla" aria-pressed="true">Alla</button>
+                    <button type="button" data-filter="frukost" aria-pressed="false">Frukost</button>
+                    <button type="button" data-filter="middag" aria-pressed="false">Middag</button>
+                    <button type="button" data-filter="efterratt" aria-pressed="false">Efterrätt</button>
+                    <button type="button" data-filter="fika" aria-pressed="false">Fika</button>
+                </div>
+
+                <div class="recipe-grid">
+                    <article class="card" data-category="frukost">
+                        <a href="Pages/FrontendAssignmentV2.html">
+                            <img src="Assets/Pannkakor5.jpg" alt="Pannkakor">
+                            <h3>Pannkakor</h3>
+                            <p>30 min</p>
+                        </a>
+                    </article>
+
+                    <article class="card" data-category="middag">
+                        <a href="#">
+                            <img src="Assets/PastaMedTomatSås.jpg" alt="Pasta med tomatsås">
+                            <h3>Pasta med tomatsås</h3>
+                            <p>45 min</p>
+                        </a>
+                    </article>
+
+                    <article class="card" data-category="fika">
+                        <a href="#">
+                            <img src="Assets/Kladdkaka.jpg" alt="Kladdkaka">
+                            <h3>Kladdkaka</h3>
+                            <p>15 min</p>
+                        </a>
+                    </article>
+                </div>
+            </section>
         </main>
+
+        <footer class="site-footer">
+            <div>
+                <a href="index.html" class="logo">
+                    <img src="Assets/CoffeMug.png" alt="CoffeMug">
+                    <span>Jennys recept</span>
+                </a>
+                <p>Enkla vardagsrecept som alla kan laga.</p>
+            </div>
+            <div>
+                <a href="Pages/About.html">Om sajten</a>
+                <h2>Fler recept</h2>
+                <ul>
+                    <li><a href="#recept">Frukost</a></li>
+                    <li><a href="#recept">Middag</a></li>
+                    <li><a href="#recept">Efterrätt</a></li>
+                    <li><a href="#recept">Fika</a></li>
+                </ul>
+            </div>
+            <p class="credits">© 2026 Jenny</p>
+        </footer>
     </body>
 </html>
