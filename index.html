@@ -20,7 +20,7 @@
                 <span>Jennys recept</span>
             </a>
             <nav aria-label="Huvudmeny">
-                <a class="button" href="#recept">Recept</a>
+                <a class="button" href="#recipe">Recept</a>
                 <a class="button" href="Pages/About.html">Om sajten</a>
                 <a class="button" href="Pages/ShareRecipe.html">Dela recept</a>
             </nav>
@@ -35,27 +35,27 @@
                 </div>
             </section>
 
-            <section id="recept" class="recipes">
+            <section id="recipe" class="recipes">
                 <h2>Recept</h2>
-                <div class="filters" role="group" aria-label="Filtrera recept">
-                    <button type="button" data-filter="alla" aria-pressed="true">Alla</button>
-                    <button type="button" data-filter="frukost" aria-pressed="false">Frukost</button>
-                    <button type="button" data-filter="middag" aria-pressed="false">Middag</button>
-                    <button type="button" data-filter="efterratt" aria-pressed="false">Efterrätt</button>
+                <div class="filters" role="group" aria-label="Filter recipes"> <!--Can li be buttons?-->
+                    <button type="button" data-filter="All" aria-pressed="true">All</button>
+                    <button type="button" data-filter="breakfast" aria-pressed="false">Frukost</button>
+                    <button type="button" data-filter="dinner" aria-pressed="false">Middag</button>
+                    <button type="button" data-filter="dessert" aria-pressed="false">Efterrätt</button>
                     <button type="button" data-filter="fika" aria-pressed="false">Fika</button>
                 </div>
 
                 <div class="recipe-grid">
-                    <article class="card" data-category="frukost">
-                        <a href="Pages/FrontendAssignmentV2.html">
+                    <article class="card" data-category="breakfast">
+                        <a href="Pages/PancakeRecipe.html">
                             <img src="Assets/Pannkakor5.jpg" alt="Pannkakor">
                             <h3>Pannkakor</h3>
                             <p>30 min</p>
                         </a>
                     </article>
 
-                    <article class="card" data-category="middag">
-                        <a href="#">
+                    <article class="card" data-category="dinner">
+                        <a href="#"><!-- Add link when can!  -->
                             <img src="Assets/PastaMedTomatSås.jpg" alt="Pasta med tomatsås">
                             <h3>Pasta med tomatsås</h3>
                             <p>45 min</p>
@@ -63,16 +63,16 @@
                     </article>
 
                     <article class="card" data-category="fika">
-                        <a href="#">
+                        <a href="#"><!-- Add link when can!  -->
                             <img src="Assets/Kladdkaka.jpg" alt="Kladdkaka">
                             <h3>Kladdkaka</h3>
                             <p>15 min</p>
                         </a>
                     </article>
 
-                    <atricle class="card" data-category="efterratt">
-                        <a href="#">
-                            <img src="Assets/TempBat2.png" alt="Tårta">
+                    <article class="card" data-category="dessert">
+                        <a href="#"><!-- Add link when can!  -->
+                            <img src="Assets/Tårta.webp" alt="Tårta">
                             <h3>Tårta</h3>
                             <p>30 min</p>
                         </a>
@@ -93,10 +93,10 @@
                 <a href="Pages/About.html">Om sajten</a>
                 <h2 class="footer-header">Fler recept</h2>
                 <ul>
-                    <li><a href="#recept">Frukost</a></li>
-                    <li><a href="#recept">Middag</a></li>
-                    <li><a href="#recept">Efterrätt</a></li>
-                    <li><a href="#recept">Fika</a></li>
+                    <li><a href="#recipe">Frukost</a></li>
+                    <li><a href="#recipe">Middag</a></li>
+                    <li><a href="#recipe">Efterrätt</a></li>
+                    <li><a href="#recipe">Fika</a></li>
                 </ul>
             </div>
             <p class="credits">© 2026 Jenny</p>

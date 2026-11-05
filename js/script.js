@@ -129,4 +129,4 @@ filterButtons.forEach(button => {
 // ----- Init -----
 
 // Load Swedish by default
-changeLanguage("sv");
+// changeLanguage("sv");
