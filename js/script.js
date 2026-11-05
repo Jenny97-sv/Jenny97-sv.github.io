@@ -4,6 +4,8 @@ const myImage = document.querySelector("img");
 const myButton = document.querySelector("button");
 const languageButtons = document.querySelectorAll("[data-language]");
 const checkboxes = document.querySelectorAll("li input[type='checkbox']");
+const filterButtons = document.querySelectorAll("[data-filter]");
+const cards = document.querySelectorAll(".card");
 let myHeadingClicked = false;
 let myOriginalHeading = "";
 

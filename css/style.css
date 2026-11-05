@@ -366,6 +366,11 @@ button[aria-pressed="true"] {
     margin: 0;
 }
 
+.footer-header {
+    display: flex;
+    justify-content:center;
+}
+
 /* ---------- Wider screens (keep this last) ---------- */
 @media (min-width: 700px) {
     body {
