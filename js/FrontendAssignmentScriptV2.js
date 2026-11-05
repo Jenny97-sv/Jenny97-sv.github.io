@@ -85,12 +85,12 @@ async function changeLanguage(language)
 }
 
 // ----- Event listeners -----
-myImage.addEventListener("click", toggleImage);
-languageButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        changeLanguage(button.dataset.language);
-    });
-});
+// myImage.addEventListener("click", toggleImage);
+// languageButtons.forEach(button => {
+//     button.addEventListener("click", () => {
+//         changeLanguage(button.dataset.language);
+//     });
+// });
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", () => {
         checkbox.closest("li").classList.toggle("done", checkbox.checked);
