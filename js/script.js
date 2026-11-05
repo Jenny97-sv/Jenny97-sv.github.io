@@ -114,6 +114,17 @@ myHeading.addEventListener("click", () => {
     }
     myHeadingClicked = !myHeadingClicked;
 });
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach(b => b.setAttribute("aria-pressed", b === button));
+
+        cards.forEach(card => {
+            card.hidden = filter !== "alla" && card.dataset.category !== filter;
+        });
+    });
+});
 
 // ----- Init -----
 
