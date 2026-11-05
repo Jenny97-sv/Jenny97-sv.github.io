@@ -3,6 +3,7 @@
     --color-primary: rgb(135, 66, 135);
     --color-border: rgb(136, 66, 136);
     --color-background: rgb(204, 154, 202);
+    --color-button-background: rgb(241, 182, 239);
     --color-body-background: #f8d4fd;
     --color-text: rgb(20, 0, 26);
 }
@@ -74,7 +75,7 @@ button,
 .button {
     display: inline-block;
     color: var(--color-text);
-    background-color: var(--color-background);
+    background-color: var(--color-button-background);
     border: 2px solid var(--color-border);
     border-radius: 0.5rem;
     padding: 0.4rem 1rem;
@@ -136,7 +137,7 @@ input[type="checkbox"]:checked + span {
 }
 
 li.done {
-    color: darkseagreen;
+    color: rgb(6, 42, 6);
 }
 
 /* ---------- Layout sections (mobile first: one column) ---------- */
@@ -371,7 +372,6 @@ button[aria-pressed="true"] {
     justify-content:center;
 }
 
-/* ---------- Wider screens (keep this last) ---------- */
 @media (min-width: 700px) {
     body {
         padding: 1rem;
@@ -388,7 +388,7 @@ button[aria-pressed="true"] {
     .recipe {
         grid-template-columns: 1fr 1fr;
     }
-        .site-header {
+    .site-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
