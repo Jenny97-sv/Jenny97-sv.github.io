@@ -17,6 +17,11 @@ function toggleDone(e)
     e.currentTarget.classList.toggle("done", checkbox.checked);
 }
 
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+
 // ----- Event listeners -----
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", () => {
