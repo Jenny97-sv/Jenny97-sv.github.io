@@ -30,7 +30,7 @@ filterButtons.forEach(button => {
         filterButtons.forEach(b => b.setAttribute("aria-pressed", b === button));
 
         cards.forEach(card => {
-            card.hidden = filter !== "alla" && card.dataset.category !== filter;
+            card.hidden = filter !== "all" && card.dataset.category !== filter;
         });
     });
 });
