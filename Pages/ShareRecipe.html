@@ -3,32 +3,124 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title data-i18n="pageTitle">Pannkaksrecept</title>
+    <title>Dela recept</title>
 
-    <script defer src="../js/FrontendAssignmentScriptV2.js"></script>
+    <script defer src="../js/ShareRecipe.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <!-- Menu -->
+
     <header class="site-header">
-        <a href="../index.html" class="logo">
-            <img src="../Assets/CoffeMug.png" alt="">
-            <span>Jennys recept</span>
-        </a>
+        <div class="popup">
+            <a class="logo" href="../index.html" aria-describedby="myPopup">
+                <img src="../Assets/CoffeMug.png" alt="">
+                <span>Jennys recept</span>
+            </a>
+            <span class="popuptext" id="myPopup" role="tooltip">Jennys recept start</span>
+        </div>
         <nav aria-label="Huvudmeny">
-            <a class="button" href="../Pages/PancakeRecipe.html">Pannkaksrecept</a>
-            <a class="button" href="../Pages/About.html">Om sajten</a>
+            <div class="popup">
+                <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                    <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                </a>
+            </div>
+            <div class="popup">
+                <a class="button" href="../Pages/PancakeRecipe.html" aria-describedby="pancakePopup">Pannkaksrecept
+                    <span class="popuptext" id="pancakePopup" role="tooltip">Se pannkaksrecept</span>
+                </a>
+            </div>
         </nav>
     </header>
 
     <main id="main-content" tabindex="-1">
+        <h1>Dela ditt recept</h1>
+        <p class="form-intro">Fyll i formuläret så sparas ditt recept. Fält markerade med * är obligatoriska.</p>
 
+        <form id="recipe-form" class="recipe-form">
+
+            <fieldset>
+                <legend>Om receptet</legend>
+
+                <div class="field">
+                    <label for="name">Receptets namn <span aria-hidden="true">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="field">
+                    <label for="category">Kategori *</label>
+                    <select id="category" name="category">
+                        <option value="">Välj kategori</option>
+                        <option value="frukost">Frukost</option>
+                        <option value="middag">Middag</option>
+                        <option value="efterratt">Efterrätt</option>
+                        <option value="fika">Fika</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="time">Tid i minuter *</label>
+                        <input type="number" id="time" name="time" min="1">
+                    </div>
+                    <div class="field">
+                        <label for="servings">Antal portioner *</label>
+                        <input type="number" id="servings" name="servings" min="1">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Svårighetsgrad</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="difficulty" value="Lätt"> Lätt</label>
+                    <label><input type="radio" name="difficulty" value="Medel"> Medel</label>
+                    <label><input type="radio" name="difficulty" value="Svår"> Svår</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Receptet</legend>
+
+                <div class="field">
+                    <label for="ingredients">Ingredienser <span aria-hidden="true">*</span></label>
+                    <textarea id="ingredients" name="ingredients" rows="5" required aria-describedby="ingredients-hint"></textarea>
+                    <small id="ingredients-hint">Skriv en ingrediens per rad.</small>
+                </div>
+
+                <div class="field">
+                    <label for="steps">Gör så här <span aria-hidden="true">*</span></label>
+                    <textarea id="steps" name="steps" rows="5" required aria-describedby="steps-hint" required></textarea>
+                    <small id="steps-hint">Skriv ett steg per rad.</small>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Om dig</legend>
+
+                <div class="field">
+                    <label for="author">Ditt namn *</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+
+                <div class="field">
+                    <label for="email">E-post <span aria-hidden="true">*</span></label>
+                    <input type="email" id="email" name="email" required
+                           autocomplete="email" aria-describedby="email-error">
+                    <span class="error" id="email-error">Ange en giltig e-postadress</span>
+                </div>
+            </fieldset>
+
+            <button type="submit">Skicka recept</button>
+            <p id="form-status" role="status"></p>
+        </form>
     </main>
 
     <footer>
-
+        <p>© 2026 Jennys recept</p>
     </footer>
+</body>
+</html>

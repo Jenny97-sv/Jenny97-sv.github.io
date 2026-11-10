@@ -14,23 +14,30 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Menu -->
     <header class="site-header">
-        <a href="../index.html" class="logo">
-            <img src="../Assets/CoffeMug.png" alt="CoffeMug">
-            <span>Jennys recept</span>
-        </a>
+        <div class="popup">
+            <a class="logo" href="../index.html" aria-describedby="myPopup">
+                <img src="../Assets/CoffeMug.png" alt="">
+                <span>Jennys recept</span>
+            </a>
+            <span class="popuptext" id="myPopup" role="tooltip">Jennys recept start</span>
+        </div>
         <nav>
-            <a class="button" href="../Pages/About.html">Om sajten</a>
-            <a class="button" href="../Pages/ShareRecipe.html">Dela recept</a>
+            <div class="popup">
+                <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                    <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                </a>
+            </div>
+            <div class="popup">
+                <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                    <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt eget recept</span>
+                </a>
+            </div>
         </nav>
     </header>
 
     <main id="main-content" tabindex="-1">
         <!-- Row 1: image left, text right -->
         <section class="hero">
-            <!-- <div class="popup">
-                <button type="button" aria-destribedby="MyPopup">Hover me</button>
-                <span class="popuptext" id="myPopup" role="tooltip">Popup text...</span>
-            </div> -->
             <img class="hero-image" src="../Assets/Pannkakor4.jpg" alt="Pannkakor">
             <div class="hero-text">
                 <h1>Enkelt recept på pannkakor</h1>
