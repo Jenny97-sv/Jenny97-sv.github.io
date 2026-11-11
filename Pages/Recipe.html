@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pannkaksrecept</title>
+    <script defer src="../js/recipe/recipe.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+    <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <header class="site-header">
+            <div class="popup">
+                <a class="logo" href="../index.html" aria-describedby="myPopup">
+                    <img src="../Assets/CoffeMug.png" alt="">
+                    <span>Jennys recept</span>
+                </a>
+                <span class="popuptext" id="myPopup" role="tooltip">Jennys recept start</span>
+            </div>
+            <nav>
+                <div class="popup">
+                    <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                        <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                    </a>
+                </div>
+                <div class="popup">
+                    <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                        <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt eget recept</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+                    <!-- Row 1: image left, text right -->
+            <section class="hero">
+                <img id="hero" class="hero-image" alt="" hidden>
+                <div class="hero-text">
+                <h1 id="title"></h1>
+                <ul class="facts" id="facts"></ul>
+                </div>
+            </section>
+
+            <section class="recipe">
+                <div class="ingredients">
+                    <h2>Ingredienser</h2>
+                    <ul id="ingredients"></ul>
+                </div>
+                <div class="instructions">
+                    <h2>Så här gör du</h2>
+                    <ol id="steps"></ol>
+                </div>
+            </section>
+
+            <section class="serving" id="serving" hidden>
+                <h2>Serveringsförslag</h2>
+                <div class="serving-image" id="serving-images"></div>
+            </section>
+        </main>
+    </body>
+</html>

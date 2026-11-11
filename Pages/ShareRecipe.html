@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dela recept</title>
 
-    <script defer src="../js/ShareRecipe.js"></script>
+    <script defer src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,11 +16,11 @@
 
     <header class="site-header">
         <div class="popup">
-            <a class="logo" href="../index.html" aria-describedby="myPopup">
+            <a class="logo" href="../index.html" aria-describedby="popupWindow">
                 <img src="../Assets/CoffeMug.png" alt="">
                 <span>Jennys recept</span>
             </a>
-            <span class="popuptext" id="myPopup" role="tooltip">Jennys recept start</span>
+            <span class="popuptext" id="popupWindow" role="tooltip">Jennys recept start</span>
         </div>
         <nav aria-label="Huvudmeny">
             <div class="popup">
@@ -54,9 +54,9 @@
                     <label for="category">Kategori *</label>
                     <select id="category" name="category">
                         <option value="">Välj kategori</option>
-                        <option value="frukost">Frukost</option>
-                        <option value="middag">Middag</option>
-                        <option value="efterratt">Efterrätt</option>
+                        <option value="breakfast">Frukost</option>
+                        <option value="dinner">Middag</option>
+                        <option value="dessert">Efterrätt</option>
                         <option value="fika">Fika</option>
                     </select>
                 </div>
@@ -88,14 +88,35 @@
                 <div class="field">
                     <label for="ingredients">Ingredienser <span aria-hidden="true">*</span></label>
                     <textarea id="ingredients" name="ingredients" rows="5" required aria-describedby="ingredients-hint"></textarea>
-                    <small id="ingredients-hint">Skriv en ingrediens per rad.</small>
+                    <small id="ingredients-hint">Skriv en ingrediens per rad. 
+                        ex. 1dl socker</small>
                 </div>
 
                 <div class="field">
                     <label for="steps">Gör så här <span aria-hidden="true">*</span></label>
                     <textarea id="steps" name="steps" rows="5" required aria-describedby="steps-hint" required></textarea>
-                    <small id="steps-hint">Skriv ett steg per rad.</small>
+                    <small id="steps-hint">Skriv ett steg per rad. Nummer behövs ej</small>
                 </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Bilder</legend>
+
+                <div class="field">
+                    <label for="thumbnail">Miniatyrbild (visas på startsidan)</label>*
+                    <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+                </div>
+
+                <div class="field">
+                    <label for="hero-image">Bild bredvid rubrik</label>*
+                    <input type="file" id="hero-image" name="hero-image" accept="image/*" required>
+                </div>
+
+                <div class="field" id="serving-fields">
+                    <label for="serving-image">Serveringsbilder</label>*
+                    <input type="file" id="serving-image" name="serving-image" accept="image/*" required multiple>
+                </div>
+                <button type="button" id="add-serving">Lägg till fler bilder</button>
             </fieldset>
 
             <fieldset>

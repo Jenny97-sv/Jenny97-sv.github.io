@@ -156,12 +156,17 @@ li.done {
     padding: 0 1rem 1rem;
 }
 
+#serving-fields input {
+    display: block;
+    margin-top: 0.5rem;
+}
+
 /* ---------- Hero ---------- */
 .hero-image {
     width: 100%;
     height: 100%;
     min-height: 16rem;
-    margin: 0;                 /* margin: auto would stop the grid from stretching it */
+    margin: 0;            
     object-fit: cover;
 }
 
@@ -173,10 +178,13 @@ li.done {
     }
 }
 
-.hero-text h1,
 .ingredients h2,
 .instructions h2 {
     text-align: left;
+    margin-top: 0;
+}
+.hero-text h1 {
+    text-align: center;   
     margin-top: 0;
 }
 
@@ -254,7 +262,7 @@ li.done {
   to {opacity:1 ;}
 }
 /* ---------- Serving images ---------- */
-.pancake-image {
+.serving-image {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
@@ -398,7 +406,7 @@ button[aria-pressed="true"] {
 
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 
@@ -483,9 +491,6 @@ legend {
 
 .field {
     margin-bottom: 1rem;
-    /* :last-child {
-        margin-bottom: 0;
-    } */
 }
 
 .recipe-form {
@@ -583,6 +588,9 @@ input:user-invalid + .error {
     .recipe {
         grid-template-columns: 1fr 1fr;
     }
+    .recipe-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
     .site-header {
         flex-direction: row;
         justify-content: space-between;
@@ -602,14 +610,6 @@ input:user-invalid + .error {
     }
 
     .card{
-        max-width: 17rem;
         margin: 0;
     }
 }
-
-/* @media (max-width: 699px) {
-
-    /* .site-header .button {
-        width: calc(100% - 2rem);  /* full width minus the padding on the nav */
-    /* } */
-/* } */
