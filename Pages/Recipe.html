@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pannkaksrecept</title>
+    <script defer src="../js/images.js"></script>
     <script defer src="../js/recipe/recipe.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,21 +42,86 @@
                 <div class="hero-text">
                 <h1 id="title"></h1>
                 <div class="owner-actions" id="owner-actions" hidden>
-                    <a class="button" id="edit-link" href="#">Redigera</a>
+                    <button type="button" id="edit-recipe">Redigera</button>
                     <button type="button" id="delete-recipe">Ta bort</button>
+                </div>
+
+                <div class="edit-bar" id="edit-bar" hidden>
+                    <p>Redigeringsläge: klicka på text med streckad ram för att ändra den.</p>
+                    <button type="button" id="change-thumb">Byt miniatyrbild (startsidan)</button>
+                    <button type="button" id="change-hero">Byt huvudbild</button>
+                    <button type="button" id="add-serving">Lägg till serveringsbild</button>
+                    <!-- <a class="button" id="edit-link" href="#">Fler fält (kategori, tid, färger)</a> -->
+                    <button type="button" id="save-edit">Spara</button>
+                    <button type="button" id="cancel-edit">Avbryt</button>
+                    <input type="file" id="file-picker" accept="image/*" hidden>
                 </div>
                 <ul class="facts" id="facts"></ul>
                 </div>
             </section>
 
+            <section class="edit-details" id="edit-details" hidden>
+            <h2>Detaljer</h2>
+
+            <div class="category">
+                    <label for="edit-category">Kategori</label>
+                    <select id="edit-category">
+                        <option value="breakfast">Frukost</option>
+                        <option value="dinner">Middag</option>
+                        <option value="dessert">Efterrätt</option>
+                        <option value="fika">Fika</option>
+                    </select>
+                </div>
+
+            <fieldset>
+                <legend>Färger</legend>
+                <div class="row">
+                    <div class="field">
+                        <label for="edit-color-bg">Bakgrund (hela sidan)</label>
+                        <input type="color" id="edit-color-bg" value="#cc9aca">
+                    </div>
+                    <div class="field">
+                        <label for="edit-color-body-bg">Bakgrund i rutan</label>
+                        <input type="color" id="edit-color-body-bg" value="#f8d4fd">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label for="edit-color-button-bg">Bakgrund i knappar</label>
+                        <input type="color" id="edit-color-button-bg" value="#F1B6EF">
+                    </div>
+                    <div class="field">
+                        <label for="edit-color-border">Ramfärg</label>
+                        <input type="color" id="edit-color-border" value="#884288">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label for="edit-color-primary">Rubrikfärg</label>
+                        <input type="color" id="edit-color-primary" value="#874287">
+                    </div>
+                    <div class="field">
+                        <label for="edit-color-text">Textfärg</label>
+                        <input type="color" id="edit-color-text" value="#14001a">
+                    </div>
+                </div>
+                <label>
+                    <input type="checkbox" id="edit-default-colors">
+                    <span>Använd sidans standardfärger</span>
+                </label>
+            </fieldset>
+        </section>
+
             <section class="recipe">
                 <div class="ingredients">
                     <h2>Ingredienser</h2>
                     <ul id="ingredients"></ul>
+                    <button type="button" class="add-row" data-list="ingredients" hidden>Lägg till ingrediens</button>
                 </div>
                 <div class="instructions">
                     <h2>Så här gör du</h2>
                     <ol id="steps"></ol>
+                    <button type="button" class="add-row" data-list="steps" hidden>Lägg till steg</button>
                 </div>
             </section>
 

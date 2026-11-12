@@ -112,6 +112,107 @@ main > .button {
     margin: 1rem;
 }
 
+/* ---------- Edit page --------------*/
+
+.edit-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px dashed var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+.edit-bar p {
+    flex-basis: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.editing [contenteditable="true"] {
+    outline: 2px dashed var(--color-primary);
+    outline-offset: 3px;
+    cursor: text;
+}
+
+.editing #title::after {
+    content: " ✎";
+}
+
+.editing input[type="checkbox"] {
+    display: none;
+}
+
+.edit-details {
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px dashed var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+.edit-details h2 {
+    margin-top: 0;
+}
+
+.edit-details select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    font: inherit;
+    background-color: white;
+}
+
+.edit-details input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    font: inherit;
+}
+
+.edit-details label {
+    display: block;
+    font-weight: 700;
+}
+
+.edit-details label:has(input[type="checkbox"]) {
+    display: flex;
+}
+
+.editing .edit-details input[type="checkbox"] {
+    display: inline-block;
+}
+
+figure button {
+    margin: 0.25rem 0.25rem 0 0;
+}
+
+.editing #ingredients span,
+.editing #steps span {
+    min-width: 8rem;
+    display: inline-block;
+}
+
+.fact-input {
+    width: 4rem;
+    padding: 0.25rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    font: inherit;
+}
+
+.facts select {
+    padding: 0.25rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    font: inherit;
+    background-color: white;
+}
+
 /* ---------- Lists and checkboxes ---------- */
 ul,
 ol {
@@ -546,9 +647,19 @@ legend {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-
     .field {
-        margin-bottom: 0;
+        margin-bottom: 0rem;
+    }
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:1rem;
+    select {
+        margin-left:1rem;
+        width:10rem;
     }
 }
 
