@@ -22,6 +22,8 @@ const saved = JSON.parse(localStorage.getItem("recipes") ?? "[]");
 
 const addServing = document.querySelector("#add-serving");
 const servingFields = document.querySelector("#serving-fields");
+const editId = Number(new URLSearchParams(location.search).get("edit")) || null;
+const existing = editId ? saved.find((/** @type {any} */ r) => r.id === editId) : null;
 
 // ----- Functions -----
 /**
@@ -69,6 +71,49 @@ function showStatus(message) {
     }
 }
 
+/**
+ * @param {string} id
+ * @param {string} value
+ */
+function setValue(id, value) {
+    const el = document.getElementById(id);
+    if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement) {
+        el.value = value;
+    }
+}
+
+/** @param {any} r */
+function fillForm(r) {
+    setValue("name", r.name);
+    setValue("category", r.category);
+    setValue("time", r.time);
+    setValue("servings", r.servings);
+    setValue("ingredients", r.ingredients.join("\n"));
+    setValue("steps", r.steps.join("\n"));
+    setValue("author", r.author);
+
+    const radio = document.querySelector(`input[name="difficulty"][value="${r.difficulty}"]`);
+    if (radio instanceof HTMLInputElement) radio.checked = true;
+
+    // The email is never saved, so it can't be required when editing
+    const email = document.getElementById("email");
+    if (email instanceof HTMLInputElement) email.required = false;
+
+    const heading = document.querySelector("main h1");
+    if (heading) heading.textContent = "Redigera recept";
+
+    const defaults = document.getElementById("default-colors");
+    if (defaults instanceof HTMLInputElement) defaults.checked = !r.colors;
+    if (r.colors) {
+        setValue("color-bg", r.colors.background ?? "#cc9aca");
+        setValue("color-body-bg", r.colors.bodybackground ?? "#f8d4fd");
+        setValue("color-button-bg", r.colors.buttonbackground ?? "#F1B6EF");
+        setValue("color-border", r.colors.border ?? "#884288");
+        setValue("color-primary", r.colors.primary ?? "#874287");
+        setValue("color-text", r.colors.text ?? "#14001a");
+    }
+}
+
 // ----- Event listeners -----
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", () => {
@@ -90,6 +135,9 @@ filterButtons.forEach(button => {
 });
 
 if (form) {
+    if (form && existing) 
+        fillForm(existing);
+    
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = new FormData(form);
@@ -102,7 +150,7 @@ if (form) {
                 .filter(f => f instanceof File && f.size > 0);
 
             const recipe = {
-                id: Date.now(),
+                id: existing ? existing.id : Date.now(),  
                 name: text("name"),
                 category: text("category"),
                 time: text("time"),
@@ -111,14 +159,36 @@ if (form) {
                 ingredients: text("ingredients").split("\n").map(s => s.trim()).filter(Boolean),
                 steps: text("steps").split("\n").map(s => s.trim()).filter(Boolean),
                 author: text("author"),
-                thumbnail: await imageFrom(data.get("thumbnail")),
-                heroImage: await imageFrom(data.get("hero-image")),
-                servingImages: await Promise.all(servingFiles.map(f => imageFrom(f)))
+                thumbnail: (await imageFrom(data.get("thumbnail"))) || existing?.thumbnail || "",
+                heroImage: (await imageFrom(data.get("hero-image"))) || existing?.heroImage || "",
+                servingImages: servingFiles.length
+                    ? await Promise.all(servingFiles.map(f => imageFrom(f)))
+                    : existing?.servingImages ?? [],
+                colors: data.get("default-colors")
+                    ? null
+                    : { background: text("color-bg"), 
+                        bodybackground: text("color-body-bg"), 
+                        buttonbackground: text("color-button-bg"),
+                        border: text("color-border"),
+                        primary: text("color-primary"), 
+                        text: text("color-text") }
             };
+            
 
             const recipes = JSON.parse(localStorage.getItem("recipes") ?? "[]");
-            recipes.push(recipe);
+            const index = recipes.findIndex((/** @type {any} */ r) => r.id === recipe.id);
+
+            if (index >= 0) {
+                recipes[index] = recipe;      // editing: replace
+            } else {
+                recipes.push(recipe);         // new: add
+            }
             localStorage.setItem("recipes", JSON.stringify(recipes));
+
+            if (existing) {
+                location.href = `Recipe.html?id=${recipe.id}`;   // back to the recipe
+                return;
+            }
             showStatus(`Tack! Receptet "${recipe.name}" är sparat.`);
             form.reset();
             servingFields?.querySelectorAll("input:not(#serving-image)").forEach((i) => i.remove());

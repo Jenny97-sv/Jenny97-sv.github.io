@@ -1,9 +1,9 @@
 /* ---------- Variables ---------- */
 :root {
     --color-primary: rgb(135, 66, 135);
-    --color-border: rgb(136, 66, 136);
-    --color-background: rgb(204, 154, 202);
-    --color-button-background: rgb(241, 182, 239);
+    --color-border: #884288;
+    --color-background: #CC9ACA;
+    --color-button-background: #F1B6EF;
     --color-body-background: #f8d4fd;
     --color-text: rgb(20, 0, 26);
     --font-family: "Roboto", sans-serif;
@@ -102,6 +102,14 @@ button:focus-visible,
 
 main > .button {
     margin: 0 1rem 1rem;
+}
+
+/* ---------- User buttons -------------*/
+.owner-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1rem;
 }
 
 /* ---------- Lists and checkboxes ---------- */
