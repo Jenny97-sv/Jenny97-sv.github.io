@@ -51,9 +51,8 @@
                     <button type="button" id="change-thumb">Byt miniatyrbild (startsidan)</button>
                     <button type="button" id="change-hero">Byt huvudbild</button>
                     <button type="button" id="add-serving">Lägg till serveringsbild</button>
-                    <!-- <a class="button" id="edit-link" href="#">Fler fält (kategori, tid, färger)</a> -->
-                    <button type="button" id="save-edit">Spara</button>
-                    <button type="button" id="cancel-edit">Avbryt</button>
+                    <!-- <button type="button" id="save-edit">Spara</button>
+                    <button type="button" id="cancel-edit">Avbryt</button> -->
                     <input type="file" id="file-picker" accept="image/*" hidden>
                 </div>
                 <ul class="facts" id="facts"></ul>
@@ -129,6 +128,11 @@
                 <h2>Serveringsförslag</h2>
                 <div class="serving-image" id="serving-images"></div>
             </section>
+
+            <div class="edit-buttons" id="edit-buttons" hidden>
+                <button type="button" id="save-edit">Spara</button>
+                <button type="button" id="cancel-edit">Avbryt</button>
+            </div>
         </main>
         <footer>
             <p>© 2026 Jennys recept</p>

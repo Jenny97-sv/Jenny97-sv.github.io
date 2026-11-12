@@ -26,6 +26,7 @@ const COLOR_FIELDS = [
 const titleEl = document.getElementById("title");
 const ownerActions = document.getElementById("owner-actions");
 const editBar = document.getElementById("edit-bar");
+const editButtons = document.getElementById("edit-buttons");
 const detailsSection = document.getElementById("edit-details");
 const picker = document.getElementById("file-picker");
 
@@ -214,6 +215,7 @@ function setEditing(on) {
   document.body.classList.toggle("editing", on);
 
   if (editBar) editBar.hidden = !on;
+  if (editButtons) editButtons.hidden = !on;
   if (ownerActions) ownerActions.hidden = on;
   if (detailsSection) detailsSection.hidden = !on;
 
