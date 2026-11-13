@@ -1,3 +1,27 @@
+/* ----------- Reset ----------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, p, ul, ol, figure {
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
 /* ---------- Variables ---------- */
 :root {
     --color-primary: rgb(135, 66, 135);
@@ -5,9 +29,16 @@
     --color-background: #CC9ACA;
     --color-button-background: #F1B6EF;
     --color-body-background: #f8d4fd;
+    --color-hero-overlay-background: rgba(20, 0, 26, 0.55);
+    --color-hero-overlay-text: white;
+    --color-error: darkred;
+    --color-note-background: rgb(205, 201, 206);
+    --color-popup-text-background: rgba(87, 84, 88, 0.9);
     --color-text: rgb(20, 0, 26);
+
     --font-family: "Roboto", sans-serif;
     --font-size: 1rem;
+
     --border-edit: 2px dashed var(--color-primary);
 }
 
@@ -49,6 +80,7 @@ body {
 
 h1,
 h2 {
+    margin: 1rem auto;
     color: var(--color-primary);
     text-align: center;
 }
@@ -70,7 +102,6 @@ img {
 /* ---------- Lists and checkboxes ---------- */
 ul,
 ol {
-    margin: 0;
     padding-left: 1.5rem;
 }
 
@@ -140,7 +171,6 @@ button,
         outline: 5px solid var(--color-text);
         outline-offset: 3px;
     }
-
 }
 
 /* ---------- User buttons -------------*/
@@ -165,7 +195,6 @@ button,
 
     p {
         flex-basis: 100%;
-        margin: 0;
         text-align: center;
     }
 }
@@ -262,6 +291,11 @@ figure button {
     background-color: white;
 }
 
+/*Hides all editing and hidden elements*/
+[hidden] {
+    display: none;
+}
+
 /* ---------- Layout sections (mobile first: one column) ---------- */
 .hero,
 .recipe {
@@ -285,7 +319,6 @@ figure button {
     width: 100%;
     height: 100%;
     min-height: 16rem;
-    margin: 0;            
     object-fit: cover;
 }
 
@@ -308,7 +341,7 @@ figure button {
 }
 
 .note {
-    background-color: rgb(205, 201, 206);
+    background-color: var(--color-note-background);
     padding: 1rem 1.5rem;
 }
 
@@ -342,10 +375,10 @@ figure button {
         z-index: 10;
         width: max-content;  
         padding: 0.2rem;
-        background-color: rgba(87, 84, 88, 0.9);
+        background-color: var(--color-popup-text-background);
         color: white;
         text-align: center;
-        font-weight: Light;
+        font-weight: lighter;
         border: 2px solid var(--color-border);
         font-family:'Times New Roman', Times, serif;    
 
@@ -374,14 +407,10 @@ figure button {
     gap: 1rem;
 }
 
-figure {
-    margin: 0;
-
-    img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-    }
+figure img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 figcaption {
@@ -396,14 +425,6 @@ footer {
     padding: 1rem;
     border-top: 1px solid var(--color-border);
     text-align: center;
-    p {
-        margin: 0;
-    }
-}
-
-/*Hides all editing and hidden elements*/
-[hidden] {
-    display: none;
 }
 
 .site-footer {
@@ -425,27 +446,20 @@ footer {
 
 .site-header {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    object-fit: cover;
-    object-position: center;
     gap: 0.5rem;
     padding: 1rem;
+    flex-wrap: nowrap;
 
     .button {
-        width: calc(100% - 2rem);  /* full width minus the padding on the nav */
+        width: calc(100%);  /* full width minus the padding on the nav */
     }
     .logo {
         justify-content: left;
-    }
-    nav {
-        align-items: stretch;
     }
 }
 
 .logo {
     display: flex;
-    align-items: left;
     gap: 0.5rem;
     color: var(--color-text);
     font-weight: bold;
@@ -453,7 +467,6 @@ footer {
 
     img {
         width: 2rem;
-        margin: 0;
     }
 }
 
@@ -473,8 +486,8 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgba(20, 0, 26, 0.55);
-    color: white;
+    background: var(--color-hero-overlay-background);
+    color: var(--color-hero-overlay-text);
     text-align: center;
 
     h1 {
@@ -483,6 +496,7 @@ footer {
         text-wrap: balance;
     }
 
+    /*Sets it more to the center??? Not supernessessary...*/
     p {
         margin: 0;
     }
@@ -529,7 +543,6 @@ button[aria-pressed="true"] {
         width: 100%;
         aspect-ratio: 3 / 2;
         object-fit: cover;
-        margin: 0;
     }
     
     h3 {
@@ -548,10 +561,6 @@ button[aria-pressed="true"] {
             text-decoration: auto;
         }
     }
-}
-
-.credits {
-    margin: 0;
 }
 
 .footer-header {
@@ -663,12 +672,12 @@ legend {
 /* Felmeddelande: syns bara när användaren skrivit något ogiltigt */
 .error {
     display: none;
-    color: darkred;
+    color: var(--color-error);
     font-weight: bold;
 }
 
 input:user-invalid {
-    border-color: rgb(255, 0, 0);
+    border-color: var(--color-error);
 }
 
 input:user-invalid + .error {
@@ -710,9 +719,5 @@ input:user-invalid + .error {
 
     .credits {
         grid-column: 1 / -1;
-    }
-
-    .card{
-        margin: 0;
     }
 }
