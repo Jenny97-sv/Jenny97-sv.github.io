@@ -67,6 +67,45 @@ img {
     max-width: 100%;
 }
 
+/* ---------- Lists and checkboxes ---------- */
+ul,
+ol {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+ul {
+    list-style: none; /*no dots!*/
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 0.2rem;
+    line-height: 2;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+li.done {
+    color: black;
+}
+
 /* ---------- Navigation ---------- */
 nav {
     display: flex;
@@ -86,7 +125,7 @@ button,
     border-radius: 0.5rem;
     
     padding: 0.4rem 1rem;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; /*hm annorlunda font...*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
     text-decoration: none;
     text-align: center;
@@ -102,11 +141,6 @@ button,
         outline-offset: 3px;
     }
 
-}
-
-/*main är parent till button*/
-main > .button {
-    margin: 0 1rem 1rem;
 }
 
 /* ---------- User buttons -------------*/
@@ -137,22 +171,17 @@ main > .button {
 }
 
 .editing {
-    /* &[contenteditable="true"] {
+    &[contenteditable="true"] {
         outline: var(--border-edit);
         outline-offset: 3px;
         cursor: text;
-    } */
+    }
      #title::after {
         content: " ✎";
     }
-    &input[type="checkbox"] { /*Kind of want to remove this...*/
+    &input[type="checkbox"] {
         display: none;
     }
-}
-.editing [contenteditable="true"] {
-    outline: var(--border-edit);
-    outline-offset: 3px;
-    cursor: text;
 }
 
 .edit-details {
@@ -172,7 +201,7 @@ main > .button {
         font: inherit;
         background-color: white;
     }
-    &input[type="number"] { /*can't see that this changes anything...*/
+    &input[type="number"] { 
         width: 100%;
         box-sizing: border-box;
         padding: 0.5rem;
@@ -183,8 +212,9 @@ main > .button {
     label {
         display: block;
         font-weight: bold;
+        margin-top: 0.5rem;
     }
-    &label:has(input[type="checkbox"]) {/*can't see that this changes anything...*/
+    &label:has(input[type="checkbox"]) {
         display: flex;
     }
 }
@@ -196,7 +226,7 @@ main > .button {
 .edit-buttons {
     display: flex;
     justify-content: flex-end;   /* knapparna längst till höger */
-    gap: 0.5rem;                 /* avstånd mellan dem */
+    gap: 0.5rem;                 
     margin: 1rem;
     #save-edit,
     #cancel-edit {
@@ -232,45 +262,6 @@ figure button {
     background-color: white;
 }
 
-/* ---------- Lists and checkboxes ---------- */
-ul,
-ol {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-ul {
-    list-style: none; /*no dots!*/
-    padding-left: 0;
-}
-
-li {
-    margin-bottom: 0.2rem;
-    line-height: 2;
-}
-
-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    cursor: pointer;
-}
-
-input[type="checkbox"]:checked + span {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
-
-li.done {
-    color: black;
-}
-
 /* ---------- Layout sections (mobile first: one column) ---------- */
 .hero,
 .recipe {
@@ -293,9 +284,9 @@ li.done {
 .hero-image {
     width: 100%;
     height: 100%;
-    min-height: 16rem; /*nothing changes...*/
+    min-height: 16rem;
     margin: 0;            
-    object-fit: cover; /*nothing changes...*/
+    object-fit: cover;
 }
 
 .hero-text {
@@ -331,18 +322,18 @@ li.done {
         padding: 0.5rem;
         text-align: center;
     }
+    /*elements next to each other*/
     li + li {
         border-left: 1px solid var(--color-border);
     }
 }
 
-/* Popup container */
+/* -------- Popup container --------- */
 .popup {
     position: relative;
     display: inline-block;
     cursor: pointer;
 
-    /* The actual popup (appears on top) */
     .popuptext {
         position: absolute;
         left: 50%;                  /* precis till höger om logotypen */
@@ -363,7 +354,6 @@ li.done {
         transition: opacity 0.3s;
     }
 
-    /* Toggle this class when clicking on the popup container (hide and show the popup) */
     .hover {
         visibility: visible;
         -webkit-animation: fadeIn 1s;
@@ -377,16 +367,6 @@ li.done {
     transition: opacity 0.3s 0.6s;
 }
 
-/* Add animation (fade in the popup) */
-/* @-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-} */
-
-/* @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-} */
 /* ---------- Serving images ---------- */
 .serving-image {
     display: grid;
@@ -421,7 +401,8 @@ footer {
     }
 }
 
-[hidden] { /*???*/
+/*Hides all editing and hidden elements*/
+[hidden] {
     display: none;
 }
 
@@ -629,11 +610,11 @@ legend {
         font: inherit;
     }
 
-    input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible {
+    &input:focus-visible,
+    &select:focus-visible,
+    &textarea:focus-visible {
         outline: 3px solid var(--color-text);
-        outline-offset: 2px;
+        outline-offset: 3px;
     }
 
     small {
@@ -657,10 +638,10 @@ legend {
 }
 
 .category {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom:1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:1rem;
     select {
         margin-left:1rem;
         width:10rem;
@@ -682,13 +663,12 @@ legend {
 /* Felmeddelande: syns bara när användaren skrivit något ogiltigt */
 .error {
     display: none;
-    margin-top: 0.25rem;
     color: darkred;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 input:user-invalid {
-    border-color: darkred;
+    border-color: rgb(255, 0, 0);
 }
 
 input:user-invalid + .error {
