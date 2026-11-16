@@ -28,6 +28,7 @@ textarea {
     --color-border: #884288;
     --color-background: #CC9ACA;
     --color-button-background: #F1B6EF;
+    --color-notes-background: var(--color-button-background);
     --color-body-background: #f8d4fd;
     --color-hero-overlay-background: rgba(20, 0, 26, 0.55);
     --color-hero-overlay-text: white;
@@ -40,6 +41,11 @@ textarea {
     --font-size: 1rem;
 
     --border-edit: 2px dashed var(--color-primary);
+    --border-thin: 1px solid var(--color-border);
+    --border-normal: 2px solid var(--color-border);
+    --border-thick: 5px solid var(--color-border);
+
+    --control-height: 2.5rem;
 }
 
 /* ---------- Base ---------- */
@@ -49,11 +55,9 @@ html {
 
 body {
     max-width: 60rem;
-    /* width: 100%; */
     inline-size: 100%;
     margin: auto;
     margin-block-end: 1rem;
-    /* margin-bottom: 1rem; */
     padding: 0;
 
     font-size: var(--font-size);
@@ -62,7 +66,7 @@ body {
 
     background-color: var(--color-body-background);
     box-sizing: border-box;
-    border: 5px solid var(--color-border);
+    border: var(--border-thick);
     border-radius: 14px;
 }
 
@@ -74,6 +78,7 @@ body {
 
     /*instead of left. It starts where it should no matter which direction*/
     inset-inline-start: 0;
+
     background-color: var(--color-primary);
     color: white;
     padding: 8px;
@@ -86,7 +91,8 @@ body {
 
 h1,
 h2 {
-    margin: 1rem auto;
+    margin-block: 1rem;
+    margin-inline: auto;
     color: var(--color-primary);
     text-align: center;
 }
@@ -95,31 +101,24 @@ h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 
 p {
-    margin: 0 0 1rem;
+    margin-block-start: 0;
+    margin-block-end: 1rem;
+    margin-inline-start: 0;
     text-wrap: pretty;
-}
-
-img {
-    display: block;
-    margin: auto;
-    max-width: 100%;
 }
 
 /* ---------- Lists and checkboxes ---------- */
 ul,
 ol {
-    /* padding-left: 1.5rem; */
     padding-inline-start: 1.5rem;
 }
 
 ul {
-    list-style: none; /*no dots!*/
-    /* padding-left: 0; */
+    list-style: none;
     padding-inline-start: 0;
 }
 
 li {
-    /* margin-bottom: 0.2rem; */
     margin-block-end: 0.2rem;
     line-height: 2;
 }
@@ -133,8 +132,6 @@ label {
 
 input[type="checkbox"] {
     inline-size: 1rem;
-    /* width: 1rem; */
-    /* height: 1rem; */
     block-size: 1rem;
     cursor: pointer;
 }
@@ -163,7 +160,7 @@ button,
     color: var(--color-text);
     background-color: var(--color-button-background);
     
-    border: 2px solid var(--color-border);
+    border: var(--border-normal);
     border-radius: 0.5rem;
     
     padding: 0.4rem 1rem;
@@ -211,15 +208,15 @@ button,
 }
 
 .editing {
-    &[contenteditable="true"] {
+    [contenteditable="true"] {
         outline: var(--border-edit);
         outline-offset: 3px;
         cursor: text;
     }
-     #title::after {
+    #title::after {
         content: " ✎";
     }
-    &input[type="checkbox"] {
+    input[type="checkbox"] {
         display: none;
     }
 }
@@ -231,31 +228,25 @@ button,
     border-radius: 0.5rem;
 
     h2 {
-        /* margin-top: 0; */
         margin-block-start: 0;
     }
     select {
         inline-size: 100%;
-        /* width: 100%; */
         padding: 0.5rem;
-        border: 2px solid var(--color-border);
+        border: var(--border-normal);
         border-radius: 0.5rem;
-        font: inherit;
         background-color: white;
     }
-    &input[type="number"] { 
-        /* width: 100%; */
+    input[type="number"] { 
         inline-size: 100%;
         box-sizing: border-box;
         padding: 0.5rem;
         border: var(--border-edit);
         border-radius: 0.5rem;
-        font: inherit;
     }
     label {
         display: block;
         font-weight: bold;
-        /* margin-top: 0.5rem; */
         margin-block-start: 0.5rem;
     }
     &label:has(input[type="checkbox"]) {
@@ -276,14 +267,15 @@ button,
     #cancel-edit {
         inline-size: 7rem;
         block-size: 3rem;
-        /* width:7rem;
-        height:3rem; */
         font-weight: bold;
     }
 }
 
 figure button {
-    margin: 0.25rem 0.25rem 0 0;
+    margin-block-start: 0.25rem;
+    margin-block-end: 0;
+    margin-inline-start: 0.25rem;
+    margin-inline-end: 0;
 }
 
 .editing #ingredients span,
@@ -294,18 +286,16 @@ figure button {
 
 .fact-input {
     inline-size: 4rem;
-    /* width: 4rem; */
+    block-size: 2rem;
     padding: 0.25rem;
     border:var(--border-edit);
     border-radius: 0.5rem;
-    font: inherit;
 }
 
 .facts select {
     padding: 0.25rem;
     border:var(--border-edit);
     border-radius: 0.5rem;
-    font: inherit;
     background-color: white;
 }
 
@@ -329,7 +319,6 @@ figure button {
 
 #serving-fields input {
     display: block;
-    /* margin-top: 0.5rem; */
     margin-block-start: 0.5rem;
 }
 
@@ -337,8 +326,6 @@ figure button {
 .hero-image {
     inline-size: 100%;
     block-size: 100%;
-    /* width: 100%;
-    height: 100%; */
     min-height: 16rem;
     object-fit: cover;
 }
@@ -355,11 +342,9 @@ figure button {
 .instructions h2 {
     text-align: start;
     margin-block-start: 0;
-    /* margin-top: 0; */
 }
 .hero-text h1 {
     text-align: center;   
-    /* margin-top: 0; */
     margin-block-start: 0;
 }
 
@@ -370,7 +355,7 @@ figure button {
 
 .facts {
     display: flex;
-    border: 1px solid var(--color-border);
+    border: var(--border-thin);
  
     li {
         flex: 1;
@@ -380,8 +365,7 @@ figure button {
     }
     /*elements next to each other*/
     li + li {
-        /* border-left: 1px solid var(--color-border); */
-        border-inline-start: 1px solid var(--color-border);
+        border-inline-start: var(--border-thin);
     }
 }
 
@@ -393,20 +377,23 @@ figure button {
 
     .popuptext {
         position: absolute;
-        /* start: 50%; */  /*start doesn't exist here?*/
-        left: 50%;                  /* precis till höger om logotypen */
+        left: 50%; /*FIX THIS!*/    /* precis till höger om logotypen */
         transform: translateY(40%); /* centrerad i höjdled */
-        /*margin-left: 0.5rem;*/         /* lite luft mot logotypen */
+
+        /* lite luft mot logotypen */
         margin-inline-start: 0.5rem;
-        z-index: 10;
-        /* width: max-content;  */
-        inline-size: max-content; 
+
         padding: 0.2rem;
+        inline-size: max-content; 
+        z-index: 10;
+
         background-color: var(--color-popup-text-background);
         color: white;
+
         text-align: center;
         font-weight: lighter;
-        border: 2px solid var(--color-border);
+
+        border: var(--border-normal);
         font-family:'Times New Roman', Times, serif;    
 
         opacity: 0;
@@ -436,15 +423,13 @@ figure button {
 
 figure img {
     inline-size: 100%;
-    /* width: 100%; */
     aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
 figcaption {
     padding: 0.5rem;
-    border: 1px solid var(--color-border);
-    /*border-top: 0;*/ /*hides it behind image*/
+    border: var(--border-thin);
     border-block-start: 0;
     background-color: var(--color-button-background);
 }
@@ -452,8 +437,7 @@ figcaption {
 /* ---------- Footer ---------- */
 footer {
     padding: 1rem;
-    /* border-top: 1px solid var(--color-border); */
-    border-block-start: 1px solid var(--color-border);
+    border-block-start: var(--border-thin);
     text-align: center;
 }
 
@@ -461,34 +445,40 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    border-block-start: 1px solid var(--color-border); /*MAKE VARIABLES OF THIS!!!*/
-    /* border-top: 1px solid var(--color-border); */
+    border-block-start: var(--border-thin); 
 
     h2 {
         text-align: start;
-        /* text-align: left; */
         font-size: 1rem;
-        margin: 1rem 0 0.5rem;
+        margin-block-start: 1rem;
+        margin-block-end: 0.5rem;
+        margin-inline-start: 0;
     }
 
     ul {
         padding: 0;
     }
+
+    .logo {
+        grid-area:auto;
+    }
 }
 
 .site-header {
     display: flex;
+    flex-direction: column; /*mobile: logo above, buttons below*/
     gap: 0.5rem;
     padding: 1rem;
     flex-wrap: nowrap;
 
-    .button {
-        /*width: calc(100%);*/  /* full width minus the padding on the nav */
-        inline-size: calc(100%);
+    > .popup{
+        align-self: flex-start; /*logo on the left, only as wide as its content*/
     }
-    .logo {
-        /* justify-content: left; */
-        justify-content: start;
+    nav {
+        padding: 0;
+    }
+    .button {
+        inline-size: calc(100%);
     }
 }
 
@@ -500,20 +490,18 @@ footer {
     text-decoration: none;
 
     img {
-        /* width: 2rem; */
         inline-size: 2rem;
     }
 }
 
 .landing-hero {
     position: relative;
-    margin: 0 1rem;
+    margin-block: 0;
+    margin-inline: 1rem;
 
     img {
-        /* width: 100%; */
         inline-size: 100%;
         block-size: 18rem;
-        /* height: 18rem; */
     }
 }
 
@@ -523,7 +511,8 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: var(--color-hero-overlay-background);
+
+    background-color: var(--color-hero-overlay-background);
     color: var(--color-hero-overlay-text);
     text-align: center;
 
@@ -533,7 +522,6 @@ footer {
         text-wrap: balance;
     }
 
-    /*Sets it more to the center??? Not supernessessary...*/
     p {
         margin: 0;
     }
@@ -548,7 +536,6 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
-    /* margin-bottom: 1.5rem; */
     margin-block-end: 1.5rem;
 }
 
@@ -564,12 +551,12 @@ button[aria-pressed="true"] {
 }
 
 .card {
-    border: 1px solid var(--color-border);
+    border: var(--border-thin);
 
-    /* width: 100%; */
     inline-size: 100%;
     object-fit: cover;
-    margin: 0 auto;  
+    margin-block: 0;
+    margin-inline: auto;
     object-position: center;
     
     a {
@@ -579,24 +566,27 @@ button[aria-pressed="true"] {
     }
 
     img {
-        /* width: 100%; */
         inline-size: 100%;
         aspect-ratio: 3 / 2;
         object-fit: cover;
     }
     
     h3 {
-        margin: 0.5rem 1rem 0;
+        margin-block-start: 0.5rem;
+        margin-inline-start: 1rem;
+        margin-block-end: 0;
     }
 
     p {
-        margin: 0 1rem 1rem;
+        margin-block-start: 0;
+        margin-block-end: 1rem;
+        margin-inline-start: 1rem;
     }
 
     a:hover,
     a:focus-visible {
         text-decoration: underline;
-        border: 5px solid var(--color-border);
+        border: var(--border-thick);
         p {
             text-decoration: auto;
         }
@@ -612,18 +602,19 @@ button[aria-pressed="true"] {
 .form-intro,
 .recipe-form {
     margin: 1rem;
+    max-inline-size: 42rem;
+    margin-inline: auto;
 }
 
 .recipe-form {
     display: grid;
     gap: 1.5rem;
     padding-block-end: 1rem;
-    /* padding-bottom: 1rem; */
 }
 
 fieldset {
     padding: 1rem;
-    border: 1px solid var(--color-border);
+    border: var(--border-thin);
     border-radius: 0.5rem;
 }
 
@@ -634,7 +625,6 @@ legend {
 }
 
 .field {
-    /* margin-bottom: 1rem; */
     margin-block-end: 1rem;
 }
 
@@ -642,37 +632,12 @@ legend {
 
     .field label {
         display: block;
-        /* margin-bottom: 0.25rem; */
         margin-block-end: 0.25rem;
         font-weight: bold;
-    }
-    
-    input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    select,
-    textarea {
-        inline-size: 100%;
-        /* width: 100%; */
-        box-sizing: border-box;
-        padding: 0.5rem;
-        border: 2px solid var(--color-border);
-        border-radius: 0.5rem;
-        background-color: white;
-        color: var(--color-text);
-        font: inherit;
-    }
-
-    &input:focus-visible,
-    &select:focus-visible,
-    &textarea:focus-visible {
-        outline: 3px solid var(--color-text);
-        outline-offset: 3px;
     }
 
     small {
         display: block;
-        /* margin-top: 0.25rem; */
         margin-block-start: 0.25rem;
     }
 
@@ -682,12 +647,34 @@ legend {
     }
 }
 
+:where(.recipe-form, .edit-details, .ingredient-row, .step-row)
+:is(input:not([type="checkbox"], [type="radio"], [type="color"], [type="file"]), select, textarea) {
+    inline-size: 100%;
+    padding-block:0.4rem;
+    padding-inline:0.6rem;
+    border: var(--border-normal);
+    border-radius: 0.5rem;
+    background-color: white;
+    color: var(--color-text);
+}
+
+/*Single line controls get the same height, so selects match text inputs*/
+:where(.recipe-form, .edit-details, .ingredient-row, .step-row)
+:is(input:not([type="checkbox"], [type="radio"], [type="color"], [type="file"]), select, textarea) {
+    block-size: var(--control-height);
+}
+
+:where(.recipe-form, .edit-details)
+:is(input, select, textarea):focus-visible {
+    outline: 3px solid var(--color-text);
+    outline-offset: 3px;
+}
+
 .row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     .field {
-        /* margin-bottom: 0rem; */
         margin-block-end: 0rem;
     }
 }
@@ -696,12 +683,9 @@ legend {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-bottom:1rem; */
     margin-block-end: 1rem;
     select {
         margin-inline-start: 1rem;
-        /* margin-left:1rem; */
-        /* width:10rem; */
         inline-size: 10rem;
     }
 }
@@ -713,8 +697,6 @@ legend {
 
     input[type="radio"] {
         inline-size: 1rem;
-        /* width: 1rem; */
-        /* height: 1rem; */
         block-size: 1rem;
         cursor: pointer;
     }
@@ -742,17 +724,15 @@ input:user-invalid + .error {
 
 .field-title {
     display: block;
-    /* margin-bottom: 0.5rem; */
     margin-block-end: 0.5rem;
     font-weight: 700;
 }
 
 .ingredient-row {
     display: grid;
-    grid-template-columns: 5rem 6rem 1fr auto;
+    grid-template-columns: 4.5rem 5.5rem 1fr auto;
     gap: 0.5rem;
     align-items: center;
-    /* margin-bottom: 0.75rem; */
     margin-block-end: 0.75rem;
 }
 
@@ -771,19 +751,16 @@ input:user-invalid + .error {
 .ingredient-row input,
 .ingredient-row select,
 .step-row input {
-    /* width: 100%; */
     inline-size: 100%;
     box-sizing: border-box;
     padding: 0.4rem;
-    border: 2px solid var(--color-border);
+    border: var(--border-normal);
     border-radius: 0.5rem;
     background-color: white;
     color: var(--color-text);
-    font: inherit;
 }
 
 .remove-row {
-    /* width: 2.5rem; */
     inline-size: 2.5rem;
     padding: 0.2rem;
     font-weight: 700;
@@ -798,8 +775,6 @@ input:user-invalid + .error {
 .info-button {
     inline-size: 1.6rem;
     block-size: 1.6rem;
-    /* width: 1.6rem;
-    height: 1.6rem; */
     padding: 0;
     border-radius: 50%;
     font-weight: 700;
@@ -807,29 +782,36 @@ input:user-invalid + .error {
 }
 
 .notes {
-    /* padding: 0 1rem; */
-    padding-block:0;
+    padding-block: 0.5rem;
     padding-inline: 1rem;
-}
+    margin: 1rem;
 
-.notes p {
-    white-space: pre-line;
+    border: var(--border-normal);
+    border-radius: 0.5rem;
+
+    background-color: var(--color-notes-background);
+    text-align: center;
+
+    h2 {
+        margin-block-start: 0.5rem;
+    }
+    p {
+        margin: 0;
+        white-space: pre-line; /*keeps the line breaks the user typed*/
+    }
 }
 
 .edit-details textarea {
-    /* width: 100%; */
     inline-size: 100%;
     box-sizing: border-box;
     padding: 0.5rem;
-    border: 20px solid var(--color-border);
+    border: var(--border-normal);
     border-radius: 0.5rem;
-    font: inherit;
 }
 
 @media (min-width: 700px) {
     body {
         padding: 1rem;
-        /* margin: 1rem auto; */
         margin-block:1rem;
         margin-inline:auto;
     }
@@ -851,10 +833,14 @@ input:user-invalid + .error {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+
+        > .popup{
+            align-self: auto;
+        }
     }
 
     .site-header .logo {
-        justify-content: flex-start;
+        justify-content: start;
     }
 
     .site-footer {
