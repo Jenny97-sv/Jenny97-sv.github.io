@@ -24,46 +24,10 @@ const addServing = document.querySelector("#add-serving");
 const servingFields = document.querySelector("#serving-fields");
 const editId = Number(new URLSearchParams(location.search).get("edit")) || null;
 const existing = editId ? saved.find((/** @type {any} */ r) => r.id === editId) : null;
+const ingredientList = document.getElementById("ingredient-rows");
+const stepList = document.getElementById("step-rows");
 
 // ----- Functions -----
-// /**
-//  * Shrinks an image file and returns it as a JPEG data URL.
-//  * @param {File} file
-//  * @param {number} maxSize longest side in pixels
-//  * @returns {Promise<string>}
-//  */
-// function resizeImage(file, maxSize = 800) {
-//     return new Promise((resolve, reject) => {
-//         const img = new Image();
-//         const url = URL.createObjectURL(file);
-
-//         img.onload = () => {
-//             const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
-//             const canvas = document.createElement("canvas");
-//             canvas.width = Math.round(img.width * scale);
-//             canvas.height = Math.round(img.height * scale);
-
-//             const ctx = canvas.getContext("2d");
-//             if (!ctx) {
-//                 reject(new Error("Canvas not supported"));
-//                 return;
-//             }
-//             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-//             URL.revokeObjectURL(url);
-//             resolve(canvas.toDataURL("image/jpeg", 0.7));
-//         };
-//         img.onerror = () => reject(new Error("Could not read image"));
-//         img.src = url;
-//     });
-// }
-
-// /**
-//  * @param {FormDataEntryValue | null} value
-//  * @returns {Promise<string>} data URL, or "" if no file was chosen
-//  */
-// async function imageFrom(value) {
-//     return value instanceof File && value.size > 0 ? resizeImage(value) : "";
-// }
 /** @param {string} message */
 function showStatus(message) {
     if (formStatus) {
@@ -84,12 +48,17 @@ function setValue(id, value) {
 
 /** @param {any} r */
 function fillForm(r) {
-    setValue("name", r.name);
+    ingredientList?.replaceChildren();
+    stepList?.replaceChildren();
+    r.ingredients.map(normalizeIngredient).forEach((/** @type {any} */ i) => addIngredientRow(i));
+    r.steps.forEach((/** @type {string} */ s) => addStepRow(s));
+    setValue("notes", r.notes ?? "");
+    setValue("notes-position", r.notesPosition ?? "below");
     setValue("category", r.category);
     setValue("time", r.time);
     setValue("servings", r.servings);
     setValue("ingredients", r.ingredients.join("\n"));
-    setValue("steps", r.steps.join("\n"));
+    // setValue("steps", r.steps.join("\n"));
     setValue("author", r.author);
 
     const radio = document.querySelector(`input[name="difficulty"][value="${r.difficulty}"]`);
@@ -114,6 +83,25 @@ function fillForm(r) {
     }
 }
 
+/** @param {any} [ing] */
+function addIngredientRow(ing) {
+    ingredientList?.append(createIngredientRow(ing));
+    ingredientList?.lastElementChild?.querySelector("input")?.focus();
+}
+
+/** @param {string} [text] */
+function addStepRow(text = "") {
+    stepList?.append(createStepRow(text));
+    stepList?.lastElementChild?.querySelector("input")?.focus();
+}
+
+function resetRows() {
+    ingredientList?.replaceChildren();
+    stepList?.replaceChildren();
+    addIngredientRow();
+    addStepRow();
+}
+
 // ----- Event listeners -----
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", () => {
@@ -135,8 +123,13 @@ filterButtons.forEach(button => {
 });
 
 if (form) {
-    if (form && existing) 
+    if (existing) 
         fillForm(existing);
+    else 
+        resetRows();
+
+    document.getElementById("add-ingredient")?.addEventListener("click", () => addIngredientRow());
+    document.getElementById("add-step")?.addEventListener("click", () => addStepRow());
     
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -148,6 +141,12 @@ if (form) {
         try {
             const servingFiles = data.getAll("serving-image")
                 .filter(f => f instanceof File && f.size > 0);
+            const ingredients = ingredientList ? readIngredientRows(ingredientList) : [];
+            const steps = stepList ? readStepRows(stepList) : [];
+            if (ingredients.length === 0 || steps.length === 0) {
+                showStatus("Lägg till minst en ingrediens och ett steg.");
+                return;
+            }
 
             const recipe = {
                 id: existing ? existing.id : Date.now(),  
@@ -156,8 +155,10 @@ if (form) {
                 time: text("time"),
                 servings: text("servings"),
                 difficulty: text("difficulty"),
-                ingredients: text("ingredients").split("\n").map(s => s.trim()).filter(Boolean),
-                steps: text("steps").split("\n").map(s => s.trim()).filter(Boolean),
+                ingredients,
+                steps,
+                notes: text("notes"),
+                notesPosition: text("notes-position") || "below",
                 author: text("author"),
                 thumbnail: (await imageFrom(data.get("thumbnail"))) || existing?.thumbnail || "",
                 heroImage: (await imageFrom(data.get("hero-image"))) || existing?.heroImage || "",
@@ -191,6 +192,7 @@ if (form) {
             }
             showStatus(`Tack! Receptet "${recipe.name}" är sparat.`);
             form.reset();
+            resetRows();
             servingFields?.querySelectorAll("input:not(#serving-image)").forEach((i) => i.remove());
         } catch (error) {
             showStatus("Det gick inte att spara receptet. Bilderna kan vara för stora.");

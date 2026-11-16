@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pannkaksrecept</title>
     <script defer src="../js/images.js"></script>
+    <script defer src="../js/rows.js"></script>
     <script defer src="../js/recipe/recipe.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,15 +64,27 @@
                 <h2>Detaljer</h2>
 
                 <div class="category">
-                        <label for="edit-category">Kategori</label>
-                        <select id="edit-category">
-                            <option value="breakfast">Frukost</option>
-                            <option value="dinner">Middag</option>
-                            <option value="dessert">Efterrätt</option>
-                            <option value="fika">Fika</option>
-                        </select>
-                    </div>
+                    <label for="edit-category">Kategori</label>
+                    <select id="edit-category">
+                        <option value="breakfast">Frukost</option>
+                        <option value="dinner">Middag</option>
+                        <option value="dessert">Efterrätt</option>
+                        <option value="fika">Fika</option>
+                    </select>
+                </div>
 
+                <div class="field">
+                    <label for="edit-notes">Anteckningar</label>
+                    <textarea id="edit-notes" rows="4"></textarea>
+                </div>
+                <div class="field">
+                    <label for="edit-notes-position">Visa anteckningarna</label>
+                    <select id="edit-notes-position">
+                        <option value="below">Under receptet</option>
+                        <option value="above">Ovanför receptet</option>
+                    </select>
+                </div>
+                
                 <fieldset>
                     <legend>Färger</legend>
                     <div class="row">
@@ -109,6 +122,11 @@
                         <span>Använd sidans standardfärger</span>
                     </label>
                 </fieldset>
+            </section>
+
+            <section class="notes" id="notes-section" hidden>
+                <h2>Anteckningar</h2>
+                <p id="notes-text"></p>
             </section>
 
             <section class="recipe">

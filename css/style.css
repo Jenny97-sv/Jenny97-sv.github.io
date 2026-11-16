@@ -49,9 +49,11 @@ html {
 
 body {
     max-width: 60rem;
-    width: 100%;
+    /* width: 100%; */
+    inline-size: 100%;
     margin: auto;
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+    /* margin-bottom: 1rem; */
     padding: 0;
 
     font-size: var(--font-size);
@@ -66,8 +68,12 @@ body {
 
 .skip-link{
     position: absolute;
-    top: -1000px;
-    left: 0;
+
+    /*skip link will always be at the top, no matter which language or direction*/
+    top: -1000px; 
+
+    /*instead of left. It starts where it should no matter which direction*/
+    inset-inline-start: 0;
     background-color: var(--color-primary);
     color: white;
     padding: 8px;
@@ -102,16 +108,19 @@ img {
 /* ---------- Lists and checkboxes ---------- */
 ul,
 ol {
-    padding-left: 1.5rem;
+    /* padding-left: 1.5rem; */
+    padding-inline-start: 1.5rem;
 }
 
 ul {
     list-style: none; /*no dots!*/
-    padding-left: 0;
+    /* padding-left: 0; */
+    padding-inline-start: 0;
 }
 
 li {
-    margin-bottom: 0.2rem;
+    /* margin-bottom: 0.2rem; */
+    margin-block-end: 0.2rem;
     line-height: 2;
 }
 
@@ -123,8 +132,10 @@ label {
 }
 
 input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
+    inline-size: 1rem;
+    /* width: 1rem; */
+    /* height: 1rem; */
+    block-size: 1rem;
     cursor: pointer;
 }
 
@@ -220,10 +231,12 @@ button,
     border-radius: 0.5rem;
 
     h2 {
-        margin-top: 0;
+        /* margin-top: 0; */
+        margin-block-start: 0;
     }
     select {
-        width: 100%;
+        inline-size: 100%;
+        /* width: 100%; */
         padding: 0.5rem;
         border: 2px solid var(--color-border);
         border-radius: 0.5rem;
@@ -231,7 +244,8 @@ button,
         background-color: white;
     }
     &input[type="number"] { 
-        width: 100%;
+        /* width: 100%; */
+        inline-size: 100%;
         box-sizing: border-box;
         padding: 0.5rem;
         border: var(--border-edit);
@@ -241,7 +255,8 @@ button,
     label {
         display: block;
         font-weight: bold;
-        margin-top: 0.5rem;
+        /* margin-top: 0.5rem; */
+        margin-block-start: 0.5rem;
     }
     &label:has(input[type="checkbox"]) {
         display: flex;
@@ -259,8 +274,10 @@ button,
     margin: 1rem;
     #save-edit,
     #cancel-edit {
-        width:7rem;
-        height:3rem;
+        inline-size: 7rem;
+        block-size: 3rem;
+        /* width:7rem;
+        height:3rem; */
         font-weight: bold;
     }
 }
@@ -276,7 +293,8 @@ figure button {
 }
 
 .fact-input {
-    width: 4rem;
+    inline-size: 4rem;
+    /* width: 4rem; */
     padding: 0.25rem;
     border:var(--border-edit);
     border-radius: 0.5rem;
@@ -311,13 +329,16 @@ figure button {
 
 #serving-fields input {
     display: block;
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
+    margin-block-start: 0.5rem;
 }
 
 /* ---------- Hero ---------- */
 .hero-image {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
+    /* width: 100%;
+    height: 100%; */
     min-height: 16rem;
     object-fit: cover;
 }
@@ -332,12 +353,14 @@ figure button {
 
 .ingredients h2,
 .instructions h2 {
-    text-align: left;
-    margin-top: 0;
+    text-align: start;
+    margin-block-start: 0;
+    /* margin-top: 0; */
 }
 .hero-text h1 {
     text-align: center;   
-    margin-top: 0;
+    /* margin-top: 0; */
+    margin-block-start: 0;
 }
 
 .note {
@@ -357,7 +380,8 @@ figure button {
     }
     /*elements next to each other*/
     li + li {
-        border-left: 1px solid var(--color-border);
+        /* border-left: 1px solid var(--color-border); */
+        border-inline-start: 1px solid var(--color-border);
     }
 }
 
@@ -369,11 +393,14 @@ figure button {
 
     .popuptext {
         position: absolute;
+        /* start: 50%; */  /*start doesn't exist here?*/
         left: 50%;                  /* precis till höger om logotypen */
         transform: translateY(40%); /* centrerad i höjdled */
-        margin-left: 0.5rem;         /* lite luft mot logotypen */
+        /*margin-left: 0.5rem;*/         /* lite luft mot logotypen */
+        margin-inline-start: 0.5rem;
         z-index: 10;
-        width: max-content;  
+        /* width: max-content;  */
+        inline-size: max-content; 
         padding: 0.2rem;
         background-color: var(--color-popup-text-background);
         color: white;
@@ -408,7 +435,8 @@ figure button {
 }
 
 figure img {
-    width: 100%;
+    inline-size: 100%;
+    /* width: 100%; */
     aspect-ratio: 1 / 1;
     object-fit: cover;
 }
@@ -416,14 +444,16 @@ figure img {
 figcaption {
     padding: 0.5rem;
     border: 1px solid var(--color-border);
-    border-top: 0; /*hides it behind image*/
+    /*border-top: 0;*/ /*hides it behind image*/
+    border-block-start: 0;
     background-color: var(--color-button-background);
 }
 
 /* ---------- Footer ---------- */
 footer {
     padding: 1rem;
-    border-top: 1px solid var(--color-border);
+    /* border-top: 1px solid var(--color-border); */
+    border-block-start: 1px solid var(--color-border);
     text-align: center;
 }
 
@@ -431,10 +461,12 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    border-top: 1px solid var(--color-border);
+    border-block-start: 1px solid var(--color-border); /*MAKE VARIABLES OF THIS!!!*/
+    /* border-top: 1px solid var(--color-border); */
 
     h2 {
-        text-align: left;
+        text-align: start;
+        /* text-align: left; */
         font-size: 1rem;
         margin: 1rem 0 0.5rem;
     }
@@ -451,10 +483,12 @@ footer {
     flex-wrap: nowrap;
 
     .button {
-        width: calc(100%);  /* full width minus the padding on the nav */
+        /*width: calc(100%);*/  /* full width minus the padding on the nav */
+        inline-size: calc(100%);
     }
     .logo {
-        justify-content: left;
+        /* justify-content: left; */
+        justify-content: start;
     }
 }
 
@@ -466,7 +500,8 @@ footer {
     text-decoration: none;
 
     img {
-        width: 2rem;
+        /* width: 2rem; */
+        inline-size: 2rem;
     }
 }
 
@@ -475,8 +510,10 @@ footer {
     margin: 0 1rem;
 
     img {
-        width: 100%;
-        height: 18rem;
+        /* width: 100%; */
+        inline-size: 100%;
+        block-size: 18rem;
+        /* height: 18rem; */
     }
 }
 
@@ -511,7 +548,8 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
+    margin-block-end: 1.5rem;
 }
 
 button[aria-pressed="true"] {
@@ -528,7 +566,8 @@ button[aria-pressed="true"] {
 .card {
     border: 1px solid var(--color-border);
 
-    width: 100%;
+    /* width: 100%; */
+    inline-size: 100%;
     object-fit: cover;
     margin: 0 auto;  
     object-position: center;
@@ -540,7 +579,8 @@ button[aria-pressed="true"] {
     }
 
     img {
-        width: 100%;
+        /* width: 100%; */
+        inline-size: 100%;
         aspect-ratio: 3 / 2;
         object-fit: cover;
     }
@@ -577,7 +617,8 @@ button[aria-pressed="true"] {
 .recipe-form {
     display: grid;
     gap: 1.5rem;
-    padding-bottom: 1rem;
+    padding-block-end: 1rem;
+    /* padding-bottom: 1rem; */
 }
 
 fieldset {
@@ -593,14 +634,16 @@ legend {
 }
 
 .field {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    margin-block-end: 1rem;
 }
 
 .recipe-form {
 
     .field label {
         display: block;
-        margin-bottom: 0.25rem;
+        /* margin-bottom: 0.25rem; */
+        margin-block-end: 0.25rem;
         font-weight: bold;
     }
     
@@ -609,7 +652,8 @@ legend {
     input[type="number"],
     select,
     textarea {
-        width: 100%;
+        inline-size: 100%;
+        /* width: 100%; */
         box-sizing: border-box;
         padding: 0.5rem;
         border: 2px solid var(--color-border);
@@ -628,7 +672,8 @@ legend {
 
     small {
         display: block;
-        margin-top: 0.25rem;
+        /* margin-top: 0.25rem; */
+        margin-block-start: 0.25rem;
     }
 
     button[type="submit"] {
@@ -642,7 +687,8 @@ legend {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     .field {
-        margin-bottom: 0rem;
+        /* margin-bottom: 0rem; */
+        margin-block-end: 0rem;
     }
 }
 
@@ -650,10 +696,13 @@ legend {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom:1rem;
+    /* margin-bottom:1rem; */
+    margin-block-end: 1rem;
     select {
-        margin-left:1rem;
-        width:10rem;
+        margin-inline-start: 1rem;
+        /* margin-left:1rem; */
+        /* width:10rem; */
+        inline-size: 10rem;
     }
 }
 
@@ -663,8 +712,10 @@ legend {
     gap: 0.5rem 2rem;
 
     input[type="radio"] {
-        width: 1rem;
-        height: 1rem;
+        inline-size: 1rem;
+        /* width: 1rem; */
+        /* height: 1rem; */
+        block-size: 1rem;
         cursor: pointer;
     }
 }
@@ -684,10 +735,103 @@ input:user-invalid + .error {
     display: block;
 }
 
+/* ---------- Ingredient and step rows ---------- */
+.row-list {
+    padding: 0;
+}
+
+.field-title {
+    display: block;
+    /* margin-bottom: 0.5rem; */
+    margin-block-end: 0.5rem;
+    font-weight: 700;
+}
+
+.ingredient-row {
+    display: grid;
+    grid-template-columns: 5rem 6rem 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    /* margin-bottom: 0.75rem; */
+    margin-block-end: 0.75rem;
+}
+
+.ingredient-row .ing-substitute {
+    grid-column: 1 / 4;
+}
+
+.step-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.ingredient-row input,
+.ingredient-row select,
+.step-row input {
+    /* width: 100%; */
+    inline-size: 100%;
+    box-sizing: border-box;
+    padding: 0.4rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: white;
+    color: var(--color-text);
+    font: inherit;
+}
+
+.remove-row {
+    /* width: 2.5rem; */
+    inline-size: 2.5rem;
+    padding: 0.2rem;
+    font-weight: 700;
+}
+
+.ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-button {
+    inline-size: 1.6rem;
+    block-size: 1.6rem;
+    /* width: 1.6rem;
+    height: 1.6rem; */
+    padding: 0;
+    border-radius: 50%;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.notes {
+    /* padding: 0 1rem; */
+    padding-block:0;
+    padding-inline: 1rem;
+}
+
+.notes p {
+    white-space: pre-line;
+}
+
+.edit-details textarea {
+    /* width: 100%; */
+    inline-size: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 20px solid var(--color-border);
+    border-radius: 0.5rem;
+    font: inherit;
+}
+
 @media (min-width: 700px) {
     body {
         padding: 1rem;
-        margin: 1rem auto;
+        /* margin: 1rem auto; */
+        margin-block:1rem;
+        margin-inline:auto;
     }
 
     nav {

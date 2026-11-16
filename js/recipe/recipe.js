@@ -7,12 +7,12 @@ const recipes = JSON.parse(localStorage.getItem("recipes") ?? "[]");
 const recipe = recipes.find((r) => r.id === id);
 
 /** @type {*} */
-let draft = null;          // working copy that is changed while editing
+let draft = null;          // arbetskopia som ändras under redigering
 let editing = false;
+let currentServings = 0;   // portionerna som visas (påverkar bara visningen)
 /** @type {((dataUrl: string) => void) | null} */
 let onPicked = null;
 
-/** One row per color: key in the saved recipe, form field id, CSS variable */
 const COLOR_FIELDS = [
   { key: "background",       id: "edit-color-bg",        cssVar: "--color-background" },
   { key: "bodybackground",   id: "edit-color-body-bg",   cssVar: "--color-body-background" },
@@ -26,18 +26,20 @@ const COLOR_FIELDS = [
 const titleEl = document.getElementById("title");
 const ownerActions = document.getElementById("owner-actions");
 const editBar = document.getElementById("edit-bar");
-const editButtons = document.getElementById("edit-buttons");
 const detailsSection = document.getElementById("edit-details");
+const editButtons = document.getElementById("edit-buttons");
 const picker = document.getElementById("file-picker");
 
 /* ---------- Small helpers ---------- */
 /**
  * @param {string} elementId
- * @returns {HTMLInputElement | HTMLSelectElement | null}
+ * @returns {HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null}
  */
 function field(elementId) {
   const el = document.getElementById(elementId);
-  return el instanceof HTMLInputElement || el instanceof HTMLSelectElement ? el : null;
+  return el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement
+    ? el
+    : null;
 }
 
 /**
@@ -46,7 +48,8 @@ function field(elementId) {
  */
 function setField(elementId, value) {
   const el = field(elementId);
-  if (el && value) el.value = value;
+  if (el && value) 
+    el.value = value;
 }
 
 /** @param {string} text */
@@ -71,15 +74,51 @@ function createChecklistItem(text) {
  */
 function fillChecklist(listId, items) {
   const list = document.getElementById(listId);
-  if (!list) return;
+  if (!list) 
+    return;
   items.forEach((text) => list.append(createChecklistItem(text)));
 }
 
 /**
- * @param {string} name   used for the id: fact-<name>
- * @param {string} label  accessible name
+ * Ingrediens med kryssruta, och ⓘ-knapp om en ersättning finns.
+ * @param {*} ing
+ * @param {number} index
+ * @param {number} factor
+ */
+function createIngredientItem(ing, index, factor) {
+  const li = createChecklistItem(
+    [formatAmount(ing.amount, ing.unit, factor), ing.name].filter(Boolean).join(" ")
+  );
+  li.className = "ingredient-item";
+
+  if (ing.substitute) {
+    const popup = document.createElement("span");
+    popup.className = "popup";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "info-button";
+    button.textContent = "i";
+    button.setAttribute("aria-label", `Ersättning för ${ing.name}`);
+    button.setAttribute("aria-describedby", `sub-${index}`);
+
+    const tip = document.createElement("span");
+    tip.className = "popuptext";
+    tip.id = `sub-${index}`;
+    tip.setAttribute("role", "tooltip");
+    tip.textContent = `Kan bytas mot: ${ing.substitute}`;
+
+    popup.append(button, tip);
+    li.append(popup);
+  }
+  return li;
+}
+
+/**
+ * @param {string} name
+ * @param {string} label
  * @param {string} value
- * @param {string} suffix text after the number
+ * @param {string} suffix
  */
 function createNumberFact(name, label, value, suffix) {
   const li = document.createElement("li");
@@ -111,9 +150,15 @@ function createDifficultyFact() {
 }
 
 /* ---------- Rendering ---------- */
+function scaleFactor() {
+  const base = Number(draft.servings);
+  return !editing && base > 0 && currentServings > 0 ? currentServings / base : 1;
+}
+
 function renderFacts() {
   const list = document.getElementById("facts");
-  if (!list) return;
+  if (!list) 
+    return;
   list.replaceChildren();
 
   if (editing) {
@@ -125,15 +170,56 @@ function renderFacts() {
     return;
   }
 
-  [
-    draft.servings && `${draft.servings} port`,
-    draft.time && `${draft.time} min`,
-    draft.difficulty,
-  ].filter(Boolean).forEach((text) => {
+  if (draft.servings) {
+    const li = createNumberFact("servings", "Antal portioner", String(currentServings), "port");
+    const input = li.querySelector("input");
+    if (input) {
+      input.title = "Ändra portioner för att räkna om ingredienserna";
+      input.addEventListener("input", () => {
+        currentServings = Number(input.value);
+        renderIngredients();
+      });
+    }
+    list.append(li);
+  }
+
+  [draft.time && `${draft.time} min`, draft.difficulty].filter(Boolean).forEach((text) => {
     const li = document.createElement("li");
     li.textContent = text;
     list.append(li);
   });
+}
+
+function renderIngredients() {
+  const list = document.getElementById("ingredients");
+  if (!list) 
+    return;
+  list.replaceChildren();
+
+  if (editing) {
+    draft.ingredients.forEach((/** @type {*} */ ing) => list.append(createIngredientRow(ing)));
+    return;
+  }
+
+  const factor = scaleFactor();
+  draft.ingredients.forEach((/** @type {*} */ ing, /** @type {number} */ i) =>
+    list.append(createIngredientItem(ing, i, factor)));
+}
+
+function renderNotes() {
+  const section = document.getElementById("notes-section");
+  const text = document.getElementById("notes-text");
+  const recipeSection = document.querySelector("section.recipe");
+  if (!section || !text || !recipeSection) 
+    return;
+
+  text.textContent = draft.notes ?? "";
+  section.hidden = editing || !draft.notes;
+
+  if (draft.notesPosition === "above") 
+    recipeSection.before(section);
+  else 
+    recipeSection.after(section);
 }
 
 function renderImages() {
@@ -146,7 +232,8 @@ function renderImages() {
 
   const box = document.getElementById("serving-images");
   const section = document.getElementById("serving");
-  if (!box || !section) return;
+  if (!box || !section) 
+    return;
 
   box.replaceChildren();
   draft.servingImages.forEach((/** @type {string} */ src, /** @type {number} */ i) => {
@@ -194,19 +281,22 @@ function clearColors() {
 /* ---------- Edit mode ---------- */
 /** @param {(dataUrl: string) => void} callback */
 function pickImage(callback) {
-  if (!(picker instanceof HTMLInputElement)) return;
+  if (!(picker instanceof HTMLInputElement)) 
+    return;
   onPicked = callback;
   picker.value = "";
   picker.click();
 }
 
-/** Fill the category and color fields from the draft */
 function loadDetails() {
   setField("edit-category", draft.category);
+  setField("edit-notes", draft.notes);
+  setField("edit-notes-position", draft.notesPosition ?? "below");
   COLOR_FIELDS.forEach(({ key, id: fieldId }) => setField(fieldId, draft.colors?.[key]));
 
   const useDefault = field("edit-default-colors");
-  if (useDefault instanceof HTMLInputElement) useDefault.checked = !draft.colors;
+  if (useDefault instanceof HTMLInputElement) 
+    useDefault.checked = !draft.colors;
 }
 
 /** @param {boolean} on */
@@ -214,38 +304,50 @@ function setEditing(on) {
   editing = on;
   document.body.classList.toggle("editing", on);
 
-  if (editBar) editBar.hidden = !on;
-  if (editButtons) editButtons.hidden = !on;
-  if (ownerActions) ownerActions.hidden = on;
-  if (detailsSection) detailsSection.hidden = !on;
+  if (editBar) 
+    editBar.hidden = !on;
+  if (ownerActions) 
+    ownerActions.hidden = on;
+  if (detailsSection) 
+    detailsSection.hidden = !on;
+  if (editButtons) 
+    editButtons.hidden = !on;
 
   document.querySelectorAll(".add-row").forEach((button) => {
     if (button instanceof HTMLElement) button.hidden = !on;
   });
 
-  document.querySelectorAll("#title, #ingredients span, #steps span").forEach((el) => {
+  document.querySelectorAll("#title, #steps span").forEach((el) => {
     if (on) el.setAttribute("contenteditable", "true");
     else el.removeAttribute("contenteditable");
   });
 
-  if (on) loadDetails();
+  if (on) 
+    loadDetails();
   renderFacts();
+  renderIngredients();
+  renderNotes();
   renderImages();
 }
 
-/** Copy everything the user changed from the page into the draft */
 function readEditedValues() {
   /** @param {Element} el */
   const text = (el) => (el.textContent ?? "").trim();
 
-  if (titleEl) draft.name = text(titleEl) || draft.name;
-  draft.ingredients = [...document.querySelectorAll("#ingredients span")].map(text).filter(Boolean);
+  if (titleEl) 
+    draft.name = text(titleEl) || draft.name;
+
+  const ingredientList = document.getElementById("ingredients");
+  if (ingredientList) 
+    draft.ingredients = readIngredientRows(ingredientList);
   draft.steps = [...document.querySelectorAll("#steps span")].map(text).filter(Boolean);
 
   draft.servings = field("fact-servings")?.value ?? draft.servings;
   draft.time = field("fact-time")?.value ?? draft.time;
   draft.difficulty = field("fact-difficulty")?.value ?? draft.difficulty;
   draft.category = field("edit-category")?.value || draft.category;
+  draft.notes = field("edit-notes")?.value.trim() ?? draft.notes;
+  draft.notesPosition = field("edit-notes-position")?.value || "below";
 
   const useDefault = field("edit-default-colors");
   if (useDefault instanceof HTMLInputElement && useDefault.checked) {
@@ -289,9 +391,15 @@ function addRow(button) {
   const list = document.getElementById(button.dataset.list ?? "");
   if (!list) return;
 
+  if (list.id === "ingredients") {
+    const row = createIngredientRow();
+    list.append(row);
+    row.querySelector("input")?.focus();
+    return;
+  }
+
   const li = createChecklistItem("");
   list.append(li);
-
   const span = li.querySelector("span");
   if (span) {
     span.setAttribute("contenteditable", "true");
@@ -301,7 +409,6 @@ function addRow(button) {
 
 /* ---------- Event listeners ---------- */
 function wireEvents() {
-  // Buttons
   document.getElementById("edit-recipe")?.addEventListener("click", () => setEditing(true));
   document.getElementById("cancel-edit")?.addEventListener("click", () => location.reload());
   document.getElementById("save-edit")?.addEventListener("click", saveEdit);
@@ -316,15 +423,16 @@ function wireEvents() {
 
   document.querySelectorAll(".add-row").forEach((button) => {
     button.addEventListener("click", () => {
-      if (button instanceof HTMLElement) addRow(button);
+      if (button instanceof HTMLElement) 
+        addRow(button);
     });
   });
 
-  // Image picker
   if (picker instanceof HTMLInputElement) {
     picker.addEventListener("change", async () => {
       const file = picker.files?.[0];
-      if (!file || !onPicked) return;
+      if (!file || !onPicked) 
+        return;
       try {
         onPicked(await resizeImage(file));
       } catch (error) {
@@ -334,51 +442,59 @@ function wireEvents() {
     });
   }
 
-  // Enter must not create line breaks in editable text
+  // Enter får inte skapa radbrytningar i redigerbar text
   document.addEventListener("keydown", (e) => {
     if (editing && e.key === "Enter" && e.target instanceof HTMLElement && e.target.isContentEditable) {
       e.preventDefault();
     }
   });
 
-  // Clicking list text must not tick the checkbox while editing (only the lists, not the form fields)
+  // Klick på stegtext ska inte bocka i rutan under redigering
   document.addEventListener("click", (e) => {
-    if (editing && e.target instanceof HTMLElement && e.target.closest("#ingredients label, #steps label")) {
+    if (editing && e.target instanceof HTMLElement && e.target.closest("#steps label")) {
       e.preventDefault();
     }
   });
 
-  // Live color preview
   COLOR_FIELDS.forEach(({ id: fieldId, cssVar }) => {
     field(fieldId)?.addEventListener("input", (e) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
+      if (!(e.target instanceof HTMLInputElement)) 
+        return;
       document.documentElement.style.setProperty(cssVar, e.target.value);
       const useDefault = field("edit-default-colors");
-      if (useDefault instanceof HTMLInputElement) useDefault.checked = false;
+      if (useDefault instanceof HTMLInputElement) 
+        useDefault.checked = false;
     });
   });
 
   field("edit-default-colors")?.addEventListener("change", (e) => {
-    if (e.target instanceof HTMLInputElement && e.target.checked) clearColors();
+    if (e.target instanceof HTMLInputElement && e.target.checked) 
+      clearColors();
   });
 }
 
 /* ---------- Init ---------- */
 if (!recipe) {
-  if (titleEl) titleEl.textContent = "Receptet hittades inte";
+  if (titleEl) 
+    titleEl.textContent = "Receptet hittades inte";
 } else {
   draft = structuredClone(recipe);
   draft.servingImages ??= [];
+  draft.ingredients = (draft.ingredients ?? []).map(normalizeIngredient);
+  currentServings = Number(draft.servings) || 0;
 
   document.title = recipe.name;
-  if (titleEl) titleEl.textContent = recipe.name;
+  if (titleEl) 
+    titleEl.textContent = recipe.name;
 
-  fillChecklist("ingredients", recipe.ingredients);
-  fillChecklist("steps", recipe.steps);
+  fillChecklist("steps", draft.steps);
   renderFacts();
+  renderIngredients();
+  renderNotes();
   renderImages();
   applyColors(recipe.colors);
 
-  if (ownerActions) ownerActions.hidden = false;
+  if (ownerActions) 
+    ownerActions.hidden = false;
   wireEvents();
 }

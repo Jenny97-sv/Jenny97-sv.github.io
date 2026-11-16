@@ -6,6 +6,7 @@
     <title>Dela recept</title>
 
     <script defer src="../js/images.js"></script>
+    <script defer src="../js/rows.js"></script>
     <script defer src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +54,7 @@
 
                 <div class="field">
                     <label for="category">Kategori *</label>
-                    <select id="category" name="category">
+                    <select id="category" name="category" required>
                         <option value="">Välj kategori</option>
                         <option value="breakfast">Frukost</option>
                         <option value="dinner">Middag</option>
@@ -86,19 +87,34 @@
             <fieldset>
                 <legend>Receptet</legend>
 
-                <div class="field">
-                    <label for="ingredients">Ingredienser <span aria-hidden="true">*</span></label>
-                    <textarea id="ingredients" name="ingredients" rows="5" required aria-describedby="ingredients-hint"></textarea>
-                    <small id="ingredients-hint">Skriv en ingrediens per rad. 
-                        ex. 1dl socker</small>
+                <div class="field" role="group" aria-labelledby="ingredients-label">
+                    <span class="field-title" id="ingredients-label">Ingredienser <span aria-hidden="true">*</span></span>
+                    <ul class="row-list" id="ingredient-rows"></ul>
+                    <button type="button" id="add-ingredient">+ Lägg till ingrediens</button>
+                    <small>Lämna mängden tom för sådant som inte ska skalas, som "salt efter smak".</small>
                 </div>
 
-                <div class="field">
-                    <label for="steps">Gör så här <span aria-hidden="true">*</span></label>
-                    <textarea id="steps" name="steps" rows="5" required aria-describedby="steps-hint" required></textarea>
-                    <small id="steps-hint">Skriv ett steg per rad. Nummer behövs ej</small>
+                <div class="field" role="group" aria-labelledby="steps-label">
+                    <span class="field-title" id="steps-label">Gör så här <span aria-hidden="true">*</span></span>
+                    <ul class="row-list" id="step-rows"></ul>
+                    <button type="button" id="add-step">+ Lägg till steg</button>
                 </div>
             </fieldset>
+
+            <fieldset>
+                <legend>Anteckningar</legend>
+                <div class="field">
+                    <label for="notes">Extra info (t.ex. kalorier, tips)</label>
+                    <textarea id="notes" name="notes" rows="4"></textarea>
+                </div>
+                <div class="field">
+                    <label for="notes-position">Visa anteckningarna</label>
+                    <select id="notes-position" name="notes-position">
+                        <option value="below">Under receptet</option>
+                        <option value="above">Ovanför receptet</option>
+                    </select>
+                </div>
+</fieldset>
 
             <fieldset>
                 <legend>Bilder</legend>
