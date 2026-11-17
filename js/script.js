@@ -26,6 +26,8 @@ const editId = Number(new URLSearchParams(location.search).get("edit")) || null;
 const existing = editId ? saved.find((/** @type {any} */ r) => r.id === editId) : null;
 const ingredientList = document.getElementById("ingredient-rows");
 const stepList = document.getElementById("step-rows");
+const defaultColors = document.querySelector("#default-colors");
+const customColors = document.querySelector("#custom-colors");
 
 // ----- Functions -----
 /** @param {string} message */
@@ -58,25 +60,29 @@ function fillForm(r) {
     setValue("time", r.time);
     setValue("servings", r.servings);
     setValue("ingredients", r.ingredients.join("\n"));
-    // setValue("steps", r.steps.join("\n"));
     setValue("author", r.author);
 
     const radio = document.querySelector(`input[name="difficulty"][value="${r.difficulty}"]`);
-    if (radio instanceof HTMLInputElement) radio.checked = true;
+    if (radio instanceof HTMLInputElement) 
+        radio.checked = true;
 
     // The email is never saved, so it can't be required when editing
     const email = document.getElementById("email");
-    if (email instanceof HTMLInputElement) email.required = false;
+    if (email instanceof HTMLInputElement) 
+        email.required = false;
 
     const heading = document.querySelector("main h1");
-    if (heading) heading.textContent = "Redigera recept";
+    if (heading) 
+        heading.textContent = "Redigera recept";
 
     const defaults = document.getElementById("default-colors");
-    if (defaults instanceof HTMLInputElement) defaults.checked = !r.colors;
+    if (defaults instanceof HTMLInputElement) 
+        defaults.checked = !r.colors;
     if (r.colors) {
         setValue("color-bg", r.colors.background ?? "#cc9aca");
         setValue("color-body-bg", r.colors.bodybackground ?? "#f8d4fd");
         setValue("color-button-bg", r.colors.buttonbackground ?? "#F1B6EF");
+        setValue("color-notes-bg", r.colors.notesbackground ?? "#F1B6EF");
         setValue("color-border", r.colors.border ?? "#884288");
         setValue("color-primary", r.colors.primary ?? "#874287");
         setValue("color-text", r.colors.text ?? "#14001a");
@@ -86,13 +92,13 @@ function fillForm(r) {
 /** @param {any} [ing] */
 function addIngredientRow(ing) {
     ingredientList?.append(createIngredientRow(ing));
-    ingredientList?.lastElementChild?.querySelector("input")?.focus();
+    // ingredientList?.lastElementChild?.querySelector("input")?.focus();
 }
 
 /** @param {string} [text] */
 function addStepRow(text = "") {
     stepList?.append(createStepRow(text));
-    stepList?.lastElementChild?.querySelector("input")?.focus();
+    // stepList?.lastElementChild?.querySelector("input")?.focus();
 }
 
 function resetRows() {
@@ -101,6 +107,24 @@ function resetRows() {
     addIngredientRow();
     addStepRow();
 }
+
+function updateColorControls() {
+    if (defaultColors instanceof HTMLInputElement &&
+        customColors instanceof HTMLElement) {
+
+        const colorInputs = customColors.querySelectorAll("input");
+
+        colorInputs.forEach(input => {
+            input.disabled = defaultColors.checked;
+        });
+    }
+}
+// /** @param {variable} [variable] */
+// function getCssColor(variable) {
+//     return getComputedStyle(document.documentElement)
+//         .getPropertyValue(variable)
+//         .trim();
+// }
 
 // ----- Event listeners -----
 checkboxes.forEach(checkbox => {
@@ -170,11 +194,11 @@ if (form) {
                     : { background: text("color-bg"), 
                         bodybackground: text("color-body-bg"), 
                         buttonbackground: text("color-button-bg"),
+                        notesbackground: text("color-notes-bg"),
                         border: text("color-border"),
                         primary: text("color-primary"), 
                         text: text("color-text") }
             };
-            
 
             const recipes = JSON.parse(localStorage.getItem("recipes") ?? "[]");
             const index = recipes.findIndex((/** @type {any} */ r) => r.id === recipe.id);
@@ -240,4 +264,9 @@ if (addServing && servingFields) {
         servingFields.append(input);
         input.focus();
     });
+}
+
+if (defaultColors && customColors) {
+    defaultColors.addEventListener("change", updateColorControls);
+    updateColorControls();
 }

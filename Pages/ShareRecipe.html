@@ -120,8 +120,8 @@
                 <legend>Bilder</legend>
 
                 <div class="field">
-                    <label for="thumbnail">Miniatyrbild (visas på startsidan)</label>*
-                    <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+                    <label for="thumbnail">Miniatyrbild (visas på startsidan)</label>
+                    <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
                 </div>
 
                 <div class="field">
@@ -130,15 +130,21 @@
                 </div>
 
                 <div class="field" id="serving-fields">
-                    <label for="serving-image">Serveringsbilder</label>*
-                    <input type="file" id="serving-image" name="serving-image" accept="image/*" required multiple>
+                    <label for="serving-image">Serveringsbilder</label>
+                    <input type="file" id="serving-image" name="serving-image" accept="image/*" multiple>
                 </div>
                 <button type="button" id="add-serving">Lägg till fler bilder</button>
             </fieldset>
 
             <fieldset>
                 <legend>Utseende</legend>
-                <div class="row">
+            
+                <label class="standard-colors">
+                    <input type="checkbox" id="default-colors" name="default-colors" checked>
+                    <span>Använd sidans standardfärger</span>
+                </label>
+                
+                <div class="row" id="custom-colors">
                     <div class="field">
                         <label for="color-bg">Bakgrundsfärg</label>
                         <input type="color" id="color-bg" name="color-bg" value="#CC9ACA">
@@ -150,6 +156,10 @@
                     <div class="field">
                         <label for="color-button-bg">Bakgrundsfärg i knappar</label>
                         <input type="color" id="color-button-bg" name="color-button-bg" value="#F1B6EF">
+                    </div>
+                    <div class="field">
+                        <label for="color-notes-bg">Bakgrundsfärg i anteckningar</label>
+                        <input type="color" id="color-notes-bg" name="color-notes-bg" value="#F1B6EF">
                     </div>
                     <div class="field">
                         <label for="color-border">Borderfärg</label>
@@ -164,10 +174,6 @@
                         <input type="color" id="color-text" name="color-text" value="#14001A">
                     </div>
                 </div>
-                <label>
-                    <input type="checkbox" id="default-colors" name="default-colors" checked>
-                    <span>Använd sidans standardfärger</span>
-                </label>
             </fieldset>
 
             <fieldset>

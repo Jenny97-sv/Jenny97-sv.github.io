@@ -17,6 +17,7 @@ const COLOR_FIELDS = [
   { key: "background",       id: "edit-color-bg",        cssVar: "--color-background" },
   { key: "bodybackground",   id: "edit-color-body-bg",   cssVar: "--color-body-background" },
   { key: "buttonbackground", id: "edit-color-button-bg", cssVar: "--color-button-background" },
+  { key: "notesbackground",  id: "edit-color-notes-bg",  cssVar: "--color-notes-background" },
   { key: "border",           id: "edit-color-border",    cssVar: "--color-border" },
   { key: "primary",          id: "edit-color-primary",   cssVar: "--color-primary" },
   { key: "text",             id: "edit-color-text",      cssVar: "--color-text" },

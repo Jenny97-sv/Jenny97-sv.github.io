@@ -602,10 +602,11 @@ button[aria-pressed="true"] {
 /* ---------- Form ---------- */
 .form-intro,
 .recipe-form {
-    margin: 1rem;
     max-inline-size: 42rem;
-    margin-inline: auto;
+    margin: 1rem;
 }
+.form-intro { margin-inline: 1rem; }
+.recipe-form { margin-inline: auto; }
 
 .recipe-form {
     display: grid;
@@ -645,6 +646,7 @@ legend {
 
     button[type="submit"] {
         justify-self: start;
+        margin-inline-start: 1rem;
         font-size: 1rem;
     }
 }
@@ -670,6 +672,22 @@ legend {
 :is(input, select, textarea):focus-visible {
     outline: 3px solid var(--color-text);
     outline-offset: 3px;
+}
+
+.standard-colors {
+    padding-block-end: 1rem;
+    input[type="checkbox"]:checked + span {
+        text-decoration: none;
+        opacity: 1;
+    }
+    span {
+        box-sizing: border-box;
+        color: var(--color-text);
+    }
+}
+
+#custom-colors:disabled {
+    opacity: 0.5;
 }
 
 .row {
@@ -843,5 +861,12 @@ input:user-invalid + .error {
 
     .credits {
         grid-column: 1 / -1;
+    }
+
+    .form-intro { 
+        margin-inline: auto;
+    }
+    .recipe-form button[type="submit"] {
+        margin-inline-start: 0;
     }
 }
