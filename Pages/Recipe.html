@@ -72,10 +72,6 @@
                 </div>
 
                 <div class="field">
-                    <label for="edit-notes">Anteckningar</label>
-                    <textarea id="edit-notes" rows="4"></textarea>
-                </div>
-                <div class="field">
                     <label for="edit-notes-position">Visa anteckningarna</label>
                     <select id="edit-notes-position">
                         <option value="below">Under receptet</option>
@@ -85,6 +81,10 @@
                 
                 <fieldset>
                     <legend>Färger</legend>
+                    <label class="standard-colors">
+                        <input type="checkbox" id="edit-default-colors" name="default-colors">
+                        <span>Använd sidans standardfärger</span>
+                    </label>
                     <div class="row">
                         <div class="field">
                             <label for="edit-color-bg">Bakgrund (hela sidan)</label>
@@ -94,22 +94,18 @@
                             <label for="edit-color-body-bg">Bakgrund i rutan</label>
                             <input type="color" id="edit-color-body-bg" value="#f8d4fd">
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="field">
                             <label for="edit-color-button-bg">Bakgrund i knappar</label>
                             <input type="color" id="edit-color-button-bg" value="#F1B6EF">
                         </div>
                         <div class="field">
-                            <label for="edit-color-button-bg">Bakgrund i anteckningar</label>
+                            <label for="edit-color-notes-bg">Bakgrund i anteckningar</label>
                             <input type="color" id="edit-color-notes-bg" value="#F1B6EF">
                         </div>
                         <div class="field">
                             <label for="edit-color-border">Ramfärg</label>
                             <input type="color" id="edit-color-border" value="#884288">
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="field">
                             <label for="edit-color-primary">Rubrikfärg</label>
                             <input type="color" id="edit-color-primary" value="#874287">
@@ -119,16 +115,12 @@
                             <input type="color" id="edit-color-text" value="#14001a">
                         </div>
                     </div>
-                    <label>
-                        <input type="checkbox" id="edit-default-colors">
-                        <span>Använd sidans standardfärger</span>
-                    </label>
                 </fieldset>
             </section>
 
             <section class="notes" id="notes-section" hidden>
                 <h2>Anteckningar</h2>
-                <p id="notes-text"></p>
+                <p id="notes-text" data-placeholder="Skriv dina anteckningar här ..."></p>
             </section>
 
             <section class="recipe">

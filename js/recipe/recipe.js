@@ -2,7 +2,12 @@
 /** @type {number} */
 const id = Number(new URLSearchParams(location.search).get("id"));
 /** @type {Array<*>} */
-const recipes = JSON.parse(localStorage.getItem("recipes") ?? "[]");
+let recipes = [];
+try {
+  recipes = JSON.parse(localStorage.getItem("recipes") ?? "[]");
+} catch (error) {
+  console.error("Could not read saved recipes", error);
+}
 /** @type {*} */
 const recipe = recipes.find((r) => r.id === id);
 
@@ -207,20 +212,23 @@ function renderIngredients() {
     list.append(createIngredientItem(ing, i, factor)));
 }
 
+function placeNotes() {
+  const section = document.getElementById("notes-section");
+  const recipeSection = document.querySelector("section.recipe");
+  if (!section || !recipeSection) return;
+
+  if (draft.notesPosition === "above") recipeSection.before(section);
+  else recipeSection.after(section);
+}
+
 function renderNotes() {
   const section = document.getElementById("notes-section");
   const text = document.getElementById("notes-text");
-  const recipeSection = document.querySelector("section.recipe");
-  if (!section || !text || !recipeSection) 
-    return;
+  if (!section || !text) return;
 
   text.textContent = draft.notes ?? "";
-  section.hidden = editing || !draft.notes;
-
-  if (draft.notesPosition === "above") 
-    recipeSection.before(section);
-  else 
-    recipeSection.after(section);
+  section.hidden = !editing && !draft.notes;   // visible while editing, hidden if empty otherwise
+  placeNotes();
 }
 
 function renderImages() {
@@ -279,6 +287,25 @@ function clearColors() {
   COLOR_FIELDS.forEach(({ cssVar }) => document.documentElement.style.removeProperty(cssVar));
 }
 
+function syncColors() {
+  const useDefault = field("edit-default-colors");
+  if (!(useDefault instanceof HTMLInputElement)) 
+    return;
+
+  COLOR_FIELDS.forEach(({ id: fieldId, cssVar }) => {
+    const input = field(fieldId);
+    if (!input) 
+      return;
+    input.disabled = useDefault.checked;          // locked when standard colors are used
+    if (!useDefault.checked) {
+      document.documentElement.style.setProperty(cssVar, input.value);
+    }
+  });
+
+  if (useDefault.checked) 
+    clearColors();          // back to the colors in style.css
+}
+
 /* ---------- Edit mode ---------- */
 /** @param {(dataUrl: string) => void} callback */
 function pickImage(callback) {
@@ -291,13 +318,14 @@ function pickImage(callback) {
 
 function loadDetails() {
   setField("edit-category", draft.category);
-  setField("edit-notes", draft.notes);
   setField("edit-notes-position", draft.notesPosition ?? "below");
   COLOR_FIELDS.forEach(({ key, id: fieldId }) => setField(fieldId, draft.colors?.[key]));
 
   const useDefault = field("edit-default-colors");
   if (useDefault instanceof HTMLInputElement) 
     useDefault.checked = !draft.colors;
+
+  syncColors();
 }
 
 /** @param {boolean} on */
@@ -323,6 +351,12 @@ function setEditing(on) {
     else el.removeAttribute("contenteditable");
   });
 
+  const notesText = document.getElementById("notes-text");
+  if (notesText) {
+    if (on) notesText.setAttribute("contenteditable", "plaintext-only");
+    else notesText.removeAttribute("contenteditable");
+  }
+
   if (on) 
     loadDetails();
   renderFacts();
@@ -347,17 +381,22 @@ function readEditedValues() {
   draft.time = field("fact-time")?.value ?? draft.time;
   draft.difficulty = field("fact-difficulty")?.value ?? draft.difficulty;
   draft.category = field("edit-category")?.value || draft.category;
-  draft.notes = field("edit-notes")?.value.trim() ?? draft.notes;
+  draft.notes = document.getElementById("notes-text")?.innerText.trim() ?? "";
   draft.notesPosition = field("edit-notes-position")?.value || "below";
 
   const useDefault = field("edit-default-colors");
   if (useDefault instanceof HTMLInputElement && useDefault.checked) {
     draft.colors = null;
   } else {
-    /** @type {Record<string, string | undefined>} */
-    const colors = {};
-    COLOR_FIELDS.forEach(({ key, id: fieldId }) => { colors[key] = field(fieldId)?.value; });
-    draft.colors = colors;
+      const useDefault = field("edit-default-colors");
+    if (useDefault instanceof HTMLInputElement && useDefault.checked) {
+      draft.colors = null;
+    } else {
+      /** @type {Record<string, string | undefined>} */
+      const colors = {};
+      COLOR_FIELDS.forEach(({ key, id: fieldId }) => { colors[key] = field(fieldId)?.value; });
+      draft.colors = colors;
+    }
   }
 }
 
@@ -445,8 +484,21 @@ function wireEvents() {
 
   // Enter får inte skapa radbrytningar i redigerbar text
   document.addEventListener("keydown", (e) => {
-    if (editing && e.key === "Enter" && e.target instanceof HTMLElement && e.target.isContentEditable) {
+    if (
+      editing &&
+      e.key === "Enter" &&
+      e.target instanceof HTMLElement &&
+      e.target.isContentEditable &&
+      e.target.id !== "notes-text"
+    ) {
       e.preventDefault();
+    }
+  });
+
+  field("edit-notes-position")?.addEventListener("change", (e) => {
+    if (e.target instanceof HTMLSelectElement) {
+      draft.notesPosition = e.target.value;
+      placeNotes();
     }
   });
 
@@ -457,21 +509,17 @@ function wireEvents() {
     }
   });
 
+    // Live preview while a color is being picked
   COLOR_FIELDS.forEach(({ id: fieldId, cssVar }) => {
     field(fieldId)?.addEventListener("input", (e) => {
-      if (!(e.target instanceof HTMLInputElement)) 
-        return;
-      document.documentElement.style.setProperty(cssVar, e.target.value);
-      const useDefault = field("edit-default-colors");
-      if (useDefault instanceof HTMLInputElement) 
-        useDefault.checked = false;
+      if (e.target instanceof HTMLInputElement) {
+        document.documentElement.style.setProperty(cssVar, e.target.value);
+      }
     });
   });
 
-  field("edit-default-colors")?.addEventListener("change", (e) => {
-    if (e.target instanceof HTMLInputElement && e.target.checked) 
-      clearColors();
-  });
+  // Checking or unchecking "standard colors"
+  field("edit-default-colors")?.addEventListener("change", syncColors);
 }
 
 /* ---------- Init ---------- */

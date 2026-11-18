@@ -214,7 +214,7 @@ if (form) {
                 location.href = `Recipe.html?id=${recipe.id}`;   // back to the recipe
                 return;
             }
-            showStatus(`Tack! Receptet "${recipe.name}" är sparat.`);
+            showStatus(`          Tack! Receptet "${recipe.name}" är sparat.`);
             form.reset();
             resetRows();
             servingFields?.querySelectorAll("input:not(#serving-image)").forEach((i) => i.remove());
