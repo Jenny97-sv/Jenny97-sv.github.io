@@ -480,6 +480,9 @@ footer {
     .button {
         inline-size: 100%;
     }
+    details {
+        justify-self: center;
+    }
 }
 
 .logo {
@@ -918,6 +921,9 @@ input:user-invalid + .error {
         }
         .logo {
             justify-content: start;
+        }
+        details {
+            flex-direction: column;
         }
     }
 
