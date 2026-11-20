@@ -496,7 +496,7 @@ footer {
 
 .landing-hero {
     position: relative;
-    margin-block: 0;
+    margin-block-start: 1rem;
     margin-inline: 1rem;
 
     img {
