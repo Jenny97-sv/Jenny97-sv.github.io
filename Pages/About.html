@@ -16,13 +16,24 @@
             
         <header class="site-header">
             <a href="../index.html" class="logo">
-                <img src="../Assets/CoffeMug.png" alt="">
+                <img src="../Assets/CoffeMug.png" alt="CoffeMug">
                 <span>Jennys recept</span>
             </a>
-            <nav aria-label="Huvudmeny">
-                <a class="button" href="../Pages/PancakeRecipe.html">Pannkaksrecept</a>
-                <a class="button" href="../Pages/ShareRecipe.html">Dela recept</a>
-            </nav>
+            <details>
+                <summary>Se menyer</summary>
+                <nav aria-label="Huvudmeny">
+                    <div class="popup">
+                        <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                            <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt eget recept</span>
+                        </a>
+                    </div>
+                    <div class="popup">
+                        <a class="button" href="../Pages/PancakeRecipe.html" aria-describedby="pancakePopup">Pannkaksrecept
+                            <span class="popuptext" id="pancakePopup" role="tooltip">Se pannkaksrecepted</span>
+                        </a>
+                    </div>
+                </nav>
+            </details>
         </header>
 
         <main id="main-content" tabindex="-1">

@@ -466,23 +466,82 @@ footer {
 
 .site-header {
     display: flex;
-    flex-direction: column; /*mobile: logo above, buttons below*/
+    flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
-    flex-wrap: nowrap;
 
-    > .popup{
-        align-self: flex-start; /*logo on the left, only as wide as its content*/
-    }
-    nav {
-        padding: 0;
-    }
-    .button {
-        inline-size: 100%;
-    }
     details {
-        justify-self: center;
+        position: relative;          /* the dropdown is placed relative to this */
+        align-self: center;
+        summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding-block: 0.4rem;
+            padding-inline: 1rem;
+            color: var(--color-text);
+            background-color: var(--color-button-background);
+            border: var(--border-normal);
+            border-radius: 0.5rem;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            cursor: pointer;
+            list-style: none;        /* removes the default triangle (Firefox, modern Chrome) */
+
+            &::-webkit-details-marker {
+                display: none;       /* removes the default triangle (Safari) */
+            }
+
+            /* the arrow at the end */
+            &::after {
+                content: "";
+                inline-size: 0.5rem;
+                block-size: 0.5rem;
+                border-inline-end: 2px solid currentColor;
+                border-block-end: 2px solid currentColor;
+                transform: rotate(45deg);
+                transition: transform 0.2s;
+            }
+
+            &:hover {
+                background-color: var(--color-primary);
+                color: var(--color-hero-overlay-text);
+            }
+
+            &:focus-visible {
+                outline: 5px solid var(--color-text);
+                outline-offset: 3px;
+            }
+        }
+
+        &[open] summary::after {
+            transform: rotate(-135deg);   /* arrow points up when open */
+        }
+
+        /* The menu itself: always a column, in both mobile and desktop */
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;       /* ← horizontal centering */
+            justify-content: flex-start; /* ← vertical positioning */
+            gap: 0.5rem;
+            margin-block-start: 0.5rem;
+            padding: 0.5rem;
+
+            background-color: var(--color-border);
+            border: var(--border-normal);
+            border-radius: 0.5rem;
+
+            .button {
+                inline-size: 10rem;
+            }
+        }
+
+        .popup {
+            display: block;               /* so each button gets the full width */
+        }
     }
+    > .popup { align-self: flex-start; }
 }
 
 .logo {
@@ -829,33 +888,6 @@ input:user-invalid + .error {
 }
 
 /* ----------- About us sections -------------*/
-/* .goal {
-    margin-block: 2rem;
-    border: var(--border-thick);
-
-    block-size: 10rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    h2 {
-        justify-self: start;
-        background-color: var(--color-border);
-        color:var(--color-body-background);
-    }
-
-    p {
-        inline-size: 30rem;
-        background-color: var(--color-body-background);
-    }
-}
-
-.history {
-    display:flex;
-} */
-
-
 .goal, 
 .history {
     display:grid;
@@ -911,20 +943,37 @@ input:user-invalid + .error {
     .recipe-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    .site-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
 
-        > .popup{
-            align-self: auto;
-        }
-        .logo {
-            justify-content: start;
-        }
-        details {
-            flex-direction: column;
-        }
+    .site-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .site-header details nav {
+        position: absolute;               /* floats over the page, header layout unchanged */
+        inset-inline-end: 0;
+        inset-block-start: 100%;
+        z-index: 20;
+        inline-size: 12rem;
+        background-color: var(--color-border);
+        border: var(--border-normal);
+        border-radius: 0.5rem;
+        justify-content: end;
+
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    .site-header details {
+        align-self: center;
+        margin-inline-start: auto;
+    }
+
+    /* tooltips would run off the edge, so show them to the left of the buttons */
+    .site-header details .popuptext {
+        inset-inline-start: auto;
+        inset-inline-end: 100%;
+        margin-inline: 0 0.5rem;
     }
 
     .site-footer {
