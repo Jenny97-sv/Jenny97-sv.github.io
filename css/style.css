@@ -952,17 +952,17 @@ input:user-invalid + .error {
     .site-header details nav {
         position: absolute;               /* floats over the page, header layout unchanged */
         inset-inline-end: 0;
-        inset-block-start: 100%;
+        inset-block-start: 80%;
         z-index: 20;
         inline-size: 12rem;
         background-color: var(--color-border);
         border: var(--border-normal);
         border-radius: 0.5rem;
-        justify-content: end;
+        justify-content: center;
 
         display: flex;
         flex-direction: column;
-        align-items: end;
+        align-items: center;
     }
     .site-header details {
         align-self: center;
