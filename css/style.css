@@ -214,7 +214,7 @@ button,
 .editing {
     [contenteditable="true"] {
         outline: var(--border-edit);
-        outline-offset: 3px;
+        outline-offset: 1px;
         cursor: text;
     }
     #title::after {
@@ -818,9 +818,6 @@ input:user-invalid + .error {
 }
 
 #notes-text {
-    [contenteditable="true"] { /*This is wrong, how do I check if it's not hidden?*/
-        border: var(--border-edit);
-    }
     padding: 0.5rem;
     &:empty::before {
         content: attr(data-placeholder);
