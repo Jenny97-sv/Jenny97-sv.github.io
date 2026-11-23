@@ -950,7 +950,7 @@ input:user-valid {
 
 .step-time .step-min,
 .step-time .step-sec {
-    inline-size: 2rem;
+    inline-size: 3rem;
 }
 
 .step-time {
@@ -1095,6 +1095,11 @@ input:user-valid {
     }
     .recipe-form button[type="submit"] {
         margin-inline-start: 0;
+    }
+
+    .step-time .step-min,
+    .step-time .step-sec {
+        inline-size: 3.5rem;
     }
 
     .history,
