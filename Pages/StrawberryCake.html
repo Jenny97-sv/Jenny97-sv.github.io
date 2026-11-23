@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Jordgubbstårtarecept</title>
+        <script defer src="../js/script.js"></script>
+        <script defer src="../js/timers.js"></script>
+        <script defer src="../js/handwritten-timers.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body data-recipe-key="tarta">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        
+        <header class="site-header">
+            <div class="popup">
+                <a class="logo" href="../index.html" aria-describedby="headPopup">
+                    <img src="../Assets/CoffeMug.png">
+                    <span>Jennys recept</span>
+                </a>
+                <span class="popuptext" id="headPopup" role="tooltip">Jennys recept start</span>
+            </div>
+
+            <details>
+                <summary>Se menyer</summary>
+                <nav aria-label="Huvudmeny">
+                    <div class="popup">
+                        <a class="button" href="../index.html" aria-describedby="startPopup">Hem
+                            <span class="popuptext" id="startPopup" role="tooltip">Gå till Jennys receptsida</span>
+                        </a>
+                    </div>
+                    
+                    <div class="popup">
+                        <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                            <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                        </a>
+                    </div>
+
+                    <div class="popup">
+                        <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                            <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt egna recept</span>
+                        </a>
+                    </div>
+                </nav>
+            </details>
+        </header>
+
+        <div id="timer-status" class="visually-hidden" role="status"></div>
+
+        <main id="main-content" tabIndex="-1">
+            <section class="hero">
+                <img class="hero-image" src="../Assets/Jordgubbstårta1.jpg" alt="Tårta">
+                <div class="hero-text">
+                    <h1>Jordgubbstårta</h1>
+                    <p class="note">En klassisk gräddtårta med vanilj, jordgubbar och fluffig grädde.</p>
+                    <ul class="facts">
+                        <li>10 port</li>
+                        <li>60 min</li>
+                        <li>Medel</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="recipe">
+                <div class="ingredients">
+                    <h2>Ingredienser</h2>
+                    <p class="text">För 4 portioner</p>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>3 ägg</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1,5 dl strösocker</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1,5 dl vetemjöl</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 tsk bakpulver</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 tsk vaniljsocker</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 dl mjölk</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2 dl vispgrädde</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2 dl vaniljkräm</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2 dl jordgubbssylt</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>250g färska jordgubbar</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>florsocker, till garnering</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="instructions">
+                    <h2>Så här gör du</h2>
+                    <ol>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Sätt ugnen på 175°C. Klä botten av en rund form, cirka 22 cm i diameter, med bakplåtspapper.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Vispa ägg och socker pösigt. Blanda vetemjöl, bakpulver och vaniljsocker och vänd ner i smeten.</span>
+                            </label>
+                        </li>
+                        <li class="step-item" data-seconds="1500">
+                            <label>
+                                <input type="checkbox">
+                                <span>Häll smeten i formen och grädda mitt i ugnen tills bottnen är genomgräddad, cirka 25 minuter.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Låt bottnen svalna helt och dela den sedan i tre jämna delar.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Vispa grädden fluffig och skiva jordgubbarna.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Lägg första bottnen på ett fat. Bred över jordgubbssylt och lite grädde.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Lägg på nästa botten och bred över vaniljkräm. Lägg sedan på den sista bottnen.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Täck tårtan med resten av grädden och dekorera med jordgubbar och lite florsocker.</span>
+                            </label>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="serving">
+                <h2>Serveringsförslag</h2>
+                <div class="serving-image">
+                    <figure>
+                        <img src="../Assets/Jordgubbstårta2.jpg" alt="Tårta">
+                        <figcaption>Färdig tårta</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../Assets/Jordgubbstårta3.jpg" alt="Tårta med garnering">
+                        <figcaption>Med garnering</figcaption>
+                    </figure>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Jennys recept</p>
+        </footer>
+    </body>
+</html>

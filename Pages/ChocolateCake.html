@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Kladdkakarecept</title>
+        <script defer src="../js/script.js"></script>
+        <script defer src="../js/timers.js"></script>
+        <script defer src="../js/handwritten-timers.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body data-recipe-key="kladdkaka">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        
+        <header class="site-header">
+            <div class="popup">
+                <a class="logo" href="../index.html" aria-describedby="headPopup">
+                    <img src="../Assets/CoffeMug.png">
+                    <span>Jennys recept</span>
+                </a>
+                <span class="popuptext" id="headPopup" role="tooltip">Jennys recept start</span>
+            </div>
+
+            <details>
+                <summary>Se menyer</summary>
+                <nav aria-label="Huvudmeny">
+                    <div class="popup">
+                        <a class="button" href="../index.html" aria-describedby="startPopup">Hem
+                            <span class="popuptext" id="startPopup" role="tooltip">Gå till Jennys receptsida</span>
+                        </a>
+                    </div>
+                    
+                    <div class="popup">
+                        <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                            <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                        </a>
+                    </div>
+
+                    <div class="popup">
+                        <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                            <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt egna recept</span>
+                        </a>
+                    </div>
+                </nav>
+            </details>
+        </header>
+
+        <div id="timer-status" class="visually-hidden" role="status"></div>
+
+        <main id="main-content" tabIndex="-1">
+            <section class="hero">
+                <img class="hero-image" src="../Assets/Kladdkaka.jpg" alt="Kladdkaka">
+                <div class="hero-text">
+                    <h1>Kladdkaka</h1>
+                    <p class="note">En enkel och seg kladdkaka med chokladig smak.</p>
+                    <ul class="facts">
+                        <li>8 port</li>
+                        <li>35 min</li>
+                        <li>Lätt</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="recipe">
+                <div class="ingredients">
+                    <h2>Ingredienser</h2>
+                    <p class="text">För 4 portioner</p>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>100g smör</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2 ägg</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2 dl strösocker</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1,5 dl vetemjöl</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>4 msk kakao</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 tsk vaniljsocker</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 krm salt</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>smör till formen</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>ströbröd till formen</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>florsocker, till garnering</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="instructions">
+                    <h2>Så här gör du</h2>
+                    <ol>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Sätt ugnen på 175°C. Smörj en rund form, cirka 22 cm i diameter, och bröa den.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Smält smöret och låt det svalna något.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Vispa ihop ägg och socker lätt. Blanda sedan ner det smälta smöret.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Blanda vetemjöl, kakao, vaniljsocker och salt i en separat skål. Rör ner blandningen i smeten.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Häll smeten i formen och jämna till ytan.</span>
+                            </label>
+                        </li>
+                        <li class="step-item" data-seconds="900">
+                            <label>
+                                <input type="checkbox">
+                                <span>Grädda mitt i ugnen i cirka 15 minuter. Kakan ska fortfarande vara kladdig i mitten.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Låt kakan svalna innan den tas ur formen. Pudra över florsocker före servering.</span>
+                            </label>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="serving">
+                <h2>Serveringsförslag</h2>
+                <div class="serving-image">
+                    <figure>
+                        <img src="../Assets/Kladdkaka5.jpg" alt="Kladdkaka">
+                        <figcaption>Serverad som den är</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../Assets/Kladdkaka1.jpg" alt="Kladdkaka med garnering">
+                        <figcaption>Med garnering</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../Assets/Kladdkaka3.jpg" alt="Kladdkaka med tillbehör">
+                        <figcaption>Med tillbehör</figcaption>
+                    </figure>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Jennys recept</p>
+        </footer>
+    </body>
+</html>

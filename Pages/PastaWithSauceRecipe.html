@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Pasta med tomatsåsrecept</title>
+        <script defer src="../js/script.js"></script>
+        <script defer src="../js/timers.js"></script>
+        <script defer src="../js/handwritten-timers.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body data-recipe-key="pasta-tomatsas">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        
+        <header class="site-header">
+            <div class="popup">
+                <a class="logo" href="../index.html" aria-describedby="headPopup">
+                    <img src="../Assets/CoffeMug.png">
+                    <span>Jennys recept</span>
+                </a>
+                <span class="popuptext" id="headPopup" role="tooltip">Jennys recept start</span>
+            </div>
+
+            <details>
+                <summary>Se menyer</summary>
+                <nav aria-label="Huvudmeny">
+                    <div class="popup">
+                        <a class="button" href="../index.html" aria-describedby="startPopup">Hem
+                            <span class="popuptext" id="startPopup" role="tooltip">Gå till Jennys receptsida</span>
+                        </a>
+                    </div>
+                    
+                    <div class="popup">
+                        <a class="button" href="../Pages/About.html" aria-describedby="aboutPopup">Om sajten
+                            <span class="popuptext" id="aboutPopup" role="tooltip">Mer information om sajten</span>
+                        </a>
+                    </div>
+
+                    <div class="popup">
+                        <a class="button" href="../Pages/ShareRecipe.html" aria-describedby="sharePopup">Dela recept
+                            <span class="popuptext" id="sharePopup" role="tooltip">Dela ditt egna recept</span>
+                        </a>
+                    </div>
+                </nav>
+            </details>
+        </header>
+
+        <div id="timer-status" class="visually-hidden" role="status"></div>
+
+        <main id="main-content" tabIndex="-1">
+            <section class="hero">
+                <img class="hero-image" src="../Assets/PastaMedTomatSås.jpg" alt="Pasta med tomatsås">
+                <div class="hero-text">
+                    <h1>Pasta med tomatsås</h1>
+                    <p class="note">Gör en smaskens tomatsås med italiensk pasta.</p>
+                    <ul class="facts">
+                        <li>4 port</li>
+                        <li>30 min</li>
+                        <li>Lätt</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="recipe">
+                <div class="ingredients">
+                    <h2>Ingredienser</h2>
+                    <p class="text">För 4 portioner</p>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>400g pasta</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 gul lök</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>4 klyftor vitlök</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 tsk chiliflakes</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>2-3 msk tomatpuré</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>400g konserverade körsbärstomater, i burk</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 dl vatten</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>4 msk olivolja</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>1 dl grädde (valfri sort)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>salt</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>peppar</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>parmesanost, riven</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>basilika, till garnering</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="instructions">
+                    <h2>Så här gör du</h2>
+                    <ol>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Finhacka lök och vitlök.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Stek lök och vitlök i olivolja till de blivit lite mjukare.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Tillsätt chiliflakes och tomatpuré, stek lite till.</span>
+                            </label>
+                        </li>
+                        <li class="step-item" data-seconds="900">
+                            <label>
+                                <input type="checkbox">
+                                <span>Tillsätt tomaterna och vatten. Krydda med salt och peppar. Låt koka ihop utan lock i ca 15 min.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Häll i grädden och koka lite till.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Koka pastan i ca 2 min korta än vad som står på förpackningen. Ta upp spagettin och låt den sedan koka klart i tomatsåsen. Tillsätt även några skedar av pastavattnet i tomatsåsen.</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                <span>Servera med basilika och parmesan.</span>
+                            </label>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="serving">
+                <h2>Serveringsförslag</h2>
+                <div class="serving-image">
+                    <figure>
+                        <img src="../Assets/PastaWithTomatoSauce.jpg" alt="Pasta med tomatsås och parmesan">
+                        <figcaption>Med parmesan</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../Assets/PastaWithBasilika.jpg" alt="Pasta med tomatsås och basilika">
+                        <figcaption>Med basilika</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../Assets/PastaWithParmesan.jpg" alt="Pasta med tomatsås, parmesan och basilika">
+                        <figcaption>Med parmesan och basilika</figcaption>
+                    </figure>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Jennys recept</p>
+        </footer>
+    </body>
+</html>

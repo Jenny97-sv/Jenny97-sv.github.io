@@ -130,7 +130,9 @@ li {
 
 label {
     display: flex;
-    align-items: center;
+
+    /*if others react, do something about this*/
+    align-items: first baseline; 
     gap: 0.4rem;
     cursor: pointer;
 }
