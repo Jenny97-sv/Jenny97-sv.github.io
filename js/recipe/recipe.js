@@ -74,16 +74,16 @@ function createChecklistItem(text) {
   return li;
 }
 
-/**
- * @param {string} listId
- * @param {Array<string>} items
- */
-function fillChecklist(listId, items) {
-  const list = document.getElementById(listId);
-  if (!list) 
-    return;
-  items.forEach((text) => list.append(createChecklistItem(text)));
-}
+// /**
+//  * @param {string} listId
+//  * @param {Array<string>} items
+//  */
+// function fillChecklist(listId, items) {
+//   const list = document.getElementById(listId);
+//   if (!list) 
+//     return;
+//   items.forEach((text) => list.append(createChecklistItem(text)));
+// }
 
 /**
  * Ingrediens med kryssruta, och ⓘ-knapp om en ersättning finns.
@@ -210,6 +210,31 @@ function renderIngredients() {
   const factor = scaleFactor();
   draft.ingredients.forEach((/** @type {*} */ ing, /** @type {number} */ i) =>
     list.append(createIngredientItem(ing, i, factor)));
+}
+
+/**
+ * @param {*} step
+ * @param {number} index
+ */
+function createStepItem(step, index) {
+  const li = createChecklistItem(step.text);
+  li.className = "step-item";
+  // The timer sits outside the label, so clicking it doesn't tick the checkbox
+  if (step.seconds > 0) li.append(createTimer(recipe.id, index, step.seconds));
+  return li;
+}
+
+function renderSteps() {
+  const list = document.getElementById("steps");
+  if (!list) return;
+  list.replaceChildren();
+
+  if (editing) {
+    draft.steps.forEach((/** @type {*} */ step) => list.append(createStepRow(step)));
+    return;
+  }
+  draft.steps.forEach((/** @type {*} */ step, /** @type {number} */ i) =>
+    list.append(createStepItem(step, i)));
 }
 
 function placeNotes() {
@@ -346,10 +371,24 @@ function setEditing(on) {
     if (button instanceof HTMLElement) button.hidden = !on;
   });
 
-  document.querySelectorAll("#title, #steps span").forEach((el) => {
-    if (on) el.setAttribute("contenteditable", "true");
-    else el.removeAttribute("contenteditable");
-  });
+  // document.querySelectorAll("#title, #steps span").forEach((el) => {
+  //   if (on) el.setAttribute("contenteditable", "true");
+  //   else el.removeAttribute("contenteditable");
+  // });
+    if (titleEl) {
+    if (on) titleEl.setAttribute("contenteditable", "true");
+    else titleEl.removeAttribute("contenteditable");
+  }
+
+  // (notesText block stays as it is)
+
+  if (on)
+    loadDetails();
+  renderFacts();
+  renderIngredients();
+  renderSteps();
+  renderNotes();
+  renderImages();
 
   const notesText = document.getElementById("notes-text");
   if (notesText) {
@@ -366,16 +405,16 @@ function setEditing(on) {
 }
 
 function readEditedValues() {
-  /** @param {Element} el */
-  const text = (el) => (el.textContent ?? "").trim();
-
-  if (titleEl) 
-    draft.name = text(titleEl) || draft.name;
+  if (titleEl)
+    draft.name = (titleEl.textContent ?? "").trim() || draft.name;
 
   const ingredientList = document.getElementById("ingredients");
-  if (ingredientList) 
+  if (ingredientList)
     draft.ingredients = readIngredientRows(ingredientList);
-  draft.steps = [...document.querySelectorAll("#steps span")].map(text).filter(Boolean);
+
+  const stepList = document.getElementById("steps");
+  if (stepList)
+    draft.steps = readStepRows(stepList);
 
   draft.servings = field("fact-servings")?.value ?? draft.servings;
   draft.time = field("fact-time")?.value ?? draft.time;
@@ -388,15 +427,10 @@ function readEditedValues() {
   if (useDefault instanceof HTMLInputElement && useDefault.checked) {
     draft.colors = null;
   } else {
-      const useDefault = field("edit-default-colors");
-    if (useDefault instanceof HTMLInputElement && useDefault.checked) {
-      draft.colors = null;
-    } else {
-      /** @type {Record<string, string | undefined>} */
-      const colors = {};
-      COLOR_FIELDS.forEach(({ key, id: fieldId }) => { colors[key] = field(fieldId)?.value; });
-      draft.colors = colors;
-    }
+    /** @type {Record<string, string | undefined>} */
+    const colors = {};
+    COLOR_FIELDS.forEach(({ key, id: fieldId }) => { colors[key] = field(fieldId)?.value; });
+    draft.colors = colors;
   }
 }
 
@@ -412,6 +446,8 @@ function saveEdit() {
     }
     all[index] = draft;
     localStorage.setItem("recipes", JSON.stringify(all));
+    clearTimers(draft.id);
+    location.reload();
     location.reload();
   } catch (error) {
     alert("Det gick inte att spara. Bilderna kan vara för stora.");
@@ -423,6 +459,7 @@ function deleteRecipe() {
   if (!confirm(`Ta bort "${recipe.name}"? Det går inte att ångra.`)) return;
   const remaining = recipes.filter((r) => r.id !== recipe.id);
   localStorage.setItem("recipes", JSON.stringify(remaining));
+  clearTimers(recipe.id);
   location.href = "../index.html";
 }
 
@@ -431,20 +468,9 @@ function addRow(button) {
   const list = document.getElementById(button.dataset.list ?? "");
   if (!list) return;
 
-  if (list.id === "ingredients") {
-    const row = createIngredientRow();
-    list.append(row);
-    row.querySelector("input")?.focus();
-    return;
-  }
-
-  const li = createChecklistItem("");
-  list.append(li);
-  const span = li.querySelector("span");
-  if (span) {
-    span.setAttribute("contenteditable", "true");
-    span.focus();
-  }
+  const row = list.id === "ingredients" ? createIngredientRow() : createStepRow();
+  list.append(row);
+  row.querySelector("input")?.focus();
 }
 
 /* ---------- Event listeners ---------- */
@@ -503,11 +529,11 @@ function wireEvents() {
   });
 
   // Klick på stegtext ska inte bocka i rutan under redigering
-  document.addEventListener("click", (e) => {
-    if (editing && e.target instanceof HTMLElement && e.target.closest("#steps label")) {
-      e.preventDefault();
-    }
-  });
+  // document.addEventListener("click", (e) => {
+  //   if (editing && e.target instanceof HTMLElement && e.target.closest("#steps label")) {
+  //     e.preventDefault();
+  //   }
+  // });
 
     // Live preview while a color is being picked
   COLOR_FIELDS.forEach(({ id: fieldId, cssVar }) => {
@@ -524,26 +550,27 @@ function wireEvents() {
 
 /* ---------- Init ---------- */
 if (!recipe) {
-  if (titleEl) 
+  if (titleEl)
     titleEl.textContent = "Receptet hittades inte";
 } else {
   draft = structuredClone(recipe);
   draft.servingImages ??= [];
   draft.ingredients = (draft.ingredients ?? []).map(normalizeIngredient);
+  draft.steps = (draft.steps ?? []).map(normalizeStep);
   currentServings = Number(draft.servings) || 0;
 
   document.title = recipe.name;
-  if (titleEl) 
+  if (titleEl)
     titleEl.textContent = recipe.name;
 
-  fillChecklist("steps", draft.steps);
+  renderSteps();
   renderFacts();
   renderIngredients();
   renderNotes();
   renderImages();
   applyColors(recipe.colors);
 
-  if (ownerActions) 
+  if (ownerActions)
     ownerActions.hidden = false;
   wireEvents();
 }

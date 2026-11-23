@@ -73,15 +73,74 @@ function createIngredientRow(ing = {}) {
     return li;
 }
 
-/** @param {string} [text] */
-function createStepRow(text = "") {
+/**
+ * Old recipes saved steps as text. Turn them into objects.
+ * @param {any} item
+ * @returns {{ text: string, seconds: number }}
+ */
+function normalizeStep(item) {
+    if (typeof item === "string") {
+        return { text: item, seconds: 0 };
+    }
+    return {
+        text: String(item?.text ?? ""),
+        seconds: Math.max(0, Number(item?.seconds) || 0),
+    };
+}
+
+/**
+ * @param {string} className
+ * @param {string} label
+ * @param {number} value
+ */
+function createTimeInput(className, label, value) {
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.className = className;
+    input.placeholder = "0";
+    input.value = value ? String(value) : "";
+    input.setAttribute("aria-label", label);
+    return input;
+}
+
+/** @param {any} [step] a step object, or old-style text */
+function createStepRow(step = "") {
+    const { text, seconds } = normalizeStep(step);
+
     const li = document.createElement("li");
     li.className = "step-row";
+
+    const time = document.createElement("div");
+    time.className = "step-time";
+    time.append(
+        "⏱ Timer (valfri): ",
+        createTimeInput("step-min", "Minuter", Math.floor(seconds / 60)),
+        " min ",
+        createTimeInput("step-sec", "Sekunder", seconds % 60),
+        " sek"
+    );
+
     li.append(
         createTextInput("step-input", "Steg", text, "Beskriv steget"),
-        createRemoveButton("Ta bort steget")
+        createRemoveButton("Ta bort steget"),
+        time
     );
     return li;
+}
+
+/** @param {HTMLElement} list */
+function readStepRows(list) {
+    return [...list.querySelectorAll(".step-row")]
+        .map((row) => {
+            const minutes = Number(valueOf(row, ".step-min")) || 0;
+            const secs = Number(valueOf(row, ".step-sec")) || 0;
+            return {
+                text: valueOf(row, ".step-input"),
+                seconds: Math.max(0, Math.round(minutes * 60 + secs)),
+            };
+        })
+        .filter((s) => s.text);
 }
 
 /**
@@ -107,13 +166,6 @@ function readIngredientRows(list) {
             };
         })
         .filter((i) => i.name);
-}
-
-/** @param {HTMLElement} list */
-function readStepRows(list) {
-    return [...list.querySelectorAll(".step-row")]
-        .map((row) => valueOf(row, ".step-input"))
-        .filter(Boolean);
 }
 
 /**

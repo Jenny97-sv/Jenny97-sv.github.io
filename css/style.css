@@ -36,6 +36,8 @@ textarea {
     --color-hero-overlay-text: white;
     --color-popup-text: white;
     --color-error: darkred;
+    --color-valid: rgb(51, 100, 51);
+    --color-checkbox: pink;
     --color-note-background: rgb(205, 201, 206);
     --color-popup-text-background: rgba(87, 84, 88, 0.9);
     --color-text: rgb(20, 0, 26);
@@ -136,6 +138,7 @@ label {
 input[type="checkbox"] {
     inline-size: 1rem;
     block-size: 1rem;
+    accent-color: var(--color-checkbox);
     cursor: pointer;
 }
 
@@ -803,6 +806,10 @@ input:user-invalid + .error {
     display: block;
 }
 
+input:user-valid {
+    border-color: var(--color-valid);
+}
+
 /* ---------- Ingredient and step rows ---------- */
 .row-list {
     padding: 0;
@@ -921,6 +928,93 @@ input:user-invalid + .error {
 .profile-image {
     margin: auto;
     padding-block-end: 2rem;
+}
+
+/* ---------- Step timers ---------- */
+.visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.step-time {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    input {
+        inline-size: 4.5rem;
+    }
+}
+
+.step-item .timer {
+    margin-inline-start: 1.4rem;   /* lines up under the step text */
+    margin-block: 0.25rem 0.75rem;
+    line-height: 1.5;
+}
+
+.timer [hidden] {
+    display: none;
+}
+
+.timer-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timer-reset {
+    inline-size: 2.5rem;
+    padding: 0.2rem;
+}
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block-start: 0.4rem;
+}
+
+.timer-time {
+    min-inline-size: 3.5rem;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-track {
+    flex: 1;
+    block-size: 0.6rem;
+    border: var(--border-thin);
+    border-radius: 999px;
+    background-color: var(--color-body-background);
+    overflow: hidden;
+}
+
+.timer-bar {
+    block-size: 100%;
+    background-color: var(--color-primary);
+    transition: inline-size 0.25s linear;
+}
+
+.timer[data-state="finished"] {
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-button-background);
+    animation: timer-flash 0.5s ease-in-out 8;
+}
+
+@keyframes timer-flash {
+    50% { box-shadow: 0 0 0 0.4rem var(--color-primary); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timer[data-state="finished"] { animation: none; }
 }
 
 @media (min-width: 700px) {
