@@ -606,6 +606,11 @@ footer {
     margin-block-end: 1.5rem;
 }
 
+.show-more-wrap {
+    margin-block-start: 1.5rem;
+    text-align: center;
+}
+
 button[aria-pressed="true"] {
     background-color: var(--color-primary);
     color: var(--color-button-background-pressed);

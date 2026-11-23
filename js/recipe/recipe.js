@@ -74,17 +74,6 @@ function createChecklistItem(text) {
   return li;
 }
 
-// /**
-//  * @param {string} listId
-//  * @param {Array<string>} items
-//  */
-// function fillChecklist(listId, items) {
-//   const list = document.getElementById(listId);
-//   if (!list) 
-//     return;
-//   items.forEach((text) => list.append(createChecklistItem(text)));
-// }
-
 /**
  * Ingrediens med kryssruta, och ⓘ-knapp om en ersättning finns.
  * @param {*} ing

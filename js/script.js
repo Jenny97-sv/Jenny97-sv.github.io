@@ -7,9 +7,6 @@ const checkboxes = document.querySelectorAll("li input[type='checkbox']");
 /** @type {NodeListOf<HTMLElement>} */
 const filterButtons = document.querySelectorAll("[data-filter]");
 
-/** @type {NodeListOf<HTMLElement>} */
-const cards = document.querySelectorAll(".card");
-
 /** @type {HTMLFormElement | null} */
 const form = document.querySelector("#recipe-form");
 
@@ -28,8 +25,41 @@ const ingredientList = document.getElementById("ingredient-rows");
 const stepList = document.getElementById("step-rows");
 const defaultColors = document.querySelector("#default-colors");
 const customColors = document.querySelector("#custom-colors");
+const showMore = document.getElementById("show-more");
+const desktopQuery = window.matchMedia("(min-width: 700px)");
 
 // ----- Functions -----
+let activeFilter = "all";
+let expanded = false;
+
+function cardLimit() {
+    return desktopQuery.matches ? 6 : 3;
+}
+
+/**@returns {HTMLElement[]} */
+function getCards() {
+    return /**@type {HTMLElement[]} */([...document.querySelectorAll(".card")]);
+}
+
+/**@param {HTMLElement} card */
+function matchesFilter(card) {
+    return activeFilter === "all" || card.dataset.category === activeFilter;
+}
+
+/** Shows the cards that match the filter, but only up to the limit */
+function updateCards() {
+    const matching = getCards().filter(matchesFilter);
+    const limit = expanded ? Infinity : cardLimit();
+
+    getCards().forEach((card) => {
+        const index = matching.indexOf(card);
+        card.hidden = index === -1 || index >= limit;
+    });
+
+    if (showMore)
+        showMore.hidden = matching.length <= limit;
+}
+
 /** @param {string} message */
 function showStatus(message) {
     if (formStatus) {
@@ -52,8 +82,9 @@ function setValue(id, value) {
 function fillForm(r) {
     ingredientList?.replaceChildren();
     stepList?.replaceChildren();
+    r.ingredients.map(normalizeIngredient).forEach((/**@type {any} */i) => addIngredientRow(i));
     r.steps.map(normalizeStep).forEach((/** @type {any} */ s) => addStepRow(s));
-    r.steps.forEach((/** @type {string} */ s) => addStepRow(s));
+    // r.steps.forEach((/** @type {string} */ s) => addStepRow(s));
     setValue("notes", r.notes ?? "");
     setValue("notes-position", r.notesPosition ?? "below");
     setValue("category", r.category);
@@ -118,12 +149,6 @@ function updateColorControls() {
         });
     }
 }
-// /** @param {variable} [variable] */
-// function getCssColor(variable) {
-//     return getComputedStyle(document.documentElement)
-//         .getPropertyValue(variable)
-//         .trim();
-// }
 
 // ----- Event listeners -----
 checkboxes.forEach(checkbox => {
@@ -134,16 +159,21 @@ checkboxes.forEach(checkbox => {
 
 filterButtons.forEach(button => {
     button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
+        activeFilter = button.dataset.filter ?? "all";
+        expanded = false;
         filterButtons.forEach(b => b.setAttribute("aria-pressed", String(b === button)));
-
-        document.querySelectorAll(".card").forEach(card => {
-            if (card instanceof HTMLElement) {
-                card.hidden = filter !== "all" && card.dataset.category !== filter;
-            }
-        });
+        updateCards();
     });
 });
+
+showMore?.addEventListener("click", () => {
+    const firstNew = getCards().find((card) => card.hidden && matchesFilter(card));
+    expanded = true;
+    updateCards();
+    firstNew?.querySelector("a")?.focus();
+});
+
+desktopQuery.addEventListener("change", updateCards);
 
 if (form) {
     if (existing) 
@@ -251,6 +281,7 @@ if (grid) {
         card.append(link);
         grid.append(card);
     });
+    updateCards();
 }
 
 if (addServing && servingFields) {
