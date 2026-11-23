@@ -950,7 +950,7 @@ input:user-valid {
 
 .step-time .step-min,
 .step-time .step-sec {
-    inline-size: 1rem;
+    inline-size: 2rem;
 }
 
 .step-time {

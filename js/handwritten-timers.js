@@ -1,4 +1,4 @@
-/**@param {Number} recipeKey */
+/**@param {string} recipeKey */
 const recipeKey = document.body.dataset.recipeKey ?? location.pathname;
 
 document.querySelectorAll("[data-seconds]").forEach((/** @param {Number} item*/item) => {
