@@ -948,6 +948,11 @@ input:user-valid {
     white-space: nowrap;
 }
 
+.step-time .step-min,
+.step-time .step-sec {
+    inline-size: 3rem;
+}
+
 .step-time {
     grid-column: 1;
     display: flex;
