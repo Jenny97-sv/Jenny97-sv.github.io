@@ -160,11 +160,11 @@ function createStepRow(step = "") {
         createTimePart("step-sec", "Sekunder", secs)
     );
 
-    const hint = document.createElement("small");
-    hint.className = "time-hint";
-    hint.textContent = "timmar : minuter : sekunder";
+    // const hint = document.createElement("small");
+    // hint.className = "time-hint";
+    // hint.textContent = "timmar : minuter : sekunder";
 
-    time.append(title, fields, hint);
+    time.append(title, fields);
 
     li.append(
         createTextInput("step-input", "Steg", text, "Beskriv steget"),

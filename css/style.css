@@ -118,6 +118,30 @@ ol {
     padding-inline-start: 1.5rem;
 }
 
+ol {
+    list-style: none;
+    padding-inline-start: 0;
+    counter-reset: step;
+}
+
+ol > li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2rem 1fr;   /* nummer | innehåll */
+    align-items: baseline;
+}
+
+ol > li::before {
+    content: counter(step) ".";
+    text-align: end;
+    padding-inline-end: 0.4rem;
+}
+
+ol > li > label,
+ol > li > .timer {
+    grid-column: 2;
+}
+
 ul {
     list-style: none;
     padding-inline-start: 0;
@@ -288,7 +312,7 @@ figure button {
 
 .editing #ingredients span,
 .editing #steps span {
-    min-width: 8rem;
+    /* min-width: 8rem; */
     display: inline-block;
 }
 
@@ -848,6 +872,14 @@ input:user-valid {
     margin-bottom: 0.5rem;
 }
 
+ol > li.step-row > .step-time {
+    grid-column: 2 / -1;
+}
+
+ol > li.step-row {
+    grid-template-columns: 2rem 1fr auto;
+}
+
 .remove-row {
     inline-size: 2.5rem;
     padding: 0.2rem;
@@ -948,20 +980,13 @@ input:user-valid {
     white-space: nowrap;
 }
 
+.step-time .step-hour,
 .step-time .step-min,
 .step-time .step-sec {
     inline-size: 3rem;
 }
 
-/*timer input sizes*/
-.time-fields {
-    :nth-child(1) {
-        inline-size: 3.3rem;
-    }
-}
-
 .step-time {
-    grid-column: 1;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1104,15 +1129,10 @@ input:user-valid {
         margin-inline-start: 0;
     }
 
+    .step-time .step-hour,
     .step-time .step-min,
     .step-time .step-sec {
         inline-size: 3.5rem;
-    }
-        /*timer input sizes*/
-    .time-fields {
-        :nth-child(1) {
-            inline-size: 3.8rem;
-        }
     }
 
     .history,
