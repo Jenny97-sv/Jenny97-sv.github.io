@@ -89,37 +89,82 @@ function normalizeStep(item) {
 }
 
 /**
+ * One two-digit box: hours, minutes or seconds.
  * @param {string} className
  * @param {string} label
- * @param {number} value
+ * @param {string} value  already padded, or "" when empty
  */
-function createTimeInput(className, label, value) {
+function createTimePart(className, label, value) {
     const input = document.createElement("input");
-    input.type = "number";
-    input.min = "0";
+    input.type = "text";
+    input.inputMode = "numeric";
+    input.maxLength = 2;
+    input.pattern = "[0-9]*";
+    input.autocomplete = "off";
     input.className = className;
-    input.placeholder = "0";
-    input.value = value ? String(value) : "";
+    input.placeholder = "00";
+    input.value = value;
     input.setAttribute("aria-label", label);
+
+    // Only digits are allowed
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "");
+    });
+    // Pad to two digits when leaving the box: "5" becomes "05"
+    input.addEventListener("blur", () => {
+        if (input.value !== "") input.value = input.value.padStart(2, "0");
+    });
+    // Select everything on focus, so typing replaces the old value
+    input.addEventListener("focus", () => input.select());
+
     return input;
 }
 
 /** @param {any} [step] a step object, or old-style text */
 function createStepRow(step = "") {
     const { text, seconds } = normalizeStep(step);
+    const pad = (/** @type {number} */ n) => String(n).padStart(2, "0");
+
+    // Show 00:00:00 style values only when a timer exists
+    const hours = seconds > 0 ? pad(Math.floor(seconds / 3600)) : "";
+    const minutes = seconds > 0 ? pad(Math.floor((seconds % 3600) / 60)) : "";
+    const secs = seconds > 0 ? pad(seconds % 60) : "";
 
     const li = document.createElement("li");
     li.className = "step-row";
 
     const time = document.createElement("div");
     time.className = "step-time";
-    time.append(
-        "⏱ Timer (valfri): ",
-        createTimeInput("step-min", "Minuter", Math.floor(seconds / 60)),
-        " min ",
-        createTimeInput("step-sec", "Sekunder", seconds % 60),
-        " sek"
+
+    const title = document.createElement("span");
+    title.className = "step-time-title";
+    title.textContent = "⏱ Timer (valfri)";
+
+    const fields = document.createElement("div");
+    fields.className = "time-fields";
+    fields.setAttribute("role", "group");
+    fields.setAttribute("aria-label", "Timer: timmar, minuter och sekunder");
+
+    const colon = () => {
+        const span = document.createElement("span");
+        span.textContent = ":";
+        span.setAttribute("aria-hidden", "true");
+        return span;
+    };
+
+    fields.append(
+        createTimePart("step-hour", "Timmar", hours),
+        colon(),
+        createTimePart("step-min", "Minuter", minutes),
+        colon(),
+        createTimePart("step-sec", "Sekunder", secs)
     );
+
+    const hint = document.createElement("small");
+    hint.className = "time-hint";
+    hint.textContent = "timmar : minuter : sekunder";
+
+    time.append(title, fields, hint);
 
     li.append(
         createTextInput("step-input", "Steg", text, "Beskriv steget"),
@@ -133,11 +178,12 @@ function createStepRow(step = "") {
 function readStepRows(list) {
     return [...list.querySelectorAll(".step-row")]
         .map((row) => {
+            const hours = Number(valueOf(row, ".step-hour")) || 0;
             const minutes = Number(valueOf(row, ".step-min")) || 0;
             const secs = Number(valueOf(row, ".step-sec")) || 0;
             return {
                 text: valueOf(row, ".step-input"),
-                seconds: Math.max(0, Math.round(minutes * 60 + secs)),
+                seconds: Math.max(0, hours * 3600 + minutes * 60 + secs),
             };
         })
         .filter((s) => s.text);

@@ -1102,6 +1102,13 @@ input:user-valid {
         inline-size: 3.5rem;
     }
 
+    /*timer input sizes*/
+    .time-fields {
+        :nth-child(1) {
+            inline-size: 3.5rem;
+        }
+    }
+
     .history,
     .goal {
         grid-template-columns: 1fr 1fr;
