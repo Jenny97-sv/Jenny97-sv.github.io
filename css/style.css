@@ -953,6 +953,13 @@ input:user-valid {
     inline-size: 3rem;
 }
 
+/*timer input sizes*/
+.time-fields {
+    :nth-child(1) {
+        inline-size: 3.3rem;
+    }
+}
+
 .step-time {
     grid-column: 1;
     display: flex;
@@ -1101,11 +1108,10 @@ input:user-valid {
     .step-time .step-sec {
         inline-size: 3.5rem;
     }
-
-    /*timer input sizes*/
+        /*timer input sizes*/
     .time-fields {
         :nth-child(1) {
-            inline-size: 3.5rem;
+            inline-size: 3.8rem;
         }
     }
 
