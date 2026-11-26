@@ -84,13 +84,11 @@ function fillForm(r) {
     stepList?.replaceChildren();
     r.ingredients.map(normalizeIngredient).forEach((/**@type {any} */i) => addIngredientRow(i));
     r.steps.map(normalizeStep).forEach((/** @type {any} */ s) => addStepRow(s));
-    // r.steps.forEach((/** @type {string} */ s) => addStepRow(s));
     setValue("notes", r.notes ?? "");
     setValue("notes-position", r.notesPosition ?? "below");
     setValue("category", r.category);
     setValue("time", r.time);
     setValue("servings", r.servings);
-    // setValue("ingredients", r.ingredients.join("\n"));
     setValue("author", r.author);
 
     const radio = document.querySelector(`input[name="difficulty"][value="${r.difficulty}"]`);
@@ -123,7 +121,6 @@ function fillForm(r) {
 /** @param {any} [ing] */
 function addIngredientRow(ing) {
     ingredientList?.append(createIngredientRow(ing));
-    // ingredientList?.lastElementChild?.querySelector("input")?.focus();
 }
 
 /** @param {any} [step] */

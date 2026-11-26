@@ -112,7 +112,8 @@ function createTimePart(className, label, value) {
     });
     // Pad to two digits when leaving the box: "5" becomes "05"
     input.addEventListener("blur", () => {
-        if (input.value !== "") input.value = input.value.padStart(2, "0");
+        if (input.value !== "") 
+            input.value = input.value.padStart(2, "0");
     });
     // Select everything on focus, so typing replaces the old value
     input.addEventListener("focus", () => input.select());
@@ -159,10 +160,6 @@ function createStepRow(step = "") {
         colon(),
         createTimePart("step-sec", "Sekunder", secs)
     );
-
-    // const hint = document.createElement("small");
-    // hint.className = "time-hint";
-    // hint.textContent = "timmar : minuter : sekunder";
 
     time.append(title, fields);
 
@@ -221,14 +218,23 @@ function readIngredientRows(list) {
  * @param {number} [factor]
  */
 function formatAmount(amount, unit, factor = 1) {
-    if (amount === null || amount === undefined) return "";
+    if (amount === null || amount === undefined) 
+        return "";
     let value = amount * factor;
     let u = unit;
 
-    if (u === "dl" && value >= 10) { value /= 10; u = "l"; }
-    else if (u === "g" && value >= 1000) { value /= 1000; u = "kg"; }
-    else if (u === "kg" && value < 1) { value *= 1000; u = "g"; }
-    else if (u === "l" && value < 1) { value *= 10; u = "dl"; }
+    if (u === "dl" && value >= 10) { 
+        value /= 10; u = "l"; 
+    }
+    else if (u === "g" && value >= 1000) { 
+        value /= 1000; u = "kg";
+    }
+    else if (u === "kg" && value < 1) { 
+        value *= 1000; u = "g"; 
+    }
+    else if (u === "l" && value < 1) { 
+        value *= 10; u = "dl"; 
+    }
 
     const digits = value < 1 ? 100 : 10;
     const text = String(Math.round(value * digits) / digits).replace(".", ",");

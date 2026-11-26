@@ -12,7 +12,7 @@ h1, h2, h3, p, ul, ol, figure {
 
 img {
     display: block;
-    max-width: 100%;
+    max-inline-size: 100%;
 }
 
 button,
@@ -61,7 +61,7 @@ html {
 }
 
 body {
-    max-width: 60rem;
+    max-inline-size: 60rem;
     inline-size: 100%;
     margin: auto;
     margin-block-end: 1rem;
@@ -361,7 +361,7 @@ figure button {
 .hero-image {
     inline-size: 100%;
     block-size: 100%;
-    min-height: 16rem;
+    min-block-size: 16rem;
     object-fit: cover;
 }
 
@@ -1031,10 +1031,12 @@ ol > li.step-row {
     animation: timer-flash 0.5s ease-in-out 8;
 }
 
+/* animation when timer is finished*/
 @keyframes timer-flash {
     50% { box-shadow: 0 0 0 0.4rem var(--color-primary); }
 }
 
+/*I sadly see no difference when removing this... might be a setting I have to activate*/
 @media (prefers-reduced-motion: reduce) {
     .timer[data-state="finished"] { animation: none; }
 }

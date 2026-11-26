@@ -209,13 +209,15 @@ function createStepItem(step, index) {
   const li = createChecklistItem(step.text);
   li.className = "step-item";
   // The timer sits outside the label, so clicking it doesn't tick the checkbox
-  if (step.seconds > 0) li.append(createTimer(recipe.id, index, step.seconds));
+  if (step.seconds > 0) 
+    li.append(createTimer(recipe.id, index, step.seconds));
   return li;
 }
 
 function renderSteps() {
   const list = document.getElementById("steps");
-  if (!list) return;
+  if (!list) 
+    return;
   list.replaceChildren();
 
   if (editing) {
@@ -229,16 +231,20 @@ function renderSteps() {
 function placeNotes() {
   const section = document.getElementById("notes-section");
   const recipeSection = document.querySelector("section.recipe");
-  if (!section || !recipeSection) return;
+  if (!section || !recipeSection) 
+    return;
 
-  if (draft.notesPosition === "above") recipeSection.before(section);
-  else recipeSection.after(section);
+  if (draft.notesPosition === "above") 
+    recipeSection.before(section);
+  else 
+    recipeSection.after(section);
 }
 
 function renderNotes() {
   const section = document.getElementById("notes-section");
   const text = document.getElementById("notes-text");
-  if (!section || !text) return;
+  if (!section || !text) 
+    return;
 
   text.textContent = draft.notes ?? "";
   section.hidden = !editing && !draft.notes;   // visible while editing, hidden if empty otherwise
@@ -357,16 +363,15 @@ function setEditing(on) {
     editButtons.hidden = !on;
 
   document.querySelectorAll(".add-row").forEach((button) => {
-    if (button instanceof HTMLElement) button.hidden = !on;
+    if (button instanceof HTMLElement) 
+      button.hidden = !on;
   });
 
-  // document.querySelectorAll("#title, #steps span").forEach((el) => {
-  //   if (on) el.setAttribute("contenteditable", "true");
-  //   else el.removeAttribute("contenteditable");
-  // });
-    if (titleEl) {
-    if (on) titleEl.setAttribute("contenteditable", "true");
-    else titleEl.removeAttribute("contenteditable");
+  if (titleEl) {
+    if (on) 
+      titleEl.setAttribute("contenteditable", "true");
+    else 
+      titleEl.removeAttribute("contenteditable");
   }
 
   // (notesText block stays as it is)
@@ -381,8 +386,10 @@ function setEditing(on) {
 
   const notesText = document.getElementById("notes-text");
   if (notesText) {
-    if (on) notesText.setAttribute("contenteditable", "plaintext-only");
-    else notesText.removeAttribute("contenteditable");
+    if (on) 
+      notesText.setAttribute("contenteditable", "plaintext-only");
+    else 
+      notesText.removeAttribute("contenteditable");
   }
 
   if (on) 
@@ -445,7 +452,8 @@ function saveEdit() {
 }
 
 function deleteRecipe() {
-  if (!confirm(`Ta bort "${recipe.name}"? Det går inte att ångra.`)) return;
+  if (!confirm(`Ta bort "${recipe.name}"? Det går inte att ångra.`)) 
+    return;
   const remaining = recipes.filter((r) => r.id !== recipe.id);
   localStorage.setItem("recipes", JSON.stringify(remaining));
   clearTimers(recipe.id);
@@ -455,7 +463,8 @@ function deleteRecipe() {
 /** @param {HTMLElement} button */
 function addRow(button) {
   const list = document.getElementById(button.dataset.list ?? "");
-  if (!list) return;
+  if (!list) 
+    return;
 
   const row = list.id === "ingredients" ? createIngredientRow() : createStepRow();
   list.append(row);
@@ -516,13 +525,6 @@ function wireEvents() {
       placeNotes();
     }
   });
-
-  // Klick på stegtext ska inte bocka i rutan under redigering
-  // document.addEventListener("click", (e) => {
-  //   if (editing && e.target instanceof HTMLElement && e.target.closest("#steps label")) {
-  //     e.preventDefault();
-  //   }
-  // });
 
     // Live preview while a color is being picked
   COLOR_FIELDS.forEach(({ id: fieldId, cssVar }) => {
