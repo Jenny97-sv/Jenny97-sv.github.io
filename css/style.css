@@ -154,8 +154,6 @@ li {
 
 label {
     display: flex;
-
-    /*if others react, do something about this*/
     align-items: first baseline; 
     gap: 0.4rem;
     cursor: pointer;
@@ -207,7 +205,6 @@ button,
         background-color: var(--color-primary);
         color: var(--color-hero-overlay-text);
     }
-
     &:focus-visible {
         outline: 5px solid var(--color-text);
         outline-offset: 3px;
@@ -312,7 +309,6 @@ figure button {
 
 .editing #ingredients span,
 .editing #steps span {
-    /* min-width: 8rem; */
     display: inline-block;
 }
 
@@ -403,7 +399,6 @@ figure button {
         padding: 0.5rem;
         text-align: center;
     }
-    /*elements next to each other*/
     li + li {
         border-inline-start: var(--border-thin);
     }
@@ -449,7 +444,6 @@ figure button {
 /* ---------- Serving images ---------- */
 .serving-image {
     display: grid;
-    /*fit as many as screen can hold, min max value between 15rem and 1fraction*/
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
 }
@@ -487,7 +481,6 @@ footer {
         margin-block-end: 0.5rem;
         margin-inline-start: 0;
     }
-
     ul {
         padding: 0;
     }
@@ -546,11 +539,9 @@ a.footer-link {
                 outline-offset: 3px;
             }
         }
-
         &[open] summary::after {
             transform: rotate(-135deg);   /* arrow points up when open */
         }
-
         /* The menu itself: always a column, in both mobile and desktop */
         nav {
             display: flex;
@@ -569,7 +560,6 @@ a.footer-link {
                 inline-size: 10rem;
             }
         }
-
         .popup {
             display: block;               /* so each button gets the full width */
         }
@@ -618,7 +608,6 @@ a.footer-link {
         margin-inline: 0;
         text-wrap: balance;
     }
-
     p {
         margin: 0;
     }
@@ -663,25 +652,21 @@ button[aria-pressed="true"] {
         color: var(--color-text);
         text-decoration: none;
     }
-
     img {
         inline-size: 100%;
         aspect-ratio: 3 / 2;
         object-fit: cover;
     }
-    
     h3 {
         margin-block-start: 0.5rem;
         margin-inline-start: 1rem;
         margin-block-end: 0;
     }
-
     p {
         margin-block-start: 0;
         margin-block-end: 1rem;
         margin-inline-start: 1rem;
     }
-
     &:hover,
     &:focus-visible {
         text-decoration: underline;
@@ -704,13 +689,6 @@ button[aria-pressed="true"] {
     margin: 1rem;
 }
 .form-intro { margin-inline: 1rem; }
-.recipe-form { margin-inline: auto; }
-
-.recipe-form {
-    display: grid;
-    gap: 1.5rem;
-    padding-block-end: 1rem;
-}
 
 fieldset {
     padding: 1rem;
@@ -730,6 +708,10 @@ legend {
 }
 
 .recipe-form {
+    margin-inline: auto; 
+    display: grid;
+    gap: 1.5rem;
+    padding-block-end: 1rem;
 
     .field label {
         display: block;
@@ -758,11 +740,6 @@ legend {
     border-radius: 0.5rem;
     background-color: var(--color-editing--button-background);
     color: var(--color-text);
-}
-
-/*Single line controls get the same height, so selects match text inputs*/
-:where(.recipe-form, .edit-details, .ingredient-row, .step-row)
-:is(input:not([type="checkbox"], [type="radio"], [type="color"], [type="file"]), select, textarea) {
     block-size: var(--control-height);
 }
 
@@ -774,6 +751,7 @@ legend {
 
 .standard-colors {
     padding-block-end: 1rem;
+
     input[type="checkbox"]:checked + span {
         text-decoration: none;
         opacity: 1;
@@ -784,11 +762,6 @@ legend {
     }
 }
 
-/* #custom-colors:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-} */
-
 input[type="color"]:disabled {
     opacity: 0.4;
     cursor: not-allowed;
@@ -798,6 +771,7 @@ input[type="color"]:disabled {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
+
     .field {
         margin-block-end: 0rem;
     }
@@ -808,6 +782,7 @@ input[type="color"]:disabled {
     justify-content: center;
     align-items: center;
     margin-block-end: 1rem;
+
     select {
         margin-inline-start: 1rem;
         inline-size: 10rem;
@@ -826,7 +801,6 @@ input[type="color"]:disabled {
     }
 }
 
-/* Errormessage: only visible when user written something incorrect */
 .error {
     display: none;
     color: var(--color-error);
@@ -931,6 +905,7 @@ ol > li.step-row {
 
 #notes-text {
     padding: 0.5rem;
+
     &:empty::before {
         content: attr(data-placeholder);
         opacity: 0.6;
@@ -959,7 +934,6 @@ ol > li.step-row {
         background-color: var(--color-border);
         color: var(--color-body-background);
     }
-
     p {
         margin: 0;
         padding: 2rem;
@@ -1110,8 +1084,6 @@ ol > li.step-row {
         align-self: center;
         margin-inline-start: auto;
     }
-
-    /* tooltips would run off the edge, so show them to the left of the buttons */
     .site-header details .popuptext {
         inset-inline-start: auto;
         inset-inline-end: 100%;
