@@ -731,6 +731,15 @@ legend {
     }
 }
 
+textarea {
+    resize: vertical;
+
+    /*This does nothing...*/
+    #notes {
+        min-block-size: 2rem;
+    }
+}
+
 :where(.recipe-form, .edit-details, .ingredient-row, .step-row)
 :is(input:not([type="checkbox"], [type="radio"], [type="color"], [type="file"]), select, textarea) {
     inline-size: 100%;
