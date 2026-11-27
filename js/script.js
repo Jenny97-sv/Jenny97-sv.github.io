@@ -68,6 +68,22 @@ function showStatus(message) {
 }
 
 /**
+ * Shows a message followed by a link.
+ * @param {string} message
+ * @param {string} linkText
+ * @param {string} href
+ */
+function showStatusLink(message, linkText, href) {
+    if (!formStatus) return;
+
+    const link = document.createElement("a");
+    link.href = href;
+    link.textContent = linkText;
+
+    formStatus.replaceChildren(`${message} `, link);
+}
+
+/**
  * @param {string} id
  * @param {string} value
  */
@@ -240,7 +256,8 @@ if (form) {
                 location.href = `Recipe.html?id=${recipe.id}`;   // back to the recipe
                 return;
             }
-            showStatus(`🥳 Tack! Receptet är sparat.`);
+            const recipeUrl = `Recipe.html?id=${recipe.id}`;
+            showStatusLink("🥳 Tack! Receptet är sparat.", "Klicka här för att se det", recipeUrl);
 
             form.reset();
             resetRows();
