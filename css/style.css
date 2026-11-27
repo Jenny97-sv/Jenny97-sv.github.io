@@ -488,6 +488,7 @@ footer {
 
 a.footer-link {
     text-decoration: underline;
+    cursor:pointer;
 }
 
 .site-header {
@@ -675,6 +676,11 @@ button[aria-pressed="true"] {
             text-decoration: auto;
         }
     }
+
+    /* > button:focus-visible {
+        outline: var(--border-normal);
+        outline-offset:  3px;
+    } */
 }
 
 .footer-header {
